@@ -81,6 +81,23 @@
 
 		@include l.t-label;
 
+		.tab-selector-value {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			color: v.$c-black;
+
+			@include t.t-text;
+
+			img {
+				width: 16px;
+				height: 16px;
+				transition: transform v.$tr;
+			}
+		}
+
 		&.is-open {
 			background-color: v.$c-grey-97;
 			border-bottom-left-radius: 0;
@@ -98,28 +115,19 @@
 		}
 	}
 
-	.tab-divider {
-		display: block;
-		width: 1px;
-		height: 59px;
-		background-color: v.$c-grey-95;
-	}
-
-	.tab-selector-value {
+	.tab-selector:focus .tab-selector-value {
 		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 16px;
-		color: v.$c-black;
+	}
 
-		@include t.t-text;
-
-		img {
-			width: 16px;
-			height: 16px;
-			transition: transform v.$tr;
-		}
+	.tab-divider {
+		display: block;
+		width: 1px;
+		height: 59px;
+		background-color: v.$c-grey-95;
 	}
 
 	.tab-dropdown {
@@ -163,14 +171,6 @@
 		&:focus-visible {
 			background-color: v.$c-grey-95;
 		}
-
-		&.is-selected {
-			color: v.$c-black;
-
-			.tab-option-check {
-				opacity: 1;
-			}
-		}
 	}
 
 	.tab-option-check {
@@ -178,5 +178,13 @@
 		height: 16px;
 		opacity: 0;
 		transition: opacity v.$tr;
+	}
+
+	.tab-option.is-selected {
+		color: v.$c-black;
+
+		.tab-option-check {
+			opacity: 1;
+		}
 	}
 }

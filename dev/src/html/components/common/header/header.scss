@@ -14,6 +14,17 @@
 		gap: 32px;
 	}
 
+	&-logo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		img {
+			width: auto;
+			height: 50px;
+		}
+	}
+
 	nav {
 		ul {
 			display: flex;
@@ -25,7 +36,7 @@
 			a {
 				color: v.$c-black;
 
-				@include t.t-text();
+				@include t.t-text;
 			}
 		}
 	}

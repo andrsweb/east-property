@@ -1,1 +1,66 @@
 @use '../../../../scss/vars/vars' as v;
+@use '../../../../scss/mixins/typography/titles' as t;
+@use '../../../../scss/mixins/typography/text' as p;
+
+.hero {
+	width: 100%;
+	padding: 10px 0;
+
+	&-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 60px 10px 60px 20px;
+	}
+
+	&-left {
+		width: 100%;
+		max-width: 505px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 32px;
+
+		h1 {
+			color: v.$c-black;
+
+			@include t.t-headline;
+		}
+	}
+
+	&-items {
+		display: flex;
+		align-items: center;
+		gap: 32px;
+	}
+
+	&-item {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+
+		span {
+			color: v.$c-black;
+
+			@include t.t-header;
+		}
+
+		p {
+			color: v.$c-black;
+
+			@include p.t-text;
+		}
+	}
+
+	&-right {
+		flex: 1;
+	}
+
+	&-img {
+		img {
+			width: auto;
+			height: 418px;
+		}
+	}
+}

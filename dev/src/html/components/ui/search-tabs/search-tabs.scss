@@ -1,0 +1,99 @@
+@use '../../../../scss/vars/vars' as v;
+@use '../../../../scss/mixins/typography/labels' as l;
+@use '../../../../scss/mixins/typography/text' as t;
+
+.search-tabs {
+	width: 100%;
+	max-width: 475px;
+	display: flex;
+	flex-direction: column;
+
+	.tabs-buttons {
+		width: fit-content;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		border-top-left-radius: v.$br8;
+		border-top-right-radius: v.$br8;
+		background-color: v.$c-sand;
+		overflow: hidden;
+
+		.button {
+			padding: 16px 14px;
+			color: v.$c-grey;
+			border-radius: 0;
+
+			@include l.t-label;
+
+			&.is-active {
+				background-color: v.$c-white;
+				color: v.$c-black;
+			}
+		}
+	}
+
+	.tabs-panel {
+		background-color: v.$c-white;
+		padding: 20px 8px;
+		border-radius: 0 8px 8px;
+	}
+
+	.tabs-fields {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.tab-field {
+		width: 100%;
+		max-width: 160px;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		padding: 0 8px;
+	}
+
+	.tab-field-label {
+		color: v.$c-black;
+
+		@include t.t-text(true);
+	}
+
+	.tab-selector {
+		display: inline-flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		padding: 0;
+		border: none;
+		background: none;
+		cursor: pointer;
+		color: v.$c-black;
+
+		@include l.t-label;
+
+		&::after {
+			content: '';
+			display: block;
+			width: 16px;
+			height: 16px;
+			background-image: url('/img/arrow-down.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+		}
+	}
+
+	.tab-divider {
+		display: block;
+		width: 1px;
+		height: 59px;
+		background-color: v.$c-grey-95;
+	}
+
+	.tab-selector-value {
+		color: v.$c-black;
+
+		@include t.t-text;
+	}
+}

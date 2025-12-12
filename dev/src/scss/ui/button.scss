@@ -1,0 +1,6 @@
+@use '../vars/vars' as v;
+@use '../utils/placeholders/buttons/button' as *;
+
+.button {
+	@extend %button;
+}

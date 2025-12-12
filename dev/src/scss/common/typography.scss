@@ -1,0 +1,27 @@
+@use '../vars/vars' as v;
+@use '../utils/placeholders/titles/titles' as *;
+
+h1, .h1, h2, .h2, h3, .h3,
+h4, .h4, h5, .h5, h6, .h6 {
+	@extend %title
+}
+
+a {
+	display: inline-block;
+	text-decoration: none;
+	transition: opacity ease v.$tr;
+
+	&:hover {
+		opacity: v.$op;
+	}
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+b,
+strong {
+	font-weight: v.$fw-700
+}

@@ -1,0 +1,52 @@
+@use '../../../../scss/vars/vars' as v;
+@use '../../../../scss/mixins/typography/text' as t;
+@use '../../../../scss/mixins/typography/labels' as l;
+@use '../../../../scss/utils/placeholders/buttons/button' as *;
+@use '../../../../scss/mixins/global' as g;
+
+.button {
+	gap: 10px;
+
+	&.black {
+		background-color: v.$c-black;
+		color: v.$c-white;
+		border-radius: v.$br8;
+		outline: 3px solid transparent;
+
+		&.sm {
+			padding: 9.5px 10px;
+
+			@include t.t-text();
+
+			img {
+				width: 16px;
+				height: 16px;
+			}
+		}
+
+		&.xl {
+			padding: 16px 24px;
+
+			@include l.t-label();
+
+			img {
+				width: 24px;
+				height: 24px;
+			}
+		}
+
+		@include g.hover {
+			background-color: v.$c-dark-grey;
+		}
+
+		&:active {
+			transform: scale(.95);
+			background-color: v.$c-black;
+		}
+
+		&:focus-visible {
+			outline-color: v.$c-black;
+			background-color: v.$c-grey;
+		}
+	}
+}

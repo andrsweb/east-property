@@ -9,6 +9,6 @@
 	border: none;
 	padding: 0;
 	margin: 0;
-	transition: opacity ease v.$tr, background-color ease v.$tr, color ease v.$tr;
+	transition: opacity ease v.$tr, background-color ease v.$tr, color ease v.$tr, transform ease-in-out v.$tr;
 	cursor: pointer;
 }

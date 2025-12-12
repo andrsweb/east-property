@@ -1,5 +1,6 @@
 @use '../vars/vars' as v;
 @use '../utils/placeholders/titles/titles' as *;
+@use '../mixins/global' as g;
 
 h1, .h1, h2, .h2, h3, .h3,
 h4, .h4, h5, .h5, h6, .h6 {
@@ -11,7 +12,7 @@ a {
 	text-decoration: none;
 	transition: opacity ease v.$tr;
 
-	&:hover {
+	@include g.hover {
 		opacity: v.$op;
 	}
 }

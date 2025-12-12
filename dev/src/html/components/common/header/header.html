@@ -12,7 +12,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-title" content="Romanov">
+    <meta name="apple-mobile-web-app-title" content="East Property">
     <link rel="manifest" href="/site.webmanifest">
     <!--  -->
 </head>
@@ -20,5 +20,13 @@
 <body>
 <div class="wrapper">
     <header class="header">
-        <div class="header-wrapper"></div>
+        <div class="container">
+            <div class="header-wrapper">
+                <a href="/" class="header-logo">
+                    <img src="/img/logo.svg" width="132" height="50" alt="Vector logotype">
+                </a>
+                @@include('components/common/header/nav.html')
+                @@include('components/ui/button/button.html', {"class": "black xl", "text": "Login", "src": "/img/user.svg"})
+            </div>
+        </div>
     </header>

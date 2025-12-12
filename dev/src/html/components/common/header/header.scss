@@ -1,1 +1,32 @@
 @use '../../../../scss/vars/vars' as v;
+@use '../../../../scss/mixins/typography/text' as t;
+@use '../../../../scss/mixins/global' as g;
+
+.header {
+	width: 100%;
+	padding: 10px 0;
+
+	&-wrapper {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 32px;
+	}
+
+	nav {
+		ul {
+			display: flex;
+			align-items: center;
+			gap: 24px;
+		}
+
+		li {
+			a {
+				color: v.$c-black;
+
+				@include t.t-text();
+			}
+		}
+	}
+}

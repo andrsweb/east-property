@@ -1,8 +1,7 @@
 @use '../../../vars/vars.scss' as v;
 
 %title {
-	font-family: v.$ff;
-	font-weight: v.$fw-700;
+	font-family: v.$ff-title;
 	margin: 0;
 	padding: 0;
 }

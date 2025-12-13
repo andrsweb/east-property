@@ -8,32 +8,6 @@
 	width: 100%;
 	padding: 10px 0;
 
-	&.menu-opened {
-		.burger-button {
-			span {
-				transform: rotate(-45deg);
-
-				&::before {
-					top: 0;
-					transform: rotate(90deg);
-				}
-
-				&::after {
-					opacity: 0;
-				}
-			}
-		}
-
-		nav {
-			opacity: 1;
-			visibility: visible;
-
-			ul {
-				transform: translateX(0);
-			}
-		}
-	}
-
 	&-wrapper {
 		width: 100%;
 		display: flex;
@@ -62,7 +36,7 @@
 		z-index: 99;
 		width: 100vw;
 		height: 100vh;
-		background-color: rgba(17, 17, 17, 0.39);
+		background-color: rgb(17 17 17 / 39%);
 		opacity: 0;
 		visibility: hidden;
 		transition: opacity ease-in-out v.$tr, visibility ease-in-out v.$tr;
@@ -175,6 +149,32 @@
 
 		@media(min-width: v.$lg) {
 			display: none;
+		}
+	}
+
+	&.menu-opened {
+		.burger-button {
+			span {
+				transform: rotate(-45deg);
+
+				&::before {
+					top: 0;
+					transform: rotate(90deg);
+				}
+
+				&::after {
+					opacity: 0;
+				}
+			}
+		}
+
+		nav {
+			opacity: 1;
+			visibility: visible;
+
+			ul {
+				transform: translateX(0);
+			}
 		}
 	}
 }

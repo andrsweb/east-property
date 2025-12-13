@@ -1,0 +1,1 @@
+export const WINDOW_WIDTH_LG = 992;

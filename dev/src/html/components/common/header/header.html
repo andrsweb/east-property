@@ -26,7 +26,13 @@
                     <img src="/img/logo.svg" width="132" height="50" alt="Vector logotype">
                 </a>
                 @@include('components/common/header/nav.html')
-                @@include('components/ui/button/button.html', {"class": "black sm", "text": "Login", "src": "/img/user.svg"})
+                <div class="header-actions">
+                    @@include('components/ui/button/button.html', {"class": "black sm header-login", "text": "Login", "src": "/img/user.svg"})
+                    <button class="burger-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="header-nav">
+                        <span class="line"></span>
+                    </button>
+                </div>
             </div>
+            <div class="header-overlay" data-header-overlay></div>
         </div>
     </header>

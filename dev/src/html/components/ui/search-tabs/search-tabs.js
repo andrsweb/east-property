@@ -10,44 +10,34 @@ const containerClosers = new Map()
 let globalHandlersAttached = false
 
 const attachGlobalHandlers = () => {
-	if (globalHandlersAttached) {
-		return
-	}
+	if (globalHandlersAttached) return
+
 	globalHandlersAttached = true
 
 	document.addEventListener('click', (e) => {
 		const target = e.target
-		if (!(target instanceof Node)) {
-			return
-		}
+		if (!(target instanceof Node)) return
+
 		for (const [container, close] of containerClosers) {
-			if (!container.contains(target)) {
-				close()
-			}
+			if (!container.contains(target)) close()
 		}
 	})
 
 	document.addEventListener('keydown', (e) => {
-		if (e.key !== 'Escape') {
-			return
-		}
-		for (const close of containerClosers.values()) {
-			close()
-		}
+		if (e.key !== 'Escape') return
+
+		for (const close of containerClosers.values()) close()
 	})
 }
 
 const loadSearchData = (() => {
 	let cache = null
 	return async () => {
-		if (cache) {
-			return cache
-		}
+		if (cache) return cache
 
 		cache = fetch(SEARCH_DATA_URL, {cache: 'no-cache'}).then(async (res) => {
-			if (!res.ok) {
-				throw new Error(`Failed to load search data: ${res.status}`)
-			}
+			if (!res.ok) throw new Error(`Failed to load search data: ${res.status}`)
+
 			return res.json()
 		})
 		return cache
@@ -56,13 +46,12 @@ const loadSearchData = (() => {
 
 const initSearchTabs = async () => {
 	const containers = document.querySelectorAll('[data-search-tabs]')
-	if (!containers.length) {
-		return
-	}
+	if (!containers.length) return
 
 	attachGlobalHandlers()
 
 	let searchData
+
 	try {
 		searchData = await loadSearchData()
 	} catch {
@@ -79,9 +68,7 @@ const initSearchTabs = async () => {
 		const panel = container.querySelector('[role="tabpanel"]')
 		const selectors = Array.from(container.querySelectorAll('[data-search-selector]'))
 
-		if (!tabs.length || !typeField || !availableText || !priceText || !availableValue || !priceValue || !panel) {
-			return
-		}
+		if (!tabs.length || !typeField || !availableText || !priceText || !availableValue || !priceValue || !panel) return
 
 		const filterBindings = {
 			available: {
@@ -102,9 +89,7 @@ const initSearchTabs = async () => {
 
 		const updateDropdownSelection = (filterKey, selectedValue) => {
 			const dropdown = container.querySelector(`[data-search-dropdown="${filterKey}"]`)
-			if (!dropdown) {
-				return
-			}
+			if (!dropdown) return
 
 			Array.from(dropdown.querySelectorAll('.tab-option')).forEach((btn) => {
 				const btnValue = btn.getAttribute('data-value')
@@ -116,9 +101,7 @@ const initSearchTabs = async () => {
 
 		const setFilterValue = (filterKey, selectedValue) => {
 			const binding = filterBindings[filterKey]
-			if (!binding) {
-				return
-			}
+			if (!binding) return
 
 			binding.value.value = selectedValue
 			binding.text.textContent = getOptionLabel(filterKey, selectedValue)
@@ -130,13 +113,11 @@ const initSearchTabs = async () => {
 				selector.classList.remove('is-open')
 				selector.setAttribute('aria-expanded', 'false')
 				const key = selector.getAttribute('data-search-selector')
-				if (!key) {
-					return
-				}
+
+				if (!key) return
+
 				const dropdown = container.querySelector(`[data-search-dropdown="${key}"]`)
-				if (dropdown) {
-					dropdown.hidden = true
-				}
+				if (dropdown) dropdown.hidden = true
 			})
 		}
 
@@ -144,15 +125,10 @@ const initSearchTabs = async () => {
 
 		container.addEventListener('click', (e) => {
 			const target = e.target
-			if (!(target instanceof Element)) {
-				return
-			}
-			if (target.closest('[data-search-selector]')) {
-				return
-			}
-			if (target.closest('.tab-dropdown')) {
-				return
-			}
+			if (!(target instanceof Element)) return
+
+			if (target.closest('[data-search-selector]') || target.closest('.tab-dropdown')) return
+
 			closeAllDropdowns()
 		})
 
@@ -161,17 +137,15 @@ const initSearchTabs = async () => {
 			selectorButton.classList.add('is-open')
 			selectorButton.setAttribute('aria-expanded', 'true')
 			const dropdown = container.querySelector(`[data-search-dropdown="${filterKey}"]`)
-			if (dropdown) {
-				dropdown.hidden = false
-			}
+
+			if (dropdown) dropdown.hidden = false
 		}
 
 		const renderDropdown = (filterKey) => {
 			const dropdown = container.querySelector(`[data-search-dropdown="${filterKey}"]`)
 			const filter = searchData?.filters?.[filterKey]
-			if (!dropdown || !filter?.options?.length) {
-				return
-			}
+
+			if (!dropdown || !filter?.options?.length) return
 
 			dropdown.replaceChildren()
 			filter.options.forEach((opt) => {
@@ -203,16 +177,12 @@ const initSearchTabs = async () => {
 		const applyCategoryDefaults = (type) => {
 			const category = searchData?.categories?.find((c) => c?.slug === type)
 			const defaults = category?.defaults
-			if (!defaults) {
-				return
-			}
 
-			if (typeof defaults.available === 'string') {
-				setFilterValue('available', defaults.available)
-			}
-			if (typeof defaults.price === 'string') {
-				setFilterValue('price', defaults.price)
-			}
+			if (!defaults) return
+
+			if (typeof defaults.available === 'string') setFilterValue('available', defaults.available)
+
+			if (typeof defaults.price === 'string') setFilterValue('price', defaults.price)
 		}
 
 		renderDropdown('available')
@@ -220,6 +190,7 @@ const initSearchTabs = async () => {
 
 		const activeTab = tabs.find((t) => t.classList.contains('is-active'))
 		const initialType = activeTab?.dataset?.type ?? typeField.value
+
 		if (typeof initialType === 'string' && initialType) {
 			typeField.value = initialType
 			applyCategoryDefaults(initialType)
@@ -227,21 +198,22 @@ const initSearchTabs = async () => {
 
 		selectors.forEach((selector) => {
 			const filterKey = selector.getAttribute('data-search-selector')
-			if (!filterKey) {
-				return
-			}
+			if (!filterKey) return
 
 			selector.addEventListener('click', (e) => {
 				e.preventDefault()
 				const isOpen = selector.classList.contains('is-open')
+
 				if (isOpen) {
 					closeAllDropdowns()
 					return
 				}
+
 				openDropdown(filterKey, selector)
 			})
 
 			const dropdown = container.querySelector(`[data-search-dropdown="${filterKey}"]`)
+
 			if (dropdown) {
 				dropdown.addEventListener('click', (e) => {
 					const target = e.target instanceof Element ? e.target.closest('.tab-option') : null
@@ -250,9 +222,8 @@ const initSearchTabs = async () => {
 					}
 
 					const selected = target.getAttribute('data-value')
-					if (!selected) {
-						return
-					}
+
+					if (!selected) return
 
 					setFilterValue(filterKey, selected)
 					closeAllDropdowns()
@@ -262,9 +233,8 @@ const initSearchTabs = async () => {
 
 		tabs.forEach((tab) => {
 			tab.addEventListener('click', () => {
-				if (tab.classList.contains('is-active')) {
-					return
-				}
+
+				if (tab.classList.contains('is-active')) return
 
 				tabs.forEach((item) => {
 					item.classList.remove('is-active')

@@ -73,10 +73,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
-		padding: 0 8px;
 
 		@media(min-width: v.$sm) {
 			max-width: 160px;
+			padding: 0 8px;
 		}
 	}
 
@@ -97,6 +97,7 @@
 		background: transparent;
 		border-radius: v.$br8;
 		cursor: pointer;
+		padding: 0;
 		color: v.$c-black;
 		transition: background-color v.$tr;
 

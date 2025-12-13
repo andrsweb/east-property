@@ -1,0 +1,24 @@
+@use '../../../../scss/vars/vars' as v;
+@use '../../../../scss/mixins/typography/labels' as l;
+@use '../../../../scss/mixins/typography/text' as p;
+
+.properties {
+	width: 100%;
+	background-color: v.$c-grey-97;
+	padding: 40px 0;
+
+	@media(min-width: v.$lg) {
+		padding: 64px 0;
+	}
+
+	&-cards {
+		display: flex;
+		align-items: stretch;
+		flex-wrap: wrap;
+		gap: 32px;
+
+		@media(min-width: v.$xl) {
+			gap: 44px;
+		}
+	}
+}

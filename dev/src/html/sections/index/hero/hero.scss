@@ -8,9 +8,19 @@
 
 	&-wrapper {
 		display: flex;
-		align-items: center;
+		flex-direction: column;
+		align-items: flex-start;
 		gap: 10px;
-		padding: 60px 10px 60px 20px;
+		padding: 40px 0;
+
+		@media(min-width: v.$md) {
+			padding: 60px 10px 60px 20px;
+		}
+
+		@media(min-width: v.$xl) {
+			flex-direction: row;
+			align-items: center;
+		}
 	}
 
 	&-left {
@@ -19,7 +29,11 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 32px;
+		gap: 24px;
+
+		@media(min-width: v.$md) {
+			gap: 32px;
+		}
 
 		h1 {
 			color: v.$c-black;
@@ -31,7 +45,11 @@
 	&-items {
 		display: flex;
 		align-items: center;
-		gap: 32px;
+		gap: 24px;
+
+		@media(min-width: v.$md) {
+			gap: 32px;
+		}
 	}
 
 	&-item {
@@ -54,13 +72,27 @@
 	}
 
 	&-right {
+		width: 100%;
 		flex: 1;
+
+		@media(min-width: v.$xl) {
+			width: auto;
+		}
 	}
 
 	&-img {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
 		img {
-			width: auto;
-			height: 418px;
+			max-width: 100%;
+			height: auto;
+
+			@media(min-width: v.$xl) {
+				max-width: 655px;
+			}
 		}
 	}
 }

@@ -20,7 +20,7 @@
 		overflow: hidden;
 
 		.button {
-			padding: 16px 14px;
+			padding: 10px 6px;
 			color: v.$c-grey;
 			border-radius: 0;
 
@@ -34,29 +34,50 @@
 			&:focus-visible {
 				background-color: v.$c-grey-97;
 			}
+
+			@media(min-width: v.$xs) {
+				padding: 10px;
+			}
+
+			@media(min-width: v.$md) {
+				padding: 16px 14px;
+			}
 		}
 	}
 
 	.tabs-panel {
 		background-color: v.$c-white;
-		padding: 20px 8px;
+		padding: 14px 4px;
 		border-radius: 0 8px 8px;
+
+		@media(min-width: v.$xs) {
+			padding: 20px 8px;
+		}
 	}
 
 	.tabs-fields {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		flex-wrap: wrap;
+		gap: 16px;
+
+		@media(min-width: v.$sm) {
+			flex-wrap: nowrap;
+			gap: 8px;
+		}
 	}
 
 	.tab-field {
 		width: 100%;
-		max-width: 160px;
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
 		padding: 0 8px;
+
+		@media(min-width: v.$sm) {
+			max-width: 160px;
+		}
 	}
 
 	.tab-field-label {
@@ -124,10 +145,24 @@
 	}
 
 	.tab-divider {
-		display: block;
+		display: none;
 		width: 1px;
 		height: 59px;
 		background-color: v.$c-grey-95;
+
+		@media(min-width: v.$sm) {
+			display: block;
+		}
+	}
+
+	.submit {
+		width: 70%;
+		margin: 0 auto;
+
+		@media(min-width: v.$sm) {
+			width: auto;
+			margin: auto;
+		}
 	}
 
 	.tab-dropdown {

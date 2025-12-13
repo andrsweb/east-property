@@ -6,6 +6,10 @@
 	width: 100%;
 	padding: 10px 0;
 
+	@media(min-width: v.$xl) {
+		padding: 10px 0 20px;
+	}
+
 	&-wrapper {
 		display: flex;
 		flex-direction: column;

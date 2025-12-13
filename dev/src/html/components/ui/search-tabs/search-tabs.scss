@@ -167,10 +167,11 @@
 	}
 
 	.tab-dropdown {
+		width: 100%;
 		position: absolute;
 		top: 100%;
-		left: 8px;
-		right: 8px;
+		left: 50%;
+		transform: translateX(-50%);
 		z-index: 5;
 		display: flex;
 		flex-direction: column;
@@ -182,6 +183,10 @@
 
 		&[hidden] {
 			display: none;
+		}
+
+		@media(min-width: v.$sm) {
+			width: calc(100% - 16px);
 		}
 	}
 

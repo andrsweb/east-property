@@ -143,7 +143,7 @@
 		@include t.t-text;
 
 		input {
-			min-width: 300px;
+			width: 100%;
 			padding: 16px;
 			color: v.$c-black;
 			border-radius: v.$br8;
@@ -157,6 +157,10 @@
 				color: v.$c-text-grey;
 
 				@include t.t-text;
+			}
+
+			@media(min-width: v.$sm) {
+				min-width: 300px;
 			}
 		}
 	}

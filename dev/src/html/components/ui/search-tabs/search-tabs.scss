@@ -76,7 +76,6 @@
 
 		@media(min-width: v.$sm) {
 			max-width: 160px;
-			padding: 0 8px;
 		}
 	}
 
@@ -97,7 +96,7 @@
 		background: transparent;
 		border-radius: v.$br8;
 		cursor: pointer;
-		padding: 0;
+		padding: 8px;
 		color: v.$c-black;
 		transition: background-color v.$tr;
 
@@ -183,10 +182,6 @@
 
 		&[hidden] {
 			display: none;
-		}
-
-		@media(min-width: v.$sm) {
-			width: calc(100% - 16px);
 		}
 	}
 

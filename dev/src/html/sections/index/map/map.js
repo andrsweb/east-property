@@ -6,10 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const loadMapIframe = () => {
 	const section = document.querySelector('.map');
-	const iframe = section.querySelector('iframe.map-iframe');
-	const dataSrc = iframe.dataset.src;
+	if (!section) return;
 
-	if (!section || !iframe || !dataSrc) return;
+	const iframe = section.querySelector('iframe.map-iframe');
+	if (!iframe) return;
+
+	const dataSrc = iframe.dataset.src;
+	if (!dataSrc) return;
 
 	const setSrc = () => {
 		if (!iframe.src) iframe.src = dataSrc;

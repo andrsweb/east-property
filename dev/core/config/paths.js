@@ -1,3 +1,5 @@
+import {isWP} from "./env.js";
+
 export const paths = {
 	root: 'assets',
 	html: {
@@ -12,12 +14,12 @@ export const paths = {
 			'!dev/src/scss/generated/**/*.scss',
 			'dev/src/html/**/*.scss'
 		],
-		dest: 'assets/css'
+		dest: isWP ? '../assets/css' : 'assets/css'
 	},
 	scripts: {
 		src: 'dev/src/js/main.js',
 		watch: 'dev/src/js/**/*.js',
-		dest: 'assets/js'
+		dest: isWP ? '../assets/js' : 'assets/js'
 	},
 	static: {
 		src: 'dev/public/**/*',
@@ -25,10 +27,10 @@ export const paths = {
 	},
 	images: {
 		src: 'dev/src/img/**/*.{png,jpg,jpeg,svg,gif,webp,ico}',
-		dest: 'assets/img'
+		dest: isWP ? '../assets/img' : 'assets/img'
 	},
 	fonts: {
 		src: 'dev/src/fonts/**/*',
-		dest: 'assets/fonts'
+		dest: isWP ? '../assets/fonts' : 'assets/fonts'
 	}
 };

@@ -161,7 +161,7 @@ const initSearchTabs = async () => {
 
 				const check = document.createElement('img')
 				check.className = 'tab-option-check'
-				check.src = '/img/check.svg'
+				check.src = dropdown.dataset.checkIcon || '/img/check.svg'
 				check.width = 16
 				check.height = 16
 				check.alt = 'Selected'

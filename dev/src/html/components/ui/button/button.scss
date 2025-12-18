@@ -59,7 +59,7 @@
 
 		&.sm {
 			padding: 9.5px 12px;
-
+			border: none;
 			@include t.t-text;
 
 			img {
@@ -70,7 +70,7 @@
 
 		&.xl {
 			padding: 13px;
-
+			border: none;
 			@include l.t-label;
 
 			img {

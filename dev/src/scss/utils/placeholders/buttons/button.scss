@@ -12,3 +12,8 @@
 	transition: opacity ease v.$tr, background-color ease v.$tr, color ease v.$tr, transform ease-in-out v.$tr;
 	cursor: pointer;
 }
+
+#backtotop.shows {
+	background: v.$c-yellow;
+	color: v.$c-black;
+}

@@ -21,3 +21,7 @@ main .container,
 footer .container {
 	display: block;
 }
+
+main .container p {
+	margin-bottom: 0;
+}

@@ -4,6 +4,28 @@
 @use '../../../../scss/utils/placeholders/buttons/button' as *;
 @use '../../../../scss/mixins/global' as g;
 
+.results-filters-wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 14px;
+
+	.advanced {
+		@extend %button;
+
+		gap: 4px;
+		color: v.$c-black;
+
+		@include p.t-text;
+
+		img {
+			width: 16px;
+			height: 16px;
+		}
+	}
+}
+
 .results-filters-items {
 	display: flex;
 	flex-wrap: wrap;

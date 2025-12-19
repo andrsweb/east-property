@@ -1,0 +1,29 @@
+<section class="result-tabs">
+    <div class="container">
+        <div class="result-tabs-wrapper">
+            <div class="result-tabs-buttons">
+                <button class="result-tab-button active" type="button" data-tab="list">List view</button>
+                <button class="result-tab-button" type="button" data-tab="map">Map view</button>
+            </div>
+            <div class="result-tabs-content" data-tab="list">
+                <div class="content-title">
+                    <div class="title-top">
+                        <h2>132 properties</h2>
+                        <button class="sort">
+                            Show expensive first
+                            <img src="/img/arrow-down.svg" width="16" height="16" alt="Arrow down">
+                        </button>
+                    </div>
+                    <p>Aliquam lacinia diam quis lacus euismod</p>
+                </div>
+                <div class="content-list">
+                    @@include('components/cards/large-card/large-card.html')
+                    @@include('components/cards/large-card/large-card.html')
+                    @@include('components/cards/large-card/large-card.html')
+                    @@include('components/cards/large-card/large-card.html')
+                    @@include('components/cards/large-card/large-card.html')
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -22,7 +22,7 @@
 		z-index: 1;
 		padding-top: 10px;
 
-		&:before {
+		&::before {
 			content: "";
 			position: absolute;
 			left: 50%;

@@ -101,7 +101,7 @@
 		border-bottom-right-radius: v.$br8;
 		background-color: v.$c-grey-97;
 		overflow: hidden;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+		box-shadow: 0 10px 30px rgba(0 0 0 / 8%);
 
 		&[hidden] {
 			display: none;

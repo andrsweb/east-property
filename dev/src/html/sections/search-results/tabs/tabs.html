@@ -1,11 +1,11 @@
-<section class="result-tabs">
+<section class="result-tabs" data-tabs>
     <div class="container">
         <div class="result-tabs-wrapper">
-            <div class="result-tabs-buttons">
-                <button class="result-tab-button active" type="button" data-tab="list">List view</button>
-                <button class="result-tab-button" type="button" data-tab="map">Map view</button>
+            <div class="result-tabs-buttons" role="tablist">
+                <button class="result-tab-button active" type="button" data-tab-button data-tab="list" role="tab" aria-selected="true">List view</button>
+                <button class="result-tab-button" type="button" data-tab-button data-tab="map" role="tab" aria-selected="false" tabindex="-1">Map view</button>
             </div>
-            <div class="result-tabs-content" data-tab="list">
+            <div class="result-tabs-content active" data-tab-panel data-tab="list" role="tabpanel">
                 <div class="content-title">
                     <div class="title-top">
                         <h2>132 properties</h2>
@@ -23,6 +23,8 @@
                     @@include('components/cards/large-card/large-card.html')
                     @@include('components/cards/large-card/large-card.html')
                 </div>
+            </div>
+            <div class="result-tabs-content" data-tab-panel data-tab="map" role="tabpanel">
             </div>
         </div>
     </div>

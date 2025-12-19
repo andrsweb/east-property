@@ -8,42 +8,66 @@
 
 	&-inner {
 		display: flex;
+		flex-direction: column-reverse;
 		align-items: stretch;
+
+		@media(min-width: v.$md) {
+			flex-direction: row;
+		}
 	}
 
 	&-left {
 		display: flex;
 		width: 100%;
-		max-width: 525px;
+
+		@media(min-width: v.$md) {
+			max-width: 525px;
+		}
 	}
 
 	&-images {
 		width: 100%;
-		height: 240px;
+		height: 200px;
 		display: flex;
 		align-items: center;
 		gap: 2px;
 
+		@media(min-width: v.$md) {
+			height: 240px;
+		}
+
 		&-left {
-			width: 71%;
+			width: 60%;
 			height: 100%;
+
+			@media(min-width: v.$md) {
+				width: 71%;
+			}
 
 			img {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
-				border-top-left-radius: v.$br8;
 				border-bottom-left-radius: v.$br8;
+
+				@media(min-width: v.$md) {
+					border-top-left-radius: v.$br8;
+					border-bottom-left-radius: v.$br8;
+				}
 			}
 		}
 
 		&-right {
-			width: 29%;
+			width: 40%;
 			height: 100%;
 			display: flex;
 			flex-direction: column;
 			align-items: flex-start;
 			gap: 2px;
+
+			@media(min-width: v.$md) {
+				width: 29%;
+			}
 
 			img {
 				width: 100%;
@@ -58,16 +82,24 @@
 		flex-direction: column;
 		align-items: flex-start;
 		flex-grow: 1;
-		padding: 16px 16px 16px 32px;
+		padding: 16px;
+		gap: 16px;
 		border: 1px solid v.$c-grey-95;
-		border-left: 0;
-		border-radius: v.$br8;
+		border-top-left-radius: v.$br8;
+		border-top-right-radius: v.$br8;
+
+		@media(min-width: v.$md) {
+			border-left: 0;
+			border-radius: v.$br8;
+			padding: 16px 16px 16px 32px;
+		}
 	}
 
 	&-top {
 		width: 100%;
 		display: flex;
 		align-items: flex-start;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		gap: 24px;
 		margin-bottom: auto;
@@ -158,8 +190,10 @@
 		&-bottom {
 			width: 100%;
 			display: flex;
+			flex-wrap: wrap;
 			align-items: center;
 			justify-content: space-between;
+			gap: 16px;
 
 			p {
 				color: v.$c-black;
@@ -177,8 +211,13 @@
 
 		&-items {
 			display: flex;
+			flex-wrap: wrap;
 			align-items: center;
-			gap: 24px;
+			gap: 12px;
+
+			@media(min-width: v.$md) {
+				gap: 24px;
+			}
 
 			span {
 				display: flex;

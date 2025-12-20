@@ -1,4 +1,6 @@
 @use '../vars/vars' as v;
+@use '../mixins/typography/text' as p;
+@use '../utils/placeholders/buttons/button' as *;
 
 * {
 	outline: none;
@@ -35,6 +37,69 @@ form, fieldset {
 	border: 0;
 }
 
+form {
+	width: 100%;
+
+	fieldset {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+		margin-bottom: 26px;
+	}
+
+	label {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 4px;
+
+		input {
+			width: 100%;
+			height: 40px;
+			background-color: v.$c-grey-97;
+			border-color: transparent;
+			border-radius: v.$br12;
+			color: v.$c-black;
+
+			@media(min-width: v.$md) {
+				height: 50px;
+			}
+		}
+	}
+
+	.submit-group {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 16px;
+		align-items: center;
+
+		&.start {
+			justify-content: flex-start;
+		}
+
+		&.end {
+			justify-content: flex-end;
+		}
+
+		&.between {
+			justify-content: space-between;
+		}
+
+		.forgot {
+			@extend %button;
+
+			color: v.$c-black;
+			text-decoration: underline;
+
+			@include p.t-text;
+		}
+	}
+}
+
 ul {
 	margin: 0;
 	padding: 0;
@@ -43,6 +108,18 @@ ul {
 
 address {
 	font-style: normal
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0
 }
 
 .wrapper {

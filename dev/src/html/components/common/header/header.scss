@@ -8,12 +8,24 @@
 	width: 100%;
 	padding: 10px 0;
 
+	&.sand {
+		background-color: v.$c-sand-light;
+	}
+
+	&.white {
+		background-color: v.$c-white;
+	}
+
 	&-wrapper {
 		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 32px;
+		gap: 24px;
+
+		@media(min-width: v.$sm) {
+			gap: 32px;
+		}
 	}
 
 	&-logo {
@@ -23,7 +35,11 @@
 
 		img {
 			width: auto;
-			height: 50px;
+			height: 40px;
+
+			@media(min-width: v.$sm) {
+				height: 50px;
+			}
 		}
 	}
 
@@ -104,6 +120,31 @@
 		display: flex;
 		align-items: center;
 		gap: 16px;
+
+		.header-signin {
+			@extend %button;
+
+			color: v.$c-black;
+			text-decoration: underline;
+
+			@include t.t-text;
+		}
+
+		.header-login {
+			span {
+				position: absolute;
+				width: 0;
+				height: 0;
+				visibility: hidden;
+
+				@media(min-width: v.$sm) {
+					position: static;
+					width: auto;
+					height: auto;
+					visibility: visible;
+				}
+			}
+		}
 
 		button {
 			position: relative;

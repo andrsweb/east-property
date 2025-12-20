@@ -15,5 +15,11 @@
 			height: 574px;
 		}
 	}
+
+	&.full-width {
+		width: 100vw;
+		height: 100%;
+		margin-left: calc(50% - 50vw);
+	}
 }
 

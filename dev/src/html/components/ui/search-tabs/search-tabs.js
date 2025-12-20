@@ -1,10 +1,10 @@
+import {loadSearchData} from "../../../../js/common/common.js";
+
 document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
 
 	void initSearchTabs()
 })
-
-const SEARCH_DATA_URL = '/data/search.json'
 
 const containerClosers = new Map()
 let globalHandlersAttached = false
@@ -16,7 +16,7 @@ const attachGlobalHandlers = () => {
 
 	document.addEventListener('click', (e) => {
 		const target = e.target
-		if (!(target instanceof Node)) return
+		if (!target) return
 
 		for (const [container, close] of containerClosers) {
 			if (!container.contains(target)) close()
@@ -29,20 +29,6 @@ const attachGlobalHandlers = () => {
 		for (const close of containerClosers.values()) close()
 	})
 }
-
-const loadSearchData = (() => {
-	let cache = null
-	return async () => {
-		if (cache) return cache
-
-		cache = fetch(SEARCH_DATA_URL, {cache: 'no-cache'}).then(async (res) => {
-			if (!res.ok) throw new Error(`Failed to load search data: ${res.status}`)
-
-			return res.json()
-		})
-		return cache
-	}
-})()
 
 const initSearchTabs = async () => {
 	const containers = document.querySelectorAll('[data-search-tabs]')
@@ -125,7 +111,7 @@ const initSearchTabs = async () => {
 
 		container.addEventListener('click', (e) => {
 			const target = e.target
-			if (!(target instanceof Element)) return
+			if (!target) return
 
 			if (target.closest('[data-search-selector]') || target.closest('.tab-dropdown')) return
 
@@ -216,10 +202,9 @@ const initSearchTabs = async () => {
 
 			if (dropdown) {
 				dropdown.addEventListener('click', (e) => {
-					const target = e.target instanceof Element ? e.target.closest('.tab-option') : null
-					if (!(target instanceof HTMLElement)) {
-						return
-					}
+					const target = e.target ? e.target.closest('.tab-option') : null
+
+					if (!target) {return}
 
 					const selected = target.getAttribute('data-value')
 

@@ -1,0 +1,25 @@
+@use '../vars/vars' as v;
+@use '../mixins/typography/labels' as l;
+@use '../utils/placeholders/buttons/button' as *;
+
+.result-tab-button {
+	@extend %button;
+
+	padding: 16px;
+	color: v.$c-grey;
+	background-color: v.$c-sand;
+
+	@include l.t-label;
+
+	&:first-child {
+		border-top-left-radius: v.$br8;
+	}
+
+	&:last-child {
+		border-top-right-radius: v.$br8;
+	}
+
+	&.active {
+		background-color: v.$c-white;
+	}
+}

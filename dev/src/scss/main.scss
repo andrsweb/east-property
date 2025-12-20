@@ -8,8 +8,10 @@
 @forward 'common/base';
 
 //ui
+@forward 'ui/label';
 @forward 'ui/modal';
-@forward 'ui/coockie';
+@forward 'ui/swiper-thumbs';
+@forward 'ui/tabs';
 
 //generated
 @forward 'generated/html-modules';

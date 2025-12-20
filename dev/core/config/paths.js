@@ -18,7 +18,10 @@ export const paths = {
 	},
 	scripts: {
 		src: 'dev/src/js/main.js',
-		watch: 'dev/src/js/**/*.js',
+		watch: [
+			'dev/src/js/**/*.js',
+			'dev/src/html/**/*.js'
+		],
 		dest: isWP ? '../assets/js' : 'assets/js'
 	},
 	static: {

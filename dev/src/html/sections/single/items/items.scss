@@ -212,21 +212,23 @@
 			display: flex;
 			align-items: stretch;
 			background-color: v.$c-grey-97;
-			white-space: nowrap;
-			overflow-x: auto;
 
-			@include g.hideScroll;
 
 			&-image {
+				display: flex;
+				align-items: center;
 				flex-shrink: 0;
-				max-height: 50px;
+
+				img {
+					max-height: 50px;
+				}
 			}
 
 			&-info {
 				display: flex;
 				align-items: center;
 				gap: 16px;
-				padding: 0 16px;
+				padding: 4px 16px;
 
 				span {
 					color: v.$c-black;

@@ -131,4 +131,29 @@
 			right: 24px;
 		}
 	}
+
+	.single-info {
+		width: 100%;
+
+		&-block {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 10px;
+
+			h3 {
+				color: v.$c-black;
+
+				@include h.t-title-bold;
+			}
+		}
+	}
+
+	.single-dropdowns {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
 }

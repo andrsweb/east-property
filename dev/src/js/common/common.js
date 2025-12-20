@@ -17,3 +17,12 @@ export const loadSearchData = (() => {
 		return cache
 	}
 })()
+
+export const reCalculateDropdownHeight = dropdown => {
+	const dropdownOpen  = dropdown.querySelector( '.dropdown-content' ),
+		dropdownInner   = dropdown.querySelector( '.dropdown-inner' )
+
+	if (! dropdownOpen || ! dropdownInner) return
+
+	dropdownOpen.style.height = `${ dropdownInner.getBoundingClientRect().height }px`
+}

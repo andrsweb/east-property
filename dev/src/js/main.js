@@ -7,3 +7,4 @@ import '../html/sections/index/map/map';
 import '../html/components/filters/result-filters/filters';
 // Single page sliders
 import '../html/sections/single/swiper/swiper';
+import '../html/sections/single/dropdowns/dropdowns';

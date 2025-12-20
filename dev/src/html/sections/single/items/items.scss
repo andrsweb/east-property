@@ -339,4 +339,14 @@
 			height: 16px;
 		}
 	}
+
+	.map {
+		iframe {
+			height: 375px;
+
+			@media(min-width: v.$md) {
+				height: 479px;
+			}
+		}
+	}
 }

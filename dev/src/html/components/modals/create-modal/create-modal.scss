@@ -15,6 +15,11 @@
 		gap: 16px;
 		background-color: v.$c-white;
 
+		ul li img {
+			width: 24px;
+			height: 24px;
+		}
+
 		&-title {
 			width: 100%;
 			display: flex;
@@ -72,11 +77,6 @@
 				display: flex;
 				align-items: center;
 				gap: 4px;
-
-				img {
-					width: 24px;
-					height: 24px;
-				}
 			}
 		}
 	}

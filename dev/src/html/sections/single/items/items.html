@@ -1,0 +1,84 @@
+<section class="single-items">
+    <div class="container">
+        <div class="single-items-wrapper">
+            <div class="single-items-top">
+                <div class="single-items-top-left">
+                    <h1>
+                        Modon Properties
+                    </h1>
+                    <div class="single-items-top-labels">
+                        <div class="label orange">
+                            <span>SEP 2028</span>
+                        </div>
+                        <div class="label black">
+                            <span>PREMIUM DEVELOPER</span>
+                        </div>
+                        <div class="label red">
+                            <span>POPULAR</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-items-top-right">
+                    @@include('components/ui/button/button.html', {"class": "gray sm", "text": "Share", "src": "/img/share.svg"})
+                    @@include('components/ui/button/button.html', {"class": "gray sm", "text": "Save", "src": "/img/bookmark.svg"})
+                    @@include('components/ui/button/button.html', {"class": "orange sm request-quote", "text": "Request quote"})
+                </div>
+            </div>
+            @@include('sections/single/items/thumbs-slider.html')
+            <div class="single-info">
+                <div class="single-info-block">
+                    <h3>
+                        Key information
+                    </h3>
+                    <div class="single-info-rows">
+                        <div class="single-info-row">
+                            <div class="single-info-col">
+                                <span>Delivery date</span>
+                                <p>January 2030</p>
+                            </div>
+                            <div class="single-info-col">
+                                <span>Construction started</span>
+                                <p>July 2025</p>
+                            </div>
+                            <div class="single-info-col">
+                                <span>Number of buildings</span>
+                                <p>1</p>
+                            </div>
+                        </div>
+                        <div class="single-info-row">
+                            <div class="single-info-col">
+                                <span>Property types</span>
+                                <p>Apartment</p>
+                            </div>
+                            <div class="single-info-col">
+                                <span>Government fee</span>
+                                <p>2%</p>
+                            </div>
+                            <div class="single-info-col">
+                                <span>Ownership type</span>
+                                <p>Freehold</p>
+                            </div>
+                        </div>
+                        <div class="single-info-row">
+                            <div class="single-info-col">
+                                <span>Location</span>
+                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                    Abu Dhabi, Saadiyat Island
+                                    <img src="/img/link.svg" width="16" height="16" alt="vector link">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-info-block">
+                    <h3>Pricing</h3>
+                   <div class="single-dropdowns">
+                       @@include('sections/single/dropdowns/dropdowns.html')
+                       @@include('sections/single/dropdowns/dropdowns.html')
+                       @@include('sections/single/dropdowns/dropdowns.html')
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

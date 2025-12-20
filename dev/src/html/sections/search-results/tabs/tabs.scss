@@ -95,12 +95,8 @@
 			gap: 10px;
 			padding: 56px 0;
 			overflow-y: auto;
-			scrollbar-width: none;
-			-ms-overflow-style: none;
 
-			&::-webkit-scrollbar {
-				display: none;
-			}
+			@include g.hideScroll;
 		}
 	}
 

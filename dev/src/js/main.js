@@ -4,4 +4,6 @@ import './common/tabs';
 import '../html/components/ui/search-tabs/search-tabs';
 import '../html/components/common/header/header-menu';
 import '../html/sections/index/map/map';
-import '../html/components/filters/result-filters/filters.js';
+import '../html/components/filters/result-filters/filters';
+// Single page sliders
+import '../html/sections/single/swiper/swiper';

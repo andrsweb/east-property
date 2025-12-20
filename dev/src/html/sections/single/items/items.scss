@@ -321,4 +321,22 @@
 			}
 		}
 	}
+
+	.texts {
+		max-width: 600px;
+	}
+
+	.learn-more {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		color: v.$c-black;
+
+		@include t.t-text;
+
+		img {
+			width: 16px;
+			height: 16px;
+		}
+	}
 }

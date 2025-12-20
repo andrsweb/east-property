@@ -5,7 +5,7 @@
 @use '../../../../scss/mixins/global' as g;
 @use '../../../../scss/utils/placeholders/buttons/button' as *;
 
-.result-tabs {
+.profile-tabs {
 	width: 100%;
 	background-color: v.$c-white;
 
@@ -19,7 +19,7 @@
 		align-items: center;
 		position: relative;
 		z-index: 1;
-		padding-top: 10px;
+		padding-top: 32px;
 
 		&::before {
 			content: "";
@@ -60,21 +60,6 @@
 			position: relative;
 			height: 575px;
 			z-index: 1;
-		}
-
-		.content-scroll {
-			position: absolute;
-			left: 0;
-			top: 0;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 10px;
-			padding: 56px 0;
-			overflow-y: auto;
-
-			@include g.hide-scroll;
 		}
 	}
 
@@ -123,5 +108,11 @@
 		flex-direction: column;
 		gap: 32px;
 		padding-bottom: 32px;
+
+		form {
+			fieldset {
+				max-width: 300px;
+			}
+		}
 	}
 }

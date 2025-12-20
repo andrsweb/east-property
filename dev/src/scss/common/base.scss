@@ -1,4 +1,6 @@
 @use '../vars/vars' as v;
+@use '../mixins/typography/text' as p;
+@use '../utils/placeholders/buttons/button' as *;
 
 * {
 	outline: none;
@@ -65,6 +67,31 @@ form {
 			@media(min-width: v.$md) {
 				height: 50px;
 			}
+		}
+	}
+
+	.submit-group {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 16px;
+		align-items: center;
+
+		&.end {
+			justify-content: flex-end;
+		}
+
+		&.between {
+			justify-content: space-between;
+		}
+
+		.forgot {
+			@extend %button;
+
+			color: v.$c-black;
+			text-decoration: underline;
+
+			@include p.t-text;
 		}
 	}
 }

@@ -3,7 +3,7 @@
 @use '../../../../scss/mixins/typography/text' as p;
 @use '../../../../scss/utils/placeholders/buttons/button' as *;
 
-.create-modal {
+.signin-modal {
 	.modal {
 		width: 100%;
 		max-width: 403px;
@@ -48,36 +48,9 @@
 		}
 	}
 
-	p, li, label {
+	p, label {
 		color: v.$c-black;
 
 		@include p.t-text;
-	}
-
-	&-inner {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 10px;
-		margin-bottom: 10px;
-
-		ul {
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 8px;
-
-			li {
-				display: flex;
-				align-items: center;
-				gap: 4px;
-
-				img {
-					width: 24px;
-					height: 24px;
-				}
-			}
-		}
 	}
 }

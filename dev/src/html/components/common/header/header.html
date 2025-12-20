@@ -27,7 +27,7 @@
                 </a>
                 @@include('components/common/header/nav.html')
                 <div class="header-actions">
-                    <button class="header-signin" type="button">
+                    <button class="header-signin" type="button" data-modal-open="signin-modal">
                         Sign in
                     </button>
                     @@include('components/ui/button/button.html', {"class": "black sm header-login", "text": "Create Account", "src": "/img/user.svg", "dataModal": "create-modal"})

@@ -27,6 +27,9 @@ function createObfuscateStream() {
 	return new Transform({
 		objectMode: true,
 		transform(file, _encoding, callback) {
+			if (path.extname(file.path) !== '.js') {
+				return callback(null, file);
+			}
 			if (file.isBuffer()) {
 				try {
 					const code = file.contents.toString('utf8');

@@ -1,3 +1,5 @@
+import './modal';
+
 import {SEARCH_DATA_URL} from './global.js';
 
 document.addEventListener('DOMContentLoaded', () => {

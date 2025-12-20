@@ -22,7 +22,7 @@
 		}
 
 		&:active {
-			transform: scale(.95);
+			scale: 0.95;
 			background-color: v.$c-black;
 		}
 
@@ -85,7 +85,7 @@
 		}
 
 		&:active {
-			transform: scale(.95);
+			scale: 0.95;
 			background-color: v.$c-orange-dark;
 		}
 
@@ -126,7 +126,7 @@
 		}
 
 		&:active {
-			transform: scale(.95);
+			scale: 0.95;
 			background-color: v.$c-grey-97;
 		}
 

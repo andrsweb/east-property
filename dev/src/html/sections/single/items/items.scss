@@ -207,6 +207,41 @@
 				@include h.t-title-bold;
 			}
 		}
+
+		.developer {
+			display: flex;
+			align-items: stretch;
+			background-color: v.$c-grey-97;
+			white-space: nowrap;
+			overflow-x: auto;
+
+			@include g.hideScroll;
+
+			&-image {
+				flex-shrink: 0;
+				max-height: 50px;
+			}
+
+			&-info {
+				display: flex;
+				align-items: center;
+				gap: 16px;
+				padding: 0 16px;
+
+				span {
+					color: v.$c-black;
+
+					@include l.t-label;
+				}
+
+				a {
+					color: v.$c-black;
+					text-decoration: underline;
+
+					@include t.t-text;
+				}
+			}
+		}
 	}
 
 	.single-dropdowns {

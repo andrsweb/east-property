@@ -145,27 +145,6 @@
 			align-items: center;
 			gap: 8px;
 		}
-
-		.large-card-label {
-			color: v.$c-white;
-			padding: 4px 5px;
-			border-top-right-radius: v.$br8;
-			border-bottom-left-radius: v.$br8;
-
-			@include t.t-smallest;
-
-			&.orange {
-				background-color: v.$c-orange;
-			}
-
-			&.black {
-				background-color: v.$c-black;
-			}
-
-			&.red {
-				background-color: v.$c-red;
-			}
-		}
 	}
 
 	&-bottom {

@@ -49,11 +49,6 @@
 			display: inline-flex;
 			justify-content: center;
 			align-items: center;
-			background-color: v.$c-orange;
-			padding: 4px 5px;
-			border-top-right-radius: v.$br6;
-			border-bottom-left-radius: v.$br6;
-			color: v.$c-white;
 			z-index: 10;
 
 			@include t.t-smallest;

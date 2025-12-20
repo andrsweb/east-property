@@ -21,10 +21,25 @@ export const loadSearchData = (() => {
 })()
 
 export const reCalculateDropdownHeight = dropdown => {
-	const dropdownOpen  = dropdown.querySelector( '.dropdown-content' ),
-		dropdownInner   = dropdown.querySelector( '.dropdown-inner' )
+	const dropdownOpen = dropdown.querySelector('.dropdown-content'),
+		dropdownInner = dropdown.querySelector('.dropdown-inner')
 
-	if (! dropdownOpen || ! dropdownInner) return
+	if (!dropdownOpen || !dropdownInner) return
 
-	dropdownOpen.style.height = `${ dropdownInner.getBoundingClientRect().height }px`
+	dropdownOpen.style.height = `${dropdownInner.getBoundingClientRect().height}px`
 }
+
+document.addEventListener('click', (e) => {
+	const trigger = e.target.closest('[data-modal-open="plan-modal"]');
+	if (!trigger) return;
+
+	const modal  = document.querySelector('.modal-wrapper[data-modal-id="plan-modal"]');
+	const imgTag = modal?.querySelector('[data-modal-img]');
+	if (!imgTag) return;
+
+	const src = trigger.getAttribute('data-plan-src')
+		|| trigger.getAttribute('src')
+		|| trigger.querySelector('img')?.getAttribute('src');
+
+	if (src) imgTag.src = src;
+});

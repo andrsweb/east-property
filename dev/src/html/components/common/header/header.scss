@@ -8,6 +8,14 @@
 	width: 100%;
 	padding: 10px 0;
 
+	&.sand {
+		background-color: v.$c-sand-light;
+	}
+
+	&.white {
+		background-color: v.$c-white;
+	}
+
 	&-wrapper {
 		width: 100%;
 		display: flex;

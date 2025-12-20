@@ -301,4 +301,24 @@
 			padding: 8px;
 		}
 	}
+
+	.single-list {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+
+		li {
+			display: flex;
+			align-items: center;
+			gap: 4px;
+			color: v.$c-black;
+
+			@include t.t-text;
+
+			&:before {
+				content: "—";
+			}
+		}
+	}
 }

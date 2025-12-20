@@ -11,6 +11,13 @@
 		padding: 8px;
 	}
 
+	&-arrow {
+		@extend %button;
+
+		width: 16px;
+		height: 16px;
+	}
+
 	&.opened {
 		.dropdown-arrow {
 			transform: rotate(180deg);
@@ -27,13 +34,6 @@
 
 		@media(min-width: v.$lg) {
 			align-items: center;
-		}
-
-		.dropdown-arrow {
-			@extend %button;
-
-			width: 16px;
-			height: 16px;
 		}
 
 		.dropdown-row {

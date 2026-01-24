@@ -1,4 +1,4 @@
-import {loadSearchData} from "../../../../js/common/common.js";
+import { loadSearchData } from "../../../../js/common/common.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
@@ -204,7 +204,7 @@ const initSearchTabs = async () => {
 				dropdown.addEventListener('click', (e) => {
 					const target = e.target ? e.target.closest('.tab-option') : null
 
-					if (!target) {return}
+					if (!target) { return }
 
 					const selected = target.getAttribute('data-value')
 
@@ -237,5 +237,126 @@ const initSearchTabs = async () => {
 				applyCategoryDefaults(type)
 			})
 		})
+
+		const bedsBathsSelector = container.querySelector('[data-search-selector="beds_baths"]')
+		const bedsBathsDropdown = container.querySelector('[data-search-dropdown="beds_baths"]')
+		const bedsBathsText = container.querySelector('[data-search-beds-baths-text]')
+		const bedsValueInput = container.querySelector('[data-search-beds-value]')
+		const bathsValueInput = container.querySelector('[data-search-baths-value]')
+
+		if (bedsBathsSelector && bedsBathsDropdown && bedsBathsText && bedsValueInput && bathsValueInput) {
+			let selectedBeds = new Set(['2', '3'])
+			let selectedBaths = new Set(['2'])
+			let tempBeds = new Set(selectedBeds)
+			let tempBaths = new Set(selectedBaths)
+
+			const updateDisplayText = () => {
+				const bedsArray = Array.from(selectedBeds).sort()
+				const bathsArray = Array.from(selectedBaths).sort()
+
+				let text = ''
+				if (bedsArray.length > 0) {
+					text += bedsArray.join(',') + ' bed' + (bedsArray.length > 1 || bedsArray.includes('5+') ? 's' : '')
+				}
+				if (bathsArray.length > 0) {
+					if (text) text += ', '
+					text += bathsArray.join(',') + ' bath' + (bathsArray.length > 1 || bathsArray.includes('5+') ? 's' : '')
+				}
+
+				bedsBathsText.textContent = text || 'Select'
+
+				bedsValueInput.value = bedsArray.join(',')
+				bathsValueInput.value = bathsArray.join(',')
+			}
+
+			const updateButtonStates = () => {
+				const bedButtons = bedsBathsDropdown.querySelectorAll('[data-beds]')
+				const bathButtons = bedsBathsDropdown.querySelectorAll('[data-baths]')
+
+				bedButtons.forEach(btn => {
+					const value = btn.dataset.beds
+
+					btn.classList.toggle('active', tempBeds.has(value))
+				})
+
+				bathButtons.forEach(btn => {
+					const value = btn.dataset.baths
+
+					btn.classList.toggle('active', tempBaths.has(value))
+				})
+			}
+
+			const originalOpen = () => {
+				tempBeds = new Set(selectedBeds)
+				tempBaths = new Set(selectedBaths)
+
+				updateButtonStates()
+			}
+
+			bedsBathsSelector.addEventListener('click', (e) => {
+				if (!bedsBathsSelector.classList.contains('is-open')) {
+					originalOpen()
+				}
+			}, true)
+
+			bedsBathsDropdown.addEventListener('click', (e) => {
+				const bedBtn = e.target.closest('[data-beds]')
+				const bathBtn = e.target.closest('[data-baths]')
+
+				if (bedBtn) {
+					e.stopPropagation()
+
+					const value = bedBtn.dataset.beds
+
+					if (tempBeds.has(value)) {
+						tempBeds.delete(value)
+					} else {
+						tempBeds.add(value)
+					}
+
+					updateButtonStates()
+				}
+
+				if (bathBtn) {
+					e.stopPropagation()
+
+					const value = bathBtn.dataset.baths
+
+					if (tempBaths.has(value)) {
+						tempBaths.delete(value)
+					} else {
+						tempBaths.add(value)
+					}
+					updateButtonStates()
+				}
+			})
+
+			const cancelBtn = bedsBathsDropdown.querySelector('.beds-baths-cancel .button')
+
+			if (cancelBtn) {
+				cancelBtn.addEventListener('click', (e) => {
+					e.preventDefault()
+					e.stopPropagation()
+					tempBeds = new Set(selectedBeds)
+					tempBaths = new Set(selectedBaths)
+					updateButtonStates()
+					closeAllDropdowns()
+				})
+			}
+
+			const applyBtn = bedsBathsDropdown.querySelector('.beds-baths-apply .button')
+			if (applyBtn) {
+				applyBtn.addEventListener('click', (e) => {
+					e.preventDefault()
+					e.stopPropagation()
+					selectedBeds = new Set(tempBeds)
+					selectedBaths = new Set(tempBaths)
+					updateDisplayText()
+					closeAllDropdowns()
+				})
+			}
+
+			updateDisplayText()
+		}
 	})
 }

@@ -29,7 +29,7 @@
 
 	&-left {
 		width: 100%;
-		max-width: 505px;
+		max-width: 574px;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -95,7 +95,7 @@
 			height: auto;
 
 			@media(min-width: v.$xl) {
-				max-width: 655px;
+				max-width: 613px;
 			}
 		}
 	}

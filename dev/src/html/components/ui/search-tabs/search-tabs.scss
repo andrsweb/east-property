@@ -60,19 +60,21 @@
 		flex-wrap: wrap;
 		gap: 16px;
 
-		@media(min-width: v.$sm) {
+		@media(min-width: v.$md) {
 			flex-wrap: nowrap;
 			gap: 8px;
 		}
 	}
 
 	.tab-field {
+		width: 100%;
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
 
-		@media(min-width: v.$sm) {
+		@media(min-width: v.$md) {
+			width: auto;
 			max-width: 160px;
 		}
 	}
@@ -148,7 +150,7 @@
 		height: 59px;
 		background-color: v.$c-grey-95;
 
-		@media(min-width: v.$sm) {
+		@media(min-width: v.$md) {
 			display: block;
 		}
 	}

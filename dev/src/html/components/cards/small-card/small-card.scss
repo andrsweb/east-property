@@ -42,8 +42,8 @@
 	}
 
 	&-date {
-		background-color: v.$c-orange;
-		color: v.$c-white;
+		background-color: v.$c-grey-97;
+		color: v.$c-black;
 		padding: 4px 5px;
 		border-top-right-radius: v.$br8;
 		border-bottom-left-radius: v.$br8;
@@ -68,15 +68,16 @@
 		gap: 8px;
 
 		span {
-			color: v.$c-orange;
+			color: v.$c-black;
 
 			@include h.t-title-bold;
 		}
 
-		p {
+		a {
+			text-decoration: underline;
 			color: v.$c-black;
 
-			@include l.t-label;
+			@include t.t-text;
 		}
 	}
 

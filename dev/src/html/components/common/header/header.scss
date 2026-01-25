@@ -98,6 +98,12 @@
 		}
 
 		li {
+			&.active {
+				a {
+					font-weight: v.$fw-700;
+				}
+			}
+
 			a {
 				color: v.$c-black;
 

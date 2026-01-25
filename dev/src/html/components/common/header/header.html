@@ -25,7 +25,27 @@
                 <a href="/" class="header-logo">
                     <img src="/img/logo.svg" width="132" height="50" alt="Vector logotype">
                 </a>
-                @@include('components/common/header/nav.html')
+
+                <nav id="header-nav" class="header-nav">
+                    <ul class="menu">
+                        <li class="menu-item mobile">
+                            <img src="/img/logo.svg" alt="">
+                        </li>
+                        <li class="menu-item active">
+                            <a href="/properties.html">Search property</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">New projects</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">Mortgage</a>
+                        </li>
+                        <li class="menu-item mobile">
+                            <img src="/img/hero-image.png" alt="">
+                        </li>
+                    </ul>
+                </nav>
+
                 <div class="header-actions">
                     <button class="header-signin" type="button" data-modal-open="signin-modal">
                         Sign in

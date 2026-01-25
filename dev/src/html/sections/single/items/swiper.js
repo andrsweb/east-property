@@ -1,5 +1,4 @@
 import Swiper from 'swiper';
-import 'swiper/css';
 import {Navigation, Thumbs} from 'swiper/modules';
 
 

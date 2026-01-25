@@ -1,4 +1,4 @@
-import {loadSearchData} from '../../../../js/common/common.js'
+import { loadSearchData } from '../../../../js/common/common.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
@@ -131,8 +131,10 @@ const initSearchResultsFilters = async () => {
 
 	const closeDropdown = (button) => {
 		if (!button) return
+		const filterKey = button.dataset.filter
 
-		const dropdown = button.querySelector('.result-dropdown')
+		const dropdown = button.querySelector('.result-dropdown') ||
+			button.parentElement.querySelector(`[data-result-dropdown="${filterKey}"]`)
 
 		if (!dropdown) return
 
@@ -142,11 +144,13 @@ const initSearchResultsFilters = async () => {
 
 	const openDropdown = (button) => {
 		if (!button) return
+		const filterKey = button.dataset.filter
 		if (openButton && openButton !== button) closeDropdown(openButton)
 
 		openButton = button
 
-		const dropdown = button.querySelector('.result-dropdown')
+		const dropdown = button.querySelector('.result-dropdown') ||
+			button.parentElement.querySelector(`[data-result-dropdown="${filterKey}"]`)
 
 		if (!dropdown) return
 
@@ -160,6 +164,8 @@ const initSearchResultsFilters = async () => {
 			if (!target || typeof target.closest !== 'function') return
 
 			const option = target.closest('.result-option')
+			const filterKey = button.dataset.filter
+
 			if (!option) {
 				if (button.classList.contains('is-open')) {
 					closeDropdown(button)
@@ -168,11 +174,14 @@ const initSearchResultsFilters = async () => {
 				}
 
 				openDropdown(button)
+
+				if (filterKey === 'beds_baths') {
+					window.dispatchEvent(new CustomEvent('filter:open', { detail: { filter: filterKey } }))
+				}
 				return
 			}
 
 			const selectedValue = option.getAttribute('data-value')
-			const filterKey = button.dataset.filter
 
 			if (filterKey && selectedValue) {
 				applySelection(button, filterKey, selectedValue)
@@ -202,4 +211,113 @@ const initSearchResultsFilters = async () => {
 		closeDropdown(openButton)
 		openButton = null
 	})
+
+	const bedsBathsSelector = document.querySelector('.result-filter[data-filter="beds_baths"]')
+	const bedsBathsDropdown = document.querySelector('[data-result-dropdown="beds_baths"]')
+	const bedsBathsText = document.querySelector('[data-result-beds-baths-text]')
+	const bedsValueInput = document.querySelector('[data-result-beds-value]')
+	const bathsValueInput = document.querySelector('[data-result-baths-value]')
+
+	if (bedsBathsSelector && bedsBathsDropdown && bedsBathsText && bedsValueInput && bathsValueInput) {
+		let selectedBeds = new Set()
+		let selectedBaths = new Set()
+		let tempBeds = new Set(selectedBeds)
+		let tempBaths = new Set(selectedBaths)
+
+		const updateDisplayText = () => {
+			const bedsArray = Array.from(selectedBeds).sort()
+			const bathsArray = Array.from(selectedBaths).sort()
+
+			let text = ''
+			if (bedsArray.length > 0) {
+				text += bedsArray.join(',') + ' bed' + (bedsArray.length > 1 || bedsArray.includes('5+') ? 's' : '')
+			}
+			if (bathsArray.length > 0) {
+				if (text) text += ', '
+				text += bathsArray.join(',') + ' bath' + (bathsArray.length > 1 || bathsArray.includes('5+') ? 's' : '')
+			}
+
+			bedsBathsText.textContent = text || 'Select'
+			bedsValueInput.value = bedsArray.join(',')
+			bathsValueInput.value = bathsArray.join(',')
+		}
+
+		const updateButtonStates = () => {
+			const bedButtons = bedsBathsDropdown.querySelectorAll('[data-beds]')
+			const bathButtons = bedsBathsDropdown.querySelectorAll('[data-baths]')
+
+			bedButtons.forEach(btn => {
+				const value = btn.dataset.beds
+				btn.classList.toggle('active', tempBeds.has(value))
+			})
+
+			bathButtons.forEach(btn => {
+				const value = btn.dataset.baths
+				btn.classList.toggle('active', tempBaths.has(value))
+			})
+		}
+
+		updateDisplayText()
+
+		window.addEventListener('filter:open', (e) => {
+			if (e.detail.filter === 'beds_baths') {
+				tempBeds = new Set(selectedBeds)
+				tempBaths = new Set(selectedBaths)
+				updateButtonStates()
+			}
+		})
+
+		bedsBathsDropdown.addEventListener('click', (e) => {
+			e.stopPropagation()
+			const bedBtn = e.target.closest('[data-beds]')
+			const bathBtn = e.target.closest('[data-baths]')
+
+			if (bedBtn) {
+				const value = bedBtn.dataset.beds
+				if (tempBeds.has(value)) {
+					tempBeds.delete(value)
+				} else {
+					tempBeds.add(value)
+				}
+				updateButtonStates()
+			}
+
+			if (bathBtn) {
+				const value = bathBtn.dataset.baths
+				if (tempBaths.has(value)) {
+					tempBaths.delete(value)
+				} else {
+					tempBaths.add(value)
+				}
+				updateButtonStates()
+			}
+		})
+
+		const cancelBtn = bedsBathsDropdown.querySelector('.beds-baths-cancel')
+		if (cancelBtn) {
+			cancelBtn.addEventListener('click', (e) => {
+				e.preventDefault()
+				e.stopPropagation()
+				tempBeds = new Set(selectedBeds)
+				tempBaths = new Set(selectedBaths)
+				updateButtonStates()
+				closeDropdown(bedsBathsSelector)
+				openButton = null
+			})
+		}
+
+		const applyBtn = bedsBathsDropdown.querySelector('.beds-baths-apply')
+		if (applyBtn) {
+			applyBtn.addEventListener('click', (e) => {
+				e.preventDefault()
+				e.stopPropagation()
+				selectedBeds = new Set(tempBeds)
+				selectedBaths = new Set(tempBaths)
+				updateDisplayText()
+				closeDropdown(bedsBathsSelector)
+				openButton = null
+			})
+		}
+
+	}
 }

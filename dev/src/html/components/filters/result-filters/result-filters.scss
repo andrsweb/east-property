@@ -32,6 +32,10 @@
 	align-items: stretch;
 	gap: 10px;
 
+	.result-filter-wrapper {
+		position: relative;
+	}
+
 	.result-filter {
 		@extend %button;
 
@@ -140,6 +144,7 @@
 
 		&.is-selected {
 			color: v.$c-black;
+
 			.result-option-check {
 				opacity: 1;
 			}

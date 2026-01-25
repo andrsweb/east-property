@@ -98,12 +98,6 @@
 		}
 
 		li {
-			&.active {
-				a {
-					font-weight: v.$fw-700;
-				}
-			}
-
 			a {
 				color: v.$c-black;
 
@@ -111,6 +105,12 @@
 
 				@media(min-width: v.$lg) {
 					@include t.t-text;
+				}
+			}
+
+			&.active {
+				a {
+					font-weight: v.$fw-700;
 				}
 			}
 
@@ -227,7 +227,7 @@
 }
 
 header.header {
-  background: v.$c-sand-light;
-  box-shadow: none;
-  margin-bottom: 0;
+	background: v.$c-sand-light;
+	box-shadow: none;
+	margin-bottom: 0;
 }

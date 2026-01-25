@@ -10,7 +10,7 @@
 	border-top-right-radius: v.$br8;
 	border-bottom-left-radius: v.$br8;
 
-	@include t.t-smallest;
+	@include t.t-smallest(true);
 
 	&.orange {
 		background-color: v.$c-orange;
@@ -22,5 +22,10 @@
 
 	&.red {
 		background-color: v.$c-red;
+	}
+
+	&.grey {
+		background-color: v.$c-grey-97;
+		color: v.$c-black;
 	}
 }

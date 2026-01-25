@@ -1,7 +1,7 @@
 import './common/common';
 import './common/tabs';
 // Components && Sections js
-import '../html/components/ui/search-tabs/search-tabs';
+import './search-tabs.js';
 import '../html/components/common/header/header-menu';
 import '../html/components/ui/contact-panel/contact-panel';
 import '../html/sections/index/map/map';

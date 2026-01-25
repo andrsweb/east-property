@@ -1,4 +1,5 @@
-import { loadSearchData } from '../../../../js/common/common.js'
+import { loadSearchData } from './common/common.js'
+import { getBedsBathsText, updateBedsBathsButtons, syncTempBedsBaths } from './common/beds-baths.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
@@ -164,6 +165,8 @@ const initSearchResultsFilters = async () => {
 			if (!target || typeof target.closest !== 'function') return
 
 			const option = target.closest('.result-option')
+			const filterKey = button.dataset.filter
+
 			if (!option) {
 				if (button.classList.contains('is-open')) {
 					closeDropdown(button)
@@ -172,11 +175,14 @@ const initSearchResultsFilters = async () => {
 				}
 
 				openDropdown(button)
+
+				if (filterKey === 'beds_baths') {
+					window.dispatchEvent(new CustomEvent('filter:open', { detail: { filter: filterKey } }))
+				}
 				return
 			}
 
 			const selectedValue = option.getAttribute('data-value')
-			const filterKey = button.dataset.filter
 
 			if (filterKey && selectedValue) {
 				applySelection(button, filterKey, selectedValue)
@@ -193,7 +199,7 @@ const initSearchResultsFilters = async () => {
 		const target = e.target
 		if (!target) return
 
-		if (openButton.contains(target)) return
+		if (openButton.contains(target) || target.closest('[data-result-dropdown]')) return
 
 		closeDropdown(openButton)
 		openButton = null
@@ -220,48 +226,24 @@ const initSearchResultsFilters = async () => {
 		let tempBaths = new Set(selectedBaths)
 
 		const updateDisplayText = () => {
-			const bedsArray = Array.from(selectedBeds).sort()
-			const bathsArray = Array.from(selectedBaths).sort()
-
-			let text = ''
-			if (bedsArray.length > 0) {
-				text += bedsArray.join(',') + ' bed' + (bedsArray.length > 1 || bedsArray.includes('5+') ? 's' : '')
-			}
-			if (bathsArray.length > 0) {
-				if (text) text += ', '
-				text += bathsArray.join(',') + ' bath' + (bathsArray.length > 1 || bathsArray.includes('5+') ? 's' : '')
-			}
-
-			bedsBathsText.textContent = text || 'Select'
-			bedsValueInput.value = bedsArray.join(',')
-			bathsValueInput.value = bathsArray.join(',')
+			bedsBathsText.textContent = getBedsBathsText(selectedBeds, selectedBaths)
+			bedsValueInput.value = Array.from(selectedBeds).join(',')
+			bathsValueInput.value = Array.from(selectedBaths).join(',')
 		}
 
 		const updateButtonStates = () => {
-			const bedButtons = bedsBathsDropdown.querySelectorAll('[data-beds]')
-			const bathButtons = bedsBathsDropdown.querySelectorAll('[data-baths]')
-
-			bedButtons.forEach(btn => {
-				const value = btn.dataset.beds
-				btn.classList.toggle('active', tempBeds.has(value))
-			})
-
-			bathButtons.forEach(btn => {
-				const value = btn.dataset.baths
-				btn.classList.toggle('active', tempBaths.has(value))
-			})
+			updateBedsBathsButtons(bedsBathsDropdown, tempBeds, tempBaths)
 		}
 
-		bedsBathsSelector.addEventListener('click', (e) => {
-			if (e.target.closest('.beds-baths-dropdown')) return
+		updateDisplayText()
 
-			setTimeout(() => {
-				if (bedsBathsSelector.classList.contains('is-open')) {
-					tempBeds = new Set(selectedBeds)
-					tempBaths = new Set(selectedBaths)
-					updateButtonStates()
-				}
-			}, 0)
+		window.addEventListener('filter:open', (e) => {
+			if (e.detail.filter === 'beds_baths') {
+				const synced = syncTempBedsBaths(selectedBeds, selectedBaths)
+				tempBeds = synced.tempBeds
+				tempBaths = synced.tempBaths
+				updateButtonStates()
+			}
 		})
 
 		bedsBathsDropdown.addEventListener('click', (e) => {
@@ -295,8 +277,9 @@ const initSearchResultsFilters = async () => {
 			cancelBtn.addEventListener('click', (e) => {
 				e.preventDefault()
 				e.stopPropagation()
-				tempBeds = new Set(selectedBeds)
-				tempBaths = new Set(selectedBaths)
+				const synced = syncTempBedsBaths(selectedBeds, selectedBaths)
+				tempBeds = synced.tempBeds
+				tempBaths = synced.tempBaths
 				updateButtonStates()
 				closeDropdown(bedsBathsSelector)
 				openButton = null
@@ -315,7 +298,5 @@ const initSearchResultsFilters = async () => {
 				openButton = null
 			})
 		}
-
-		updateDisplayText()
 	}
 }

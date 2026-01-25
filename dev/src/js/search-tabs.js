@@ -1,4 +1,5 @@
-import { loadSearchData } from "../../../../js/common/common.js";
+import { loadSearchData } from "./common/common.js";
+import { getBedsBathsText, updateBedsBathsButtons, syncTempBedsBaths } from "./common/beds-baths.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
@@ -167,7 +168,6 @@ const initSearchTabs = async () => {
 			if (!defaults) return
 
 			if (typeof defaults.available === 'string') setFilterValue('available', defaults.available)
-
 			if (typeof defaults.price === 'string') setFilterValue('price', defaults.price)
 		}
 
@@ -251,45 +251,19 @@ const initSearchTabs = async () => {
 			let tempBaths = new Set(selectedBaths)
 
 			const updateDisplayText = () => {
-				const bedsArray = Array.from(selectedBeds).sort()
-				const bathsArray = Array.from(selectedBaths).sort()
-
-				let text = ''
-				if (bedsArray.length > 0) {
-					text += bedsArray.join(',') + ' bed' + (bedsArray.length > 1 || bedsArray.includes('5+') ? 's' : '')
-				}
-				if (bathsArray.length > 0) {
-					if (text) text += ', '
-					text += bathsArray.join(',') + ' bath' + (bathsArray.length > 1 || bathsArray.includes('5+') ? 's' : '')
-				}
-
-				bedsBathsText.textContent = text || 'Select'
-
-				bedsValueInput.value = bedsArray.join(',')
-				bathsValueInput.value = bathsArray.join(',')
+				bedsBathsText.textContent = getBedsBathsText(selectedBeds, selectedBaths)
+				bedsValueInput.value = Array.from(selectedBeds).join(',')
+				bathsValueInput.value = Array.from(selectedBaths).join(',')
 			}
 
 			const updateButtonStates = () => {
-				const bedButtons = bedsBathsDropdown.querySelectorAll('[data-beds]')
-				const bathButtons = bedsBathsDropdown.querySelectorAll('[data-baths]')
-
-				bedButtons.forEach(btn => {
-					const value = btn.dataset.beds
-
-					btn.classList.toggle('active', tempBeds.has(value))
-				})
-
-				bathButtons.forEach(btn => {
-					const value = btn.dataset.baths
-
-					btn.classList.toggle('active', tempBaths.has(value))
-				})
+				updateBedsBathsButtons(bedsBathsDropdown, tempBeds, tempBaths)
 			}
 
 			const originalOpen = () => {
-				tempBeds = new Set(selectedBeds)
-				tempBaths = new Set(selectedBaths)
-
+				const synced = syncTempBedsBaths(selectedBeds, selectedBaths)
+				tempBeds = synced.tempBeds
+				tempBaths = synced.tempBaths
 				updateButtonStates()
 			}
 

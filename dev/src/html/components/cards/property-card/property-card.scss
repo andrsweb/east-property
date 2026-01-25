@@ -66,15 +66,19 @@
 		border-bottom-right-radius: v.$br8;
 
 		h3 {
-			color: v.$c-orange;
+			color: v.$c-black;
 
 			@include h.t-title-bold;
 		}
 
-		p {
+		p, .property-card-name {
 			color: v.$c-black;
 
 			@include l.t-label;
+		}
+
+		.property-card-name {
+			text-decoration: underline;
 		}
 	}
 

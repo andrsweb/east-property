@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	'use strict';
 
 	initSwiperThumbs();
+	initSingleSwiper();
 });
 
 const initSwiperThumbs = () => {
@@ -44,5 +45,18 @@ const initSwiperThumbs = () => {
 		thumbs: {
 			swiper: thumbsSwiper,
 		},
+	});
+};
+
+const initSingleSwiper = () => {
+	new Swiper('.single-swiper', {
+		modules: [Navigation],
+		slidesPerView: 1,
+		spaceBetween: 16,
+		loop: true,
+		navigation: {
+			nextEl: '.swiper-next',
+			prevEl: '.swiper-prev',
+		}
 	});
 };

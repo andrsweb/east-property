@@ -6,5 +6,5 @@ import '../html/components/common/header/header-menu';
 import '../html/components/ui/contact-panel/contact-panel';
 import '../html/sections/index/map/map';
 import '../html/components/filters/result-filters/filters';
-import '../html/sections/single/items/swiper';
+import './swiper.js';
 import '../html/sections/single/dropdowns/dropdowns';

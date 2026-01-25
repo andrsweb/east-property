@@ -206,7 +206,7 @@
 		&-row {
 			min-width: 100%;
 			display: flex;
-			align-items: center;
+			align-items: stretch;
 			justify-content: space-between;
 			gap: 10px;
 		}
@@ -224,6 +224,12 @@
 				color: v.$c-text-grey;
 
 				@include t.t-text;
+			}
+
+			p {
+				white-space: normal;
+				word-break: break-word;
+				overflow-wrap: break-word;
 			}
 
 			p, a {

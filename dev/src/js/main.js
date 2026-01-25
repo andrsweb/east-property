@@ -7,4 +7,4 @@ import '../html/components/ui/contact-panel/contact-panel';
 import '../html/sections/index/map/map';
 import './filters.js';
 import './swiper.js';
-import '../html/sections/single/dropdowns/dropdowns';
+import './dropdowns.js';

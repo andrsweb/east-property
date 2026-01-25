@@ -2,11 +2,18 @@
     <div class="container">
         <div class="profile-tabs-wrapper">
             <div class="profile-tabs-buttons" role="tablist">
-                <button class="result-tab-button active" type="button" id="profile-tabs-saved-tab" data-tab-button data-tab="saved" role="tab" aria-selected="true" aria-controls="profile-tabs-saved-panel">Saved properties</button>
-                <button class="result-tab-button" type="button" id="profile-tabs-acc-tab" data-tab-button data-tab="acc" role="tab" aria-selected="false" tabindex="-1" aria-controls="profile-tabs-acc-panel">Account details</button>
-                <button class="result-tab-button" type="button" id="profile-tabs-email-tab" data-tab-button data-tab="email" role="tab" aria-selected="false" tabindex="-1" aria-controls="profile-tabs-email-panel">Email notifications</button>
+                <button class="result-tab-button active" type="button" id="profile-tabs-saved-tab" data-tab-button
+                    data-tab="saved" role="tab" aria-selected="true" aria-controls="profile-tabs-saved-panel">Saved
+                    properties</button>
+                <button class="result-tab-button" type="button" id="profile-tabs-acc-tab" data-tab-button data-tab="acc"
+                    role="tab" aria-selected="false" tabindex="-1" aria-controls="profile-tabs-acc-panel">Account
+                    details</button>
+                <button class="result-tab-button" type="button" id="profile-tabs-email-tab" data-tab-button
+                    data-tab="email" role="tab" aria-selected="false" tabindex="-1"
+                    aria-controls="profile-tabs-email-panel">Email notifications</button>
             </div>
-            <div class="profile-tabs-content active" id="profile-tabs-list-panel" data-tab-panel data-tab="saved" role="tabpanel" aria-labelledby="profile-tabs-list-tab">
+            <div class="profile-tabs-content active" id="profile-tabs-saved-panel" data-tab-panel data-tab="saved"
+                role="tabpanel" aria-labelledby="profile-tabs-saved-tab">
                 <div class="content-title">
                     <div class="title-top">
                         <h2>Saved properties</h2>
@@ -22,7 +29,8 @@
                     @@include('components/cards/large-card/large-card.html')
                 </div>
             </div>
-            <div class="profile-tabs-content" id="profile-tabs-acc-panel" data-tab-panel data-tab="acc" role="tabpanel" aria-labelledby="profile-tabs-map-tab">
+            <div class="profile-tabs-content" id="profile-tabs-acc-panel" data-tab-panel data-tab="acc" role="tabpanel"
+                aria-labelledby="profile-tabs-acc-tab">
                 <div class="content-title">
                     <div class="title-top">
                         <h2>Account details</h2>
@@ -31,13 +39,13 @@
                 <div class="content-list">
                     <form>
                         <fieldset>
-                            <label for="email2">
+                            <label for="profile-email">
                                 Email
-                                <input type="email" id="email2" required>
+                                <input type="email" id="profile-email" required>
                             </label>
-                            <label for="password2">
+                            <label for="profile-password">
                                 Password
-                                <input type="password" id="password2" required>
+                                <input type="password" id="profile-password" required>
                             </label>
                         </fieldset>
                         <div class="submit-group between">
@@ -51,7 +59,8 @@
                     </form>
                 </div>
             </div>
-            <div class="profile-tabs-content" id="profile-tabs-email-panel" data-tab-panel data-tab="email" role="tabpanel" aria-labelledby="profile-tabs-map-tab">
+            <div class="profile-tabs-content" id="profile-tabs-email-panel" data-tab-panel data-tab="email"
+                role="tabpanel" aria-labelledby="profile-tabs-email-tab">
                 <h2>In development</h2>
             </div>
         </div>

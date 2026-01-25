@@ -71,13 +71,13 @@
 			@include h.t-title-bold;
 		}
 
-		p, .property-card-name {
+		p, a {
 			color: v.$c-black;
 
 			@include l.t-label;
 		}
 
-		.property-card-name {
+		a {
 			text-decoration: underline;
 		}
 	}

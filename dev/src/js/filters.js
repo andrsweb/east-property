@@ -164,8 +164,6 @@ const initSearchResultsFilters = async () => {
 			if (!target || typeof target.closest !== 'function') return
 
 			const option = target.closest('.result-option')
-			const filterKey = button.dataset.filter
-
 			if (!option) {
 				if (button.classList.contains('is-open')) {
 					closeDropdown(button)
@@ -174,14 +172,11 @@ const initSearchResultsFilters = async () => {
 				}
 
 				openDropdown(button)
-
-				if (filterKey === 'beds_baths') {
-					window.dispatchEvent(new CustomEvent('filter:open', { detail: { filter: filterKey } }))
-				}
 				return
 			}
 
 			const selectedValue = option.getAttribute('data-value')
+			const filterKey = button.dataset.filter
 
 			if (filterKey && selectedValue) {
 				applySelection(button, filterKey, selectedValue)
@@ -257,14 +252,16 @@ const initSearchResultsFilters = async () => {
 			})
 		}
 
-		updateDisplayText()
+		bedsBathsSelector.addEventListener('click', (e) => {
+			if (e.target.closest('.beds-baths-dropdown')) return
 
-		window.addEventListener('filter:open', (e) => {
-			if (e.detail.filter === 'beds_baths') {
-				tempBeds = new Set(selectedBeds)
-				tempBaths = new Set(selectedBaths)
-				updateButtonStates()
-			}
+			setTimeout(() => {
+				if (bedsBathsSelector.classList.contains('is-open')) {
+					tempBeds = new Set(selectedBeds)
+					tempBaths = new Set(selectedBaths)
+					updateButtonStates()
+				}
+			}, 0)
 		})
 
 		bedsBathsDropdown.addEventListener('click', (e) => {
@@ -319,5 +316,6 @@ const initSearchResultsFilters = async () => {
 			})
 		}
 
+		updateDisplayText()
 	}
 }

@@ -1,4 +1,4 @@
-import {reCalculateDropdownHeight} from "../../../../js/common/common.js";
+import {reCalculateDropdownHeight} from "./common/common.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 	'use strict'

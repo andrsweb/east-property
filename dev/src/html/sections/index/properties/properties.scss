@@ -11,6 +11,10 @@
 		padding: 64px 0;
 	}
 
+	&.white {
+		background-color: v.$c-white;
+	}
+
 	&-cards {
 		display: flex;
 		align-items: stretch;

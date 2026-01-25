@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
 
-	showContactPanel()
+	showContactPanel('.contact-panel')
+	showContactPanel('.broker-panel')
 })
 
-const showContactPanel = () => {
-	const panel = document.querySelector('.contact-panel')
+const showContactPanel = (selector) => {
+	const panel = document.querySelector(selector)
 	const footer = document.querySelector('.footer')
 
 	if (!panel || !footer) return

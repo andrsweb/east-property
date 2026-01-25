@@ -1,0 +1,212 @@
+<section class="single-items">
+    <div class="container">
+        <div class="single-items-wrapper">
+            @@include('sections/unit/breadcrumbs/breadcrumbs.html')
+            @@include('sections/single/items/thumbs-slider.html')
+            <div class="single-items-top">
+                <div class="single-items-top-left">
+                    <h1>
+                        AED 6,100,000
+                    </h1>
+                    <h2>Apartment by Modon Properties</h2>
+                    <div class="single-items-top-buttons">
+                        @@include('components/ui/button/button.html', {"class": "gray sm", "text": "Share", "src": "/img/share.svg"})
+                        @@include('components/ui/button/button.html', {"class": "gray sm", "text": "Save", "src": "/img/bookmark.svg"})
+                    </div>
+                    <div class="single-items-top-items">
+                            <span>
+                                <img src="/img/bed.svg" width="16" height="16" alt="Vector icon">
+                                2 Beds
+                            </span>
+                            <span>
+                                <img src="/img/bath.svg" width="16" height="16" alt="Vector icon">
+                                1 Bath
+                            </span>
+                            <span>
+                                <img src="/img/meters.svg" width="16" height="16" alt="Vector icon">
+                                120 sqft
+                            </span>
+                    </div>
+                    <p>
+                        Dubai, Sheikh Zayed Road, Sobha Central
+                    </p>
+                </div>
+                <div class="single-items-top-right">
+                    <div class="broker">
+                        <div class="broker-top">
+                            <div class="broker-top-left">
+                                <div class="broker-img">
+                                    <img src="/img/broker.jpg" width="64" height="64" alt="Брокер">
+                                </div>
+                                <div class="broker-info">
+                                    <span class="broker-name">Ahmad Adibara </span>
+                                    <span class="broker-position">Property broker</span>
+                                </div>
+                            </div>
+                            <div class="broker-estate">
+                                <img src="/img/sisu.jpg" width="77" height="66" alt="Real estate">
+                            </div>
+                        </div>
+                        <div class="broker-bottom">
+                            @@include('components/ui/button/button.html', {"class": "orange sm", "text": "Contact broker", "dataModal": "broker-modal"})
+                            <p>
+                                Get in touch with broker using email, phone ow Whatsapp. It’s freeand does not require any commitment from your side
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-info"> <div class="single-info-block">
+                <h3>Luxury Fully Furnished 2 Bedrooms</h3>
+                <div class="texts">
+                    <p>
+                        Bashayer Residences | Modern Layout | waterfront Living | Oct 2029 | Bashayer Residences –
+                        Premium Waterfront Living in Abu Dhabi
+                    </p>
+                    <p>
+                        A refined collection of contemporary waterfront apartments designed to blend modern comfort with
+                        the calm essence of island living. Positioned along the Bashayer Promenade, these residences offer
+                        expansive views, exceptional finishes, and a thoughtfully crafted community environment.
+                    </p>
+                </div>
+                <button class="button learn-more" data-modal-open="desc-modal">
+                    Learn more
+                    <img src="/img/link.svg" width="16" height="16" alt="Vector link">
+                </button>
+            </div>
+                <div class="single-info-block">
+                    <div class="single-steps">
+                        <div class="single-step">
+                            <h3>Down payment</h3>
+                            <span>10%</span>
+                            <p>Sales launch</p>
+                        </div>
+                        <div class="single-step-arrow">
+                            <img src="/img/arrow-right.svg" width="24" height="24" alt="Vector arrow">
+                        </div>
+                        <div class="single-step">
+                            <h3>During construction</h3>
+                            <span>70%</span>
+                            <p>7 installments</p>
+                        </div>
+                        <div class="single-step-arrow">
+                            <img src="/img/arrow-right.svg" width="24" height="24" alt="Vector arrow">
+                        </div>
+                        <div class="single-step">
+                            <h3>On handover</h3>
+                            <span>30%</span>
+                            <p>Sep 2029</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-info-block">
+                    <h3>Floor plan</h3>
+                   <div class="single-info-block-img" data-modal-open="plan-modal">
+                       <img src="/img/plan.jpg" width="851" height="575" alt="Image">
+                   </div>
+                </div>
+                <div class="single-info-block">
+                    <h2 class="h3">
+                        Property information
+                    </h2>
+                    <div class="single-info-rows">
+                        <div class="single-info-row">
+                            <div class="single-info-col">
+                                <span>Delivery date</span>
+                                <p>January 2030</p>
+                            </div>
+                            <div class="single-info-col">
+                                <span>Construction started</span>
+                                <p>July 2025</p>
+                            </div>
+                            <div class="single-info-col">
+                                <span>Number of buildings</span>
+                                <p>1</p>
+                            </div>
+                        </div>
+                        <div class="single-info-row">
+                            <div class="single-info-col">
+                                <span>Property types</span>
+                                <p>Apartment</p>
+                            </div>
+                            <div class="single-info-col">
+                                <span>Government fee</span>
+                                <p>2%</p>
+                            </div>
+                            <div class="single-info-col">
+                                <span>Ownership type</span>
+                                <p>Freehold</p>
+                            </div>
+                        </div>
+                        <div class="single-info-row">
+                            <div class="single-info-col">
+                                <span>Location</span>
+                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                    Abu Dhabi, Saadiyat Island
+                                    <img src="/img/link.svg" width="16" height="16" alt="vector link">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-info-block">
+                    <h2 class="h3">
+                        Building Information
+                    </h2>
+                    <div class="single-info-rows">
+                        <div class="single-info-row">
+                            <div class="single-info-col">
+                                <span>Number of buildings</span>
+                                <p>1</p>
+                            </div>
+                            <div class="single-info-col">
+                                <span>Building name</span>
+                                <p>Skyhills Residences 3 - TOWER B</p>
+                            </div>
+                            <div class="single-info-col">
+                                <span>Floors</span>
+                                <p>46</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-info-block">
+                    <h3>Amenities</h3>
+                    <ul class="single-list">
+                        <li>Kids’ Clubs</li>
+                        <li>Restorative Wellness Pod</li>
+                        <li>Fitness, Spa, and Pool</li>
+                        <li>Serene Co-working Lounge</li>
+                        <li>Dedicated Pet Spa and Grooming Studio</li>
+                        <li>A Signature Communal Hub</li>
+                    </ul>
+                </div>
+                <div class="single-info-block">
+                    <div class="developer">
+                        <div class="developer-image">
+                            <img src="/img/modon.png" width="80" height="50" alt="Developer image">
+                        </div>
+                        <div class="developer-info">
+                            <span>
+                                Modon Properties
+                            </span>
+                            <a href="#">
+                                View developer
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-info-block">
+                    <h3>Location</h3>
+                    <div class="map">
+                        <iframe
+                            class="map-iframe" title="Dubai map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                            data-src="https://www.google.com/maps?q=Dubai&z=12&output=embed"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('components/ui/contact-panel/contact-panel.html')
+</section>

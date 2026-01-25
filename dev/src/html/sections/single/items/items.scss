@@ -1,4 +1,3 @@
-@forward '../../../../../../node_modules/swiper/swiper-bundle.min.css';
 @use '../../../../scss/vars/vars' as v;
 @use '../../../../scss/mixins/typography/titles' as h;
 @use '../../../../scss/mixins/typography/labels' as l;
@@ -37,6 +36,25 @@
 
 				@include h.t-headline;
 			}
+
+			h2 {
+				color: v.$c-black;
+
+				@include h.t-title-bold;
+			}
+
+			p {
+				color: v.$c-black;
+
+				@include t.t-text;
+			}
+		}
+
+		&-buttons {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 10px;
 		}
 
 		&-labels {
@@ -227,6 +245,18 @@
 
 				@include h.t-title-bold;
 			}
+
+			&-img {
+				border-radius: v.$br30;
+				cursor: zoom-in;
+
+				img {
+					width: 100%;
+					max-width: 587px;
+					height: auto;
+					border-radius: v.$br30;
+				}
+			}
 		}
 
 		.developer {
@@ -346,6 +376,84 @@
 			@media(min-width: v.$md) {
 				height: 479px;
 			}
+		}
+	}
+
+	.broker {
+		width: 100%;
+		max-width: 439px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 16px;
+		gap: 16px;
+		border-radius: v.$br12;
+		outline: 1px solid v.$c-grey-95;
+
+		&-top {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			justify-content: space-between;
+
+			&-left {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+		}
+
+		&-bottom {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 16px;
+
+			p {
+				color: v.$c-grey;
+
+				@include t.t-text;
+			}
+		}
+
+		&-img {
+			width: 64px;
+			height: 64px;
+			aspect-ratio: 1/1;
+			flex-shrink: 0;
+			position: relative;
+			border-radius: v.$br30;
+
+			img {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: v.$br30;
+			}
+		}
+
+		&-info {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 4px;
+		}
+
+		&-name {
+			color: v.$c-black;
+
+			@include h.t-title-bold;
+		}
+
+		&-position {
+			color: v.$c-black;
+
+			@include t.t-text;
 		}
 	}
 }

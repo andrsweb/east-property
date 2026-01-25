@@ -331,7 +331,7 @@ const initSearchTabs = async () => {
 				}
 			})
 
-			const cancelBtn = bedsBathsDropdown.querySelector('.beds-baths-cancel .button')
+			const cancelBtn = bedsBathsDropdown.querySelector('.beds-baths-cancel')
 
 			if (cancelBtn) {
 				cancelBtn.addEventListener('click', (e) => {
@@ -344,7 +344,7 @@ const initSearchTabs = async () => {
 				})
 			}
 
-			const applyBtn = bedsBathsDropdown.querySelector('.beds-baths-apply .button')
+			const applyBtn = bedsBathsDropdown.querySelector('.beds-baths-apply')
 			if (applyBtn) {
 				applyBtn.addEventListener('click', (e) => {
 					e.preventDefault()

@@ -15,6 +15,14 @@
 		background-color: v.$c-white;
 	}
 
+	&.div {
+		padding: 0;
+
+		.top-title {
+			margin-bottom: 10px;
+		}
+	}
+
 	&-cards {
 		display: flex;
 		align-items: stretch;

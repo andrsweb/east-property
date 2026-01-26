@@ -86,6 +86,10 @@
 		gap: 8px;
 		padding-top: 24px;
 
+		@media(min-width: v.$md)  {
+			padding-top: 32px;
+		}
+
 		.title-top {
 			width: 100%;
 			display: flex;

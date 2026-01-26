@@ -12,6 +12,10 @@
 	gap: 32px;
 	margin-bottom: 32px;
 
+	&.center {
+		align-items: center;
+	}
+
 	&-info {
 		display: flex;
 		flex-direction: column;

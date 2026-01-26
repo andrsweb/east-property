@@ -1,6 +1,7 @@
 <section class="single-items">
     <div class="container">
         <div class="single-items-wrapper">
+            @@include('sections/project/breadcrumbs/breadcrumbs.html')
             <div class="single-items-top">
                 <div class="single-items-top-left">
                     <h1>
@@ -64,7 +65,7 @@
                                 <span>Location</span>
                                 <a href="#" target="_blank" rel="noopener noreferrer">
                                     Abu Dhabi, Saadiyat Island
-                                    <img src="/img/link.svg" width="16" height="16" alt="vector link">
+                                    <img class="col-img" src="/img/link.svg" width="16" height="16" alt="vector link">
                                 </a>
                             </div>
                         </div>
@@ -84,6 +85,9 @@
                             </a>
                         </div>
                     </div>
+                </div>
+                <div class="single-info-block">
+                    @@include('sections/project/properties/properties.html')
                 </div>
                 <div class="single-info-block">
                     <h3>Pricing</h3>

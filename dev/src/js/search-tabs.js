@@ -37,13 +37,7 @@ const initSearchTabs = async () => {
 
 	attachGlobalHandlers()
 
-	let searchData
-
-	try {
-		searchData = await loadSearchData()
-	} catch {
-		return
-	}
+	let searchData = searchTabsData;
 
 	containers.forEach((container) => {
 		const tabs = Array.from(container.querySelectorAll('[data-search-tab]'))
@@ -237,5 +231,100 @@ const initSearchTabs = async () => {
 				applyCategoryDefaults(type)
 			})
 		})
+
+		const bedsBathsSelector = container.querySelector('[data-search-selector="beds_baths"]')
+		const bedsBathsDropdown = container.querySelector('[data-search-dropdown="beds_baths"]')
+		const bedsBathsText = container.querySelector('[data-search-beds-baths-text]')
+		const bedsValueInput = container.querySelector('[data-search-beds-value]')
+		const bathsValueInput = container.querySelector('[data-search-baths-value]')
+
+		if (bedsBathsSelector && bedsBathsDropdown && bedsBathsText && bedsValueInput && bathsValueInput) {
+			let selectedBeds = new Set(['2', '3'])
+			let selectedBaths = new Set(['2'])
+			let tempBeds = new Set(selectedBeds)
+			let tempBaths = new Set(selectedBaths)
+
+			const updateDisplayText = () => {
+				bedsBathsText.textContent = getBedsBathsText(selectedBeds, selectedBaths)
+				bedsValueInput.value = Array.from(selectedBeds).join(',')
+				bathsValueInput.value = Array.from(selectedBaths).join(',')
+			}
+
+			const updateButtonStates = () => {
+				updateBedsBathsButtons(bedsBathsDropdown, tempBeds, tempBaths)
+			}
+
+			const originalOpen = () => {
+				const synced = syncTempBedsBaths(selectedBeds, selectedBaths)
+				tempBeds = synced.tempBeds
+				tempBaths = synced.tempBaths
+				updateButtonStates()
+			}
+
+			bedsBathsSelector.addEventListener('click', (e) => {
+				if (!bedsBathsSelector.classList.contains('is-open')) {
+					originalOpen()
+				}
+			}, true)
+
+			bedsBathsDropdown.addEventListener('click', (e) => {
+				const bedBtn = e.target.closest('[data-beds]')
+				const bathBtn = e.target.closest('[data-baths]')
+
+				if (bedBtn) {
+					e.stopPropagation()
+
+					const value = bedBtn.dataset.beds
+
+					if (tempBeds.has(value)) {
+						tempBeds.delete(value)
+					} else {
+						tempBeds.add(value)
+					}
+
+					updateButtonStates()
+				}
+
+				if (bathBtn) {
+					e.stopPropagation()
+
+					const value = bathBtn.dataset.baths
+
+					if (tempBaths.has(value)) {
+						tempBaths.delete(value)
+					} else {
+						tempBaths.add(value)
+					}
+					updateButtonStates()
+				}
+			})
+
+			const cancelBtn = bedsBathsDropdown.querySelector('.beds-baths-cancel')
+
+			if (cancelBtn) {
+				cancelBtn.addEventListener('click', (e) => {
+					e.preventDefault()
+					e.stopPropagation()
+					tempBeds = new Set(selectedBeds)
+					tempBaths = new Set(selectedBaths)
+					updateButtonStates()
+					closeAllDropdowns()
+				})
+			}
+
+			const applyBtn = bedsBathsDropdown.querySelector('.beds-baths-apply')
+			if (applyBtn) {
+				applyBtn.addEventListener('click', (e) => {
+					e.preventDefault()
+					e.stopPropagation()
+					selectedBeds = new Set(tempBeds)
+					selectedBaths = new Set(tempBaths)
+					updateDisplayText()
+					closeAllDropdowns()
+				})
+			}
+
+			updateDisplayText()
+		}
 	})
 }

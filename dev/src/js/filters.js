@@ -5,20 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     'use strict'
 
     void initSearchResultsFilters()
-    initPropertiesFilters()
+    //initPropertiesFilters()
 })
 
 const initSearchResultsFilters = async () => {
     const buttons = Array.from(document.querySelectorAll('.result-filter[data-filter]'))
-
+    console.log(buttons);
     if (!buttons.length) return
 
-    let searchData
-    try {
-        searchData = await loadSearchData()
-    } catch {
-        return
-    }
+    let searchData = searchTabsData;
 
     const filters = searchData?.filters
 
@@ -223,6 +218,7 @@ const initSearchResultsFilters = async () => {
     const bathsValueInput = document.querySelector('[data-result-baths-value]')
 
     if (bedsBathsSelector && bedsBathsDropdown && bedsBathsText && bedsValueInput && bathsValueInput) {
+        console.log(selectedBeds);
         let selectedBeds = new Set()
         let selectedBaths = new Set()
         let tempBeds = new Set(selectedBeds)
@@ -292,6 +288,7 @@ const initSearchResultsFilters = async () => {
         const applyBtn = bedsBathsDropdown.querySelector('.beds-baths-apply')
         if (applyBtn) {
             applyBtn.addEventListener('click', (e) => {
+                console.log('beds-baths-btn');
                 e.preventDefault()
                 e.stopPropagation()
                 selectedBeds = new Set(tempBeds)
@@ -306,7 +303,10 @@ const initSearchResultsFilters = async () => {
 
 const initPropertiesFilters = () => {
     const filterItem = document.querySelector('.results-filters-items');
+    if (!filterItem) return
+
     let filterButtons = filterItem.querySelectorAll('button.result-filter');
+    if (!filterButtons) return
 
     filterButtons.forEach(button => {
         button.addEventListener('change', () => {

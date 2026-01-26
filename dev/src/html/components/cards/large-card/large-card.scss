@@ -123,13 +123,13 @@
 			align-items: flex-start;
 
 			.subtext {
-				color: v.$c-orange;
+				color: v.$c-black;
 
 				@include t.t-smallest(true);
 			}
 
 			.large-card-price {
-				color: v.$c-orange;
+				color: v.$c-black;
 
 				@include h.t-title-bold;
 			}

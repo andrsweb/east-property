@@ -51,7 +51,7 @@
 			align-items: center;
 			z-index: 10;
 
-			@include t.t-smallest;
+			@include t.t-smallest(true);
 		}
 	}
 

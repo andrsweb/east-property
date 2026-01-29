@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	initSingleSwiper();
 });
 
+document.addEventListener('ajaxComplete', () => {
+	'use strict';
+
+	initSingleSwiper();
+});
+
 const initSwiperThumbs = () => {
 	const thumbsSwiper = new Swiper('.thumbs-swiper-container', {
 		modules: [Thumbs],

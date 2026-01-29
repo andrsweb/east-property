@@ -5,12 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     'use strict'
 
     void initSearchResultsFilters()
-    //initPropertiesFilters()
+    initPropertiesFilters()
 })
 
 const initSearchResultsFilters = async () => {
     const buttons = Array.from(document.querySelectorAll('.result-filter[data-filter]'))
-    console.log(buttons);
+
     if (!buttons.length) return
 
     let searchData = searchTabsData;
@@ -218,9 +218,22 @@ const initSearchResultsFilters = async () => {
     const bathsValueInput = document.querySelector('[data-result-baths-value]')
 
     if (bedsBathsSelector && bedsBathsDropdown && bedsBathsText && bedsValueInput && bathsValueInput) {
-        console.log(selectedBeds);
         let selectedBeds = new Set()
+        if (0 < searchData.filters.beds.options.length) {
+            searchData.filters.beds.options.forEach(bed => {
+                if (bed.active) {
+                    selectedBeds.add(bed.value)
+                }
+            });
+        }
         let selectedBaths = new Set()
+        if (0 < searchData.filters.baths.options.length) {
+            searchData.filters.baths.options.forEach(bath => {
+                if (bath.active) {
+                    selectedBaths.add(bath.value)
+                }
+            });
+        }
         let tempBeds = new Set(selectedBeds)
         let tempBaths = new Set(selectedBaths)
 
@@ -288,7 +301,6 @@ const initSearchResultsFilters = async () => {
         const applyBtn = bedsBathsDropdown.querySelector('.beds-baths-apply')
         if (applyBtn) {
             applyBtn.addEventListener('click', (e) => {
-                console.log('beds-baths-btn');
                 e.preventDefault()
                 e.stopPropagation()
                 selectedBeds = new Set(tempBeds)
@@ -296,6 +308,7 @@ const initSearchResultsFilters = async () => {
                 updateDisplayText()
                 closeDropdown(bedsBathsSelector)
                 openButton = null
+                updatePropertiesList();
             })
         }
     }
@@ -323,15 +336,26 @@ const updatePropertiesList = () => {
         contentList = resultsBlock.querySelector('.content-list'),
         contentScroll = document.querySelector('.result-tabs-content-inner .content-scroll'),
         resultTabs = document.querySelector('.result-tabs'),
-        h2Block = resultsBlock.querySelector('.title-top h2');
+        h2Block = resultsBlock.querySelector('.title-top h2'),
+        bedsValueInput = filterItem.querySelector('input[name="beds"]'),
+        bathsValueInput = filterItem.querySelector('input[name="baths"]'),
+        action = filterItem.querySelector('input[name="action"]');
 
     resultTabs.classList.add('preloader');
 
-    formData.append('action', 'get_properties');
+    formData.append('action', action.value ?? 'get_properties');
     formData.append('_ajax_nonce', ajax_object._ajax_nonce);
     filterButtons.forEach(button => {
         formData.append(button.dataset.filter, button.dataset.selectedValue);
     });
+
+    if (bedsValueInput) {
+        formData.append('beds', bedsValueInput.value);
+    }
+
+    if (bathsValueInput) {
+        formData.append('baths', bathsValueInput.value);
+    }
 
     fetch(ajax_object.ajax_url, {
         method: 'POST',
@@ -349,6 +373,7 @@ const updatePropertiesList = () => {
             }
             setTimeout(() => {
                 resultTabs.classList.remove('preloader');
+                document.dispatchEvent(new Event('ajaxComplete'));
             }, 600);
         })
         .catch(error => {

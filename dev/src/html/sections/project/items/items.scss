@@ -305,10 +305,11 @@
 		flex-direction: column;
 		align-items: stretch;
 		background-color: v.$c-grey-97;
+        flex-wrap: wrap;
 
 		@media(min-width: v.$sm) {
-			width: auto;
 			flex-direction: row;
+            justify-content: space-between;
 		}
 	}
 
@@ -319,8 +320,8 @@
 		padding: 8px;
 		gap: 4px;
 
-		@media(min-width: v.$lg) {
-			min-width: 239px;
+		@media(min-width: v.$sm) {
+			max-width: 239px;
 		}
 
 		h3 {
@@ -339,6 +340,16 @@
 			display: flex;
 			align-items: flex-start;
 			padding: 8px;
+
+            @media(max-width: v.$sm) {
+              display: none;
+            }
+
+            img {
+              max-width: 24px;
+              width: 24px;
+              height: 24px;
+            }
 		}
 	}
 

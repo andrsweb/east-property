@@ -51,6 +51,7 @@ const initSwiperThumbs = () => {
 		thumbs: {
 			swiper: thumbsSwiper,
 		},
+		loop: true,
 	});
 };
 

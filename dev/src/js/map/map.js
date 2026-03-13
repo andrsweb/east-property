@@ -24,6 +24,7 @@ export class PropertyMap {
 				mapId: MAP_CONFIG.MAP_ID,
 				disableDefaultUI: true,
 				zoomControl: false,
+				gestureHandling: 'greedy'
 			});
 		} catch (error) {
 			console.error('Error initializing Google Map:', error);

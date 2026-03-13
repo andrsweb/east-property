@@ -1,0 +1,37 @@
+@use '../../../../scss/vars/vars' as v;
+@use '../../../../scss/mixins/typography/text' as t;
+
+.loader {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 60px 0;
+	gap: 16px;
+	color: v.$c-text-grey;
+
+	@include t.t-text;
+
+	&-spinner {
+		width: 40px;
+		height: 40px;
+		border: 3px solid v.$c-grey-90;
+		border-top-color: v.$c-orange;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+}
+
+.is-loading {
+	.loader {
+		display: flex;
+	}
+
+	.building-card {
+		display: none;
+	}
+}
+
+@keyframes spin {
+	to { transform: rotate(360deg); }
+}

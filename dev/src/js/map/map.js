@@ -30,8 +30,12 @@ export class PropertyMap {
 		this.sidebarContent = document.querySelector('.map-sidebar-content');
 		this.properties = [];
 		this.markers = [];
+		this.isDragging = false;
+		this.startY = 0;
+		this.currentTranslation = 0;
 
 		void this.init();
+		this.initTouchEvents();
 	}
 
 	async init() {
@@ -120,5 +124,48 @@ export class PropertyMap {
 				prevEl: '.building-card-slider .swiper-prev',
 			},
 		});
+	}
+
+	initTouchEvents() {
+		if (!this.sidebar) return;
+
+		const handle = this.sidebar.querySelector('.map-handle-wrapper');
+		if (!handle) return;
+
+		handle.addEventListener('touchstart', (e) => this.handleTouchStart(e), {passive: true});
+		window.addEventListener('touchmove', (e) => this.handleTouchMove(e), {passive: false});
+		window.addEventListener('touchend', () => this.handleTouchEnd(), {passive: true});
+	}
+
+	handleTouchStart(e) {
+		if (window.innerWidth >= 768) return;
+		this.isDragging = true;
+		this.startY = e.touches[0].clientY;
+		this.sidebar.classList.add('is-dragging');
+	}
+
+	handleTouchMove(e) {
+		if (!this.isDragging || window.innerWidth >= 768) return;
+
+		const deltaY = e.touches[0].clientY - this.startY;
+		if (deltaY < 0) return;
+
+		e.preventDefault();
+		this.currentTranslation = deltaY;
+		this.sidebar.style.transform = `translateY(${deltaY}px)`;
+	}
+
+	handleTouchEnd() {
+		if (!this.isDragging) return;
+
+		this.isDragging = false;
+		this.sidebar.classList.remove('is-dragging');
+		this.sidebar.style.transform = '';
+
+		if (this.currentTranslation > 150) {
+			this.sidebar.classList.add('is-hidden');
+		}
+
+		this.currentTranslation = 0;
 	}
 }

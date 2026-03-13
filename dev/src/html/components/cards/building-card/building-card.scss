@@ -21,10 +21,14 @@
 
 	&-slider {
 		width: 100%;
-		height: 188px;
+		height: 150px;
 		border-radius: v.$br12;
 		overflow: hidden;
 		position: relative;
+
+		@media(min-width: v.$md) {
+			height: 188px;
+		}
 
 		img {
 			width: 100%;

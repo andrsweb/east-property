@@ -2,9 +2,14 @@
     <div id="main-map" class="map-container"></div>
 
     <aside class="map-sidebar is-hidden" id="map-sidebar">
-        <button class="sidebar-close" id="map-sidebar-close">
-            <img src="/img/close.svg" width="32" height="32" alt="Close">
-        </button>
+        <div class="aside-map-header">
+            <div class="map-handle-wrapper">
+                <span class="map-sidebar-handle"></span>
+            </div>
+            <button class="sidebar-close" id="map-sidebar-close">
+                <img src="/img/close.svg" width="32" height="32" alt="Close">
+            </button>
+        </div>
 
         <div class="map-sidebar-content">
             @@include('components/ui/loader/loader.html')

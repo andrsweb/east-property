@@ -1,73 +1,173 @@
-{
-  "id": 16840,
-  "name": "REPORTAGE PROPERTIES “Verdana 3”",
-  "gallery": [
-	"https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/ccGPUT0EY7r8697OkF84IkSMYixRuRsMVj4V8tQO.jpg",
-	"https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
-	"https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/40hUoQgxGjhyTRw13E2n2aPQPWKVAq2J7W8P5wiw.jpg",
-	"https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Oly3A9LB7WH2aMpjiaxtDUz1FdtoeZwJuLkZGw5s.jpg",
-	"https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Hcl0CItzrEEiF0yvauUf5qI4LGs81jwctZIUkl2a.jpg",
-	"https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Rkd6ir2ljxQn5ruYes3mmvT2ExlIyii88c7AjP9y.jpg",
-	"https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/BQ5T7VMTxv9JBJ6CXw7HhjU9qA79MLc6ravv74T1-scaled.jpg",
-	"https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/d5c7eaaf-546e-4baf-8bf9-7c87dcbabf69.webp",
-	"https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/C7JuYj44WT8VCUygCJ9NKT0oyfItC29fyepeAX6W.jpg",
-	"https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/2ce7a878-4a6b-4776-ac53-8c2478897a22.webp"
-  ],
-  "url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/",
-  "location": "Dubai Investments Park",
-  "price_from": "AED 565,891",
-  "units_available": 19,
-  "delivery_date": "Sep 2029",
-  "longtitude": "55.180069196375",
-  "latitude": "24.987898769598",
-  "units": [
-	{
-	  "id": 20445,
-	  "price": "AED 568,886",
-	  "image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
-	  "beds": 2,
-	  "area": 397,
-	  "url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor116-simplex-on-1-floor\/"
-	},
-	{
-	  "id": 20443,
-	  "price": "AED 568,886",
-	  "image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Oly3A9LB7WH2aMpjiaxtDUz1FdtoeZwJuLkZGw5s.jpg",
-	  "beds": 2,
-	  "area": 397,
-	  "url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor113-simplex-on-1-floor\/"
-	},
-	{
-	  "id": 20441,
-	  "price": "AED 568,886",
-	  "image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
-	  "beds": 2,
-	  "area": 397,
-	  "url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor112-simplex-on-1-floor\/"
-	},
-	{
-	  "id": 20439,
-	  "price": "AED 568,264",
-	  "image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/ccGPUT0EY7r8697OkF84IkSMYixRuRsMVj4V8tQO.jpg",
-	  "beds": 2,
-	  "area": 394,
-	  "url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vnr125-simplex-on-1-floor\/"
-	},
-	{
-	  "id": 20438,
-	  "price": "AED 568,264",
-	  "image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/ccGPUT0EY7r8697OkF84IkSMYixRuRsMVj4V8tQO.jpg",
-	  "beds": 2,
-	  "area": 394,
-	  "url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vnr122-simplex-on-1-floor\/"
-	},
-	{
-	  "id": 20433,
-	  "price": "AED 567,785",
-	  "image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
-	  "beds": 2,
-	  "area": 412,
-	  "url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vlr103-simplex-on-1-floor\/"
-	}
-  ]
-}
+[
+  {
+	"id": 1,
+	"name": "REPORTAGE PROPERTIES “Verdana 3”",
+	"gallery": [
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/ccGPUT0EY7r8697OkF84IkSMYixRuRsMVj4V8tQO.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/40hUoQgxGjhyTRw13E2n2aPQPWKVAq2J7W8P5wiw.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Oly3A9LB7WH2aMpjiaxtDUz1FdtoeZwJuLkZGw5s.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Hcl0CItzrEEiF0yvauUf5qI4LGs81jwctZIUkl2a.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Rkd6ir2ljxQn5ruYes3mmvT2ExlIyii88c7AjP9y.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/BQ5T7VMTxv9JBJ6CXw7HhjU9qA79MLc6ravv74T1-scaled.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/d5c7eaaf-546e-4baf-8bf9-7c87dcbabf69.webp",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/C7JuYj44WT8VCUygCJ9NKT0oyfItC29fyepeAX6W.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/2ce7a878-4a6b-4776-ac53-8c2478897a22.webp"
+	],
+	"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/",
+	"location": "Dubai Investments Park",
+	"price_from": "AED 565,891",
+	"units_available": 19,
+	"delivery_date": "Sep 2029",
+	"longtitude": "55.180069196375",
+	"latitude": "24.987898769598",
+	"units": [
+	  {
+		"id": 1,
+		"price": "AED 468,382",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
+		"beds": 2,
+		"area": 397,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor116-simplex-on-1-floor\/"
+	  },
+	  {
+		"id": 2,
+		"price": "AED 558,136",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Oly3A9LB7WH2aMpjiaxtDUz1FdtoeZwJuLkZGw5s.jpg",
+		"beds": 2,
+		"area": 397,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor113-simplex-on-1-floor\/"
+	  },
+	  {
+		"id": 3,
+		"price": "AED 568,886",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
+		"beds": 2,
+		"area": 397,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor112-simplex-on-1-floor\/"
+	  },
+	  {
+		"id": 4,
+		"price": "AED 528,200",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/ccGPUT0EY7r8697OkF84IkSMYixRuRsMVj4V8tQO.jpg",
+		"beds": 2,
+		"area": 394,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vnr125-simplex-on-1-floor\/"
+	  },
+	  {
+		"id": 5,
+		"price": "AED 268,264",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/ccGPUT0EY7r8697OkF84IkSMYixRuRsMVj4V8tQO.jpg",
+		"beds": 2,
+		"area": 394,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vnr122-simplex-on-1-floor\/"
+	  },
+	  {
+		"id": 6,
+		"price": "AED 167,785",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
+		"beds": 2,
+		"area": 412,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vlr103-simplex-on-1-floor\/"
+	  }
+	]
+  },
+  {
+	"id": 2,
+	"name": "Modon Properties",
+	"gallery": [
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/ccGPUT0EY7r8697OkF84IkSMYixRuRsMVj4V8tQO.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/40hUoQgxGjhyTRw13E2n2aPQPWKVAq2J7W8P5wiw.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Oly3A9LB7WH2aMpjiaxtDUz1FdtoeZwJuLkZGw5s.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Hcl0CItzrEEiF0yvauUf5qI4LGs81jwctZIUkl2a.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Rkd6ir2ljxQn5ruYes3mmvT2ExlIyii88c7AjP9y.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/BQ5T7VMTxv9JBJ6CXw7HhjU9qA79MLc6ravv74T1-scaled.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/d5c7eaaf-546e-4baf-8bf9-7c87dcbabf69.webp",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/C7JuYj44WT8VCUygCJ9NKT0oyfItC29fyepeAX6W.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/2ce7a878-4a6b-4776-ac53-8c2478897a22.webp"
+	],
+	"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/",
+	"location": "Dubai Investments Park",
+	"price_from": "AED 165,891",
+	"units_available": 3,
+	"delivery_date": "Oct 2031",
+	"longtitude": "55.195069196375",
+	"latitude": "24.897898769598",
+	"units": [
+	  {
+		"id": 1,
+		"price": "AED 468,382",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
+		"beds": 2,
+		"area": 397,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor116-simplex-on-1-floor\/"
+	  },
+	  {
+		"id": 2,
+		"price": "AED 558,136",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Oly3A9LB7WH2aMpjiaxtDUz1FdtoeZwJuLkZGw5s.jpg",
+		"beds": 2,
+		"area": 397,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor113-simplex-on-1-floor\/"
+	  },
+	  {
+		"id": 3,
+		"price": "AED 568,886",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
+		"beds": 2,
+		"area": 397,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor112-simplex-on-1-floor\/"
+	  }
+	]
+  },
+  {
+	"id": 3,
+	"name": "Farm Gardens Phase 3 by Emaar",
+	"gallery": [
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/ccGPUT0EY7r8697OkF84IkSMYixRuRsMVj4V8tQO.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/40hUoQgxGjhyTRw13E2n2aPQPWKVAq2J7W8P5wiw.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Oly3A9LB7WH2aMpjiaxtDUz1FdtoeZwJuLkZGw5s.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Hcl0CItzrEEiF0yvauUf5qI4LGs81jwctZIUkl2a.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Rkd6ir2ljxQn5ruYes3mmvT2ExlIyii88c7AjP9y.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/BQ5T7VMTxv9JBJ6CXw7HhjU9qA79MLc6ravv74T1-scaled.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/d5c7eaaf-546e-4baf-8bf9-7c87dcbabf69.webp",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/C7JuYj44WT8VCUygCJ9NKT0oyfItC29fyepeAX6W.jpg",
+	  "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/2ce7a878-4a6b-4776-ac53-8c2478897a22.webp"
+	],
+	"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/",
+	"location": "Cayan Tower - Dubai Marina",
+	"price_from": "AED 255,891",
+	"units_available": 2,
+	"delivery_date": "Oct 2031",
+	"longtitude": "55.185069196375",
+	"latitude": "24.999999969598",
+	"units": [
+	  {
+		"id": 1,
+		"price": "AED 468,382",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
+		"beds": 2,
+		"area": 397,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor116-simplex-on-1-floor\/"
+	  },
+	  {
+		"id": 2,
+		"price": "AED 558,136",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/Oly3A9LB7WH2aMpjiaxtDUz1FdtoeZwJuLkZGw5s.jpg",
+		"beds": 2,
+		"area": 397,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor113-simplex-on-1-floor\/"
+	  },
+	  {
+		"id": 3,
+		"price": "AED 568,886",
+		"image": "https:\/\/distress.ams3.digitaloceanspaces.com\/uploads\/2026\/03\/N2QFRU1Imv6bUYy29VlKZpiv49na4n5qQme8Cx4K.jpg",
+		"beds": 2,
+		"area": 397,
+		"url": "https:\/\/distressuae.info\/properties\/dubai-investments-park\/reportage-properties-verdana-3\/unit-vor112-simplex-on-1-floor\/"
+	  }
+	]
+  }
+]

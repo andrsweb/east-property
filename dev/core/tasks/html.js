@@ -1,4 +1,7 @@
 import gulp from 'gulp';
+import dotenv from 'dotenv';
+
+dotenv.config();
 import plumber from 'gulp-plumber';
 import fileInclude from 'gulp-file-include';
 import {paths} from '../config/paths.js';
@@ -14,7 +17,11 @@ export function html() {
 			fileInclude({
 				prefix: '@@',
 				basepath: 'dev/src/html',
-				indent: true
+				indent: true,
+				context: {
+					GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
+					GOOGLE_MAPS_MAP_ID: process.env.GOOGLE_MAPS_MAP_ID
+				}
 			})
 		)
 		.pipe(dest(paths.html.dest))

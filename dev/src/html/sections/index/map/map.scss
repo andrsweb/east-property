@@ -52,7 +52,7 @@
 	}
 
 	.sidebar-close {
-		margin: 0 0 16px auto;
+		margin: 0 0 24px auto;
 
 		@extend %button;
 
@@ -67,27 +67,42 @@
 
 		@include g.hide-scroll;
 	}
+}
 
-	&-actions {
-		display: flex;
-		gap: 12px;
-		padding: 24px;
-		border-top: 1px solid v.$c-grey-95;
-		background-color: v.$c-white;
+.map-marker {
+	width: 52px;
+	height: 52px;
+	background-color: v.$c-black;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	box-shadow: v.$shadow-1;
+	transition: transform ease v.$tr, background-color v.$tr;
+	z-index: 100;
+
+	span {
+		color: v.$c-white;
+
+		@include h.t-title-bold;
 	}
 
-	&-btn {
-		flex: 1;
-		white-space: nowrap;
-		justify-content: center;
-	}
+	@include g.hover{
+		transform: scale(1.1);
+		background-color: v.$c-sand;
 
-	.a-link {
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding-top: 16px;
-		background-color: v.$c-white;
+		span {
+			color: v.$c-black;
+		}
 	}
+}
+
+.a-link {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 16px;
+	background-color: v.$c-white;
 }

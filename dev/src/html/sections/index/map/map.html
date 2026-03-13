@@ -1,13 +1,14 @@
 <div class="map">
     <div id="main-map" class="map-container"></div>
 
-    <aside class="map-sidebar" id="map-sidebar">
+    <aside class="map-sidebar is-hidden" id="map-sidebar">
         <button class="sidebar-close" id="map-sidebar-close">
             <img src="/img/close.svg" width="32" height="32" alt="Close">
         </button>
 
         <div class="map-sidebar-content">
-            @@include('components/cards/building-card/building-card.html')
+            @@include('components/ui/loader/loader.html')
+            <div id="sidebar-card-target"></div>
         </div>
         <div class="a-link">
             <a href="#" class="button orange sm full-width">

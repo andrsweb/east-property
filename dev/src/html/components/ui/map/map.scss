@@ -153,6 +153,11 @@
 		@include h.t-title-bold;
 	}
 
+	img {
+		width: 22px;
+		height: 28px;
+	}
+
 	@include g.hover {
 		transform: scale(1.1);
 		background-color: v.$c-sand;

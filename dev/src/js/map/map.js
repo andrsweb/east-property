@@ -98,8 +98,8 @@ export class PropertyMap {
 
 	renderSingleMarker(AdvancedMarkerElement) {
 		const markerElement = document.createElement('div');
-		markerElement.className = 'map-marker map-marker--single';
-		markerElement.innerHTML = `<img src="/img/geo.svg" alt="Location">`;
+		markerElement.className = 'map-marker';
+		markerElement.innerHTML = `<img src="/img/geo.svg" width="22" height="28" alt="Location">`;
 
 		new AdvancedMarkerElement({
 			map: this.map,

@@ -1,0 +1,23 @@
+@use '../vars/vars' as v;
+
+.render-map {
+	width: 100%;
+	height: 500px;
+
+	@media(min-width: v.$lg) {
+		height: 575px;
+	}
+
+	&.sm {
+		height: 420px;
+
+		@media(min-width: v.$lg) {
+			height: 475px;
+		}
+	}
+
+	&.full-width {
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+	}
+}

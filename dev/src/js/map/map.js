@@ -17,6 +17,14 @@ export class PropertyMap {
 		this.container = root.querySelector('.js-map-container');
 		if (!this.container) return;
 
+		// читаем конфигурацию из дата артибуов самого компонента
+		this.mode = root.dataset.mapMode || 'list';
+		this.propertyId = root.dataset.propertyId;
+		this.showSidebar = root.dataset.showSidebar !== 'false';
+
+		this.lat = MAP_CONFIG.DEFAULT_CENTER.lat;
+		this.lng = MAP_CONFIG.DEFAULT_CENTER.lng;
+
 		this.map = null;
 		this.sidebar = root.querySelector('.js-map-sidebar');
 		this.sidebarContent = root.querySelector('.map-sidebar-content');
@@ -28,6 +36,12 @@ export class PropertyMap {
 		this.startY = 0;
 		this.currentTranslation = 0;
 
+		// если сайдбар не нужен - сносим его к чертям собачьим
+		if (!this.showSidebar && this.sidebar) {
+			this.sidebar.remove();
+			this.sidebar = null;
+		}
+
 		void this.init();
 		this.initEvents();
 	}
@@ -37,17 +51,34 @@ export class PropertyMap {
 			const {Map} = await importLibrary('maps');
 			const {AdvancedMarkerElement} = await importLibrary('marker');
 
+			await this.loadProperties();
+
+			// если сингл мод -- ищем точку в жсон
+			if (this.mode === 'single' && this.propertyId) {
+				const prop = this.properties.find(p => p.id.toString() === this.propertyId.toString());
+				if (prop) {
+					this.lat = parseFloat(prop.latitude);
+					this.lng = parseFloat(prop.longtitude);
+				}
+			}
+
+			// для одиночного режима зум побольше
+			const zoom = this.mode === 'single' ? 14 : MAP_CONFIG.DEFAULT_ZOOM;
+
 			this.map = new Map(this.container, {
-				center: MAP_CONFIG.DEFAULT_CENTER,
-				zoom: MAP_CONFIG.DEFAULT_ZOOM,
+				center: {lat: this.lat, lng: this.lng},
+				zoom: zoom,
 				mapId: MAP_CONFIG.MAP_ID,
 				disableDefaultUI: true,
 				zoomControl: false,
 				gestureHandling: 'greedy'
 			});
 
-			await this.loadProperties();
-			this.renderMarkers(AdvancedMarkerElement);
+			if (this.mode === 'single') {
+				this.renderSingleMarker(AdvancedMarkerElement);
+			} else {
+				this.renderMarkers(AdvancedMarkerElement);
+			}
 
 		} catch (error) {
 			console.error('Error initializing Google Map:', error);
@@ -63,6 +94,19 @@ export class PropertyMap {
 		} catch (error) {
 			console.error('Error loading properties:', error);
 		}
+	}
+
+	renderSingleMarker(AdvancedMarkerElement) {
+		const markerElement = document.createElement('div');
+		markerElement.className = 'map-marker map-marker--single';
+		markerElement.innerHTML = `<img src="/img/geo.svg" alt="Location">`;
+
+		new AdvancedMarkerElement({
+			map: this.map,
+			position: {lat: this.lat, lng: this.lng},
+			content: markerElement,
+			title: 'Location'
+		});
 	}
 
 	renderMarkers(AdvancedMarkerElement) {

@@ -5,29 +5,23 @@ import {MAP_CONFIG} from './config';
 import {renderBuildingCard} from './html';
 
 document.addEventListener('DOMContentLoaded', () => {
-	const mapElement = document.getElementById('main-map');
-	if (mapElement) {
-		window.appMap = new PropertyMap('main-map');
-	}
-
-	const closeBtn = document.getElementById('map-sidebar-close');
-	const sidebar = document.getElementById('map-sidebar');
-
-	if (closeBtn && sidebar) {
-		closeBtn.addEventListener('click', () => {
-			sidebar.classList.add('is-hidden');
-		});
-	}
+	const mapInstances = document.querySelectorAll('.js-map-instance');
+	mapInstances.forEach(instance => {
+		new PropertyMap(instance);
+	});
 });
 
 export class PropertyMap {
-	constructor(containerId) {
-		this.container = document.getElementById(containerId);
+	constructor(root) {
+		this.root = root;
+		this.container = root.querySelector('.js-map-container');
 		if (!this.container) return;
 
 		this.map = null;
-		this.sidebar = document.getElementById('map-sidebar');
-		this.sidebarContent = document.querySelector('.map-sidebar-content');
+		this.sidebar = root.querySelector('.js-map-sidebar');
+		this.sidebarContent = root.querySelector('.map-sidebar-content');
+		this.sidebarClose = root.querySelector('.js-map-sidebar-close');
+		this.sidebarTarget = root.querySelector('.js-sidebar-card-target');
 		this.properties = [];
 		this.markers = [];
 		this.isDragging = false;
@@ -35,7 +29,7 @@ export class PropertyMap {
 		this.currentTranslation = 0;
 
 		void this.init();
-		this.initTouchEvents();
+		this.initEvents();
 	}
 
 	async init() {
@@ -98,43 +92,49 @@ export class PropertyMap {
 	}
 
 	openSidebar(prop) {
-		if (!this.sidebar || !this.sidebarContent) return;
-
-		const target = document.getElementById('sidebar-card-target');
-		if (!target) return;
+		if (!this.sidebar || !this.sidebarContent || !this.sidebarTarget) return;
 
 		this.sidebar.classList.remove('is-hidden');
 		this.sidebar.classList.add('is-loading');
 
 		// Пока симуляция загрузки. Когда будешь аяксом грузить - можно лоадер этот дергать
 		setTimeout(() => {
-			target.innerHTML = renderBuildingCard(prop);
+			this.sidebarTarget.innerHTML = renderBuildingCard(prop);
 			this.sidebar.classList.remove('is-loading');
 			this.initCardSlider();
 		}, 1500);
 	}
 
 	initCardSlider() {
-		new Swiper('.building-card-slider', {
+		const slider = this.root.querySelector('.building-card-slider');
+		if (!slider) return;
+
+		new Swiper(slider, {
 			modules: [Navigation],
 			slidesPerView: 1,
 			loop: true,
 			navigation: {
-				nextEl: '.building-card-slider .swiper-next',
-				prevEl: '.building-card-slider .swiper-prev',
+				nextEl: slider.querySelector('.swiper-next'),
+				prevEl: slider.querySelector('.swiper-prev'),
 			},
 		});
 	}
 
-	initTouchEvents() {
-		if (!this.sidebar) return;
+	initEvents() {
+		if (this.sidebarClose) {
+			this.sidebarClose.addEventListener('click', () => {
+				this.sidebar.classList.add('is-hidden');
+			});
+		}
 
-		const handle = this.sidebar.querySelector('.map-handle-wrapper');
-		if (!handle) return;
-
-		handle.addEventListener('touchstart', (e) => this.handleTouchStart(e), {passive: true});
-		window.addEventListener('touchmove', (e) => this.handleTouchMove(e), {passive: false});
-		window.addEventListener('touchend', () => this.handleTouchEnd(), {passive: true});
+		if (this.sidebar) {
+			const handle = this.sidebar.querySelector('.map-handle-wrapper');
+			if (handle) {
+				handle.addEventListener('touchstart', (e) => this.handleTouchStart(e), {passive: true});
+				window.addEventListener('touchmove', (e) => this.handleTouchMove(e), {passive: false});
+				window.addEventListener('touchend', () => this.handleTouchEnd(), {passive: true});
+			}
+		}
 	}
 
 	handleTouchStart(e) {

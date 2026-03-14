@@ -1,6 +1,10 @@
 @use '../vars/vars' as v;
 @use '../mixins/global' as g;
 
+.swiper-next img {
+	transform: scaleX(-1);
+}
+
 .swiper-prev, .swiper-next {
 	display: flex;
 	justify-content: center;
@@ -19,6 +23,17 @@
 		height: 52px;
 	}
 
+	img {
+		width: 16px;
+		height: 16px;
+		aspect-ratio: 1;
+
+		@media(min-width: v.$md) {
+			width: 24px;
+			height: 24px;
+		}
+	}
+
 	&.xs {
 		width: 24px;
 		height: 24px;
@@ -32,17 +47,6 @@
 	&.sm {
 		width: 32px;
 		height: 32px;
-	}
-
-	img {
-		width: 16px;
-		height: 16px;
-		aspect-ratio: 1;
-
-		@media(min-width: v.$md) {
-			width: 24px;
-			height: 24px;
-		}
 	}
 
 	@include g.hover {
@@ -61,11 +65,5 @@
 		&:active {
 			scale: 1;
 		}
-	}
-}
-
-.swiper-next {
-	img {
-		transform: scaleX(-1);
 	}
 }

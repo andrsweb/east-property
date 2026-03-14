@@ -33,7 +33,7 @@
 	width: 100%;
 	height: 65%;
 	max-width: 100%;
-	padding: 12px 24px 24px 24px;
+	padding: 12px 24px 24px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -149,6 +149,7 @@
 
 	span {
 		color: v.$c-white;
+
 		@include h.t-title-bold;
 	}
 

@@ -219,7 +219,8 @@ const initSearchResultsFilters = async () => {
 
     if (bedsBathsSelector && bedsBathsDropdown && bedsBathsText && bedsValueInput && bathsValueInput) {
         let selectedBeds = new Set()
-        if (0 < searchData.filters.beds.options.length) {
+        console.log(searchData.filters);
+        if (0 < searchData.filters.beds?.options.length) {
             searchData.filters.beds.options.forEach(bed => {
                 if (bed.active) {
                     selectedBeds.add(bed.value)
@@ -227,7 +228,7 @@ const initSearchResultsFilters = async () => {
             });
         }
         let selectedBaths = new Set()
-        if (0 < searchData.filters.baths.options.length) {
+        if (0 < searchData.filters.baths?.options.length) {
             searchData.filters.baths.options.forEach(bath => {
                 if (bath.active) {
                     selectedBaths.add(bath.value)

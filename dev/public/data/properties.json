@@ -19,7 +19,7 @@
 	"price_from": "AED 565,891",
 	"units_available": 19,
 	"delivery_date": "Sep 2029",
-	"longtitude": "55.180069196375",
+	"longitude": "55.180069196375",
 	"latitude": "24.987898769598",
 	"units": [
 	  {
@@ -92,7 +92,7 @@
 	"price_from": "AED 165,891",
 	"units_available": 3,
 	"delivery_date": "Oct 2031",
-	"longtitude": "55.195069196375",
+	"longitude": "55.195069196375",
 	"latitude": "24.897898769598",
 	"units": [
 	  {
@@ -141,7 +141,7 @@
 	"price_from": "AED 255,891",
 	"units_available": 2,
 	"delivery_date": "Oct 2031",
-	"longtitude": "55.185069196375",
+	"longitude": "55.185069196375",
 	"latitude": "24.999999969598",
 	"units": [
 	  {

@@ -2,10 +2,10 @@
 
 .render-map {
 	width: 100%;
-	height: 500px;
+	height: 600px;
 
 	@media(min-width: v.$lg) {
-		height: 575px;
+		height: 675px;
 	}
 
 	&.sm {

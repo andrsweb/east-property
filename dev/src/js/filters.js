@@ -219,7 +219,6 @@ const initSearchResultsFilters = async () => {
 
     if (bedsBathsSelector && bedsBathsDropdown && bedsBathsText && bedsValueInput && bathsValueInput) {
         let selectedBeds = new Set()
-        console.log(searchData.filters);
         if (0 < searchData.filters.beds?.options.length) {
             searchData.filters.beds.options.forEach(bed => {
                 if (bed.active) {
@@ -329,18 +328,18 @@ const initPropertiesFilters = () => {
     });
 }
 
-const updatePropertiesList = () => {
+export const updatePropertiesList = () => {
     const filterItem = document.querySelector('.results-filters-items');
     let filterButtons = filterItem.querySelectorAll('button.result-filter'),
         formData = new FormData(),
         resultsBlock = document.getElementById('result-tabs-list-panel'),
         contentList = resultsBlock.querySelector('.content-list'),
-        contentScroll = document.querySelector('.result-tabs-content-inner .content-scroll'),
         resultTabs = document.querySelector('.result-tabs'),
         h2Block = resultsBlock.querySelector('.title-top h2'),
         bedsValueInput = filterItem.querySelector('input[name="beds"]'),
         bathsValueInput = filterItem.querySelector('input[name="baths"]'),
-        action = filterItem.querySelector('input[name="action"]');
+        action = filterItem.querySelector('input[name="action"]'),
+        mapInstances = document.querySelectorAll('.js-map-instance');
 
     resultTabs.classList.add('preloader');
 
@@ -369,7 +368,11 @@ const updatePropertiesList = () => {
         .then(response => {
             if (response.success) {
                 contentList.innerHTML = response.data.properties;
-                contentScroll.innerHTML = response.data.map_properties;
+                if (mapInstances.length) {
+                    mapInstances.forEach(instance => {
+                        instance.propertyMap.updateProperties(response.data.map_properties);
+                    });
+                }
                 h2Block.innerHTML = response.data.properties_found;
             }
             setTimeout(() => {

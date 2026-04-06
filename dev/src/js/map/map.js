@@ -7,7 +7,7 @@ import {renderBuildingCard} from './html';
 document.addEventListener('DOMContentLoaded', () => {
     const mapInstances = document.querySelectorAll('.js-map-instance');
     mapInstances.forEach(instance => {
-        new PropertyMap(instance);
+        instance.propertyMap = new PropertyMap(instance);
     });
 });
 
@@ -51,14 +51,16 @@ export class PropertyMap {
             const {Map} = await importLibrary('maps');
             const {AdvancedMarkerElement} = await importLibrary('marker');
 
-            await this.loadProperties();
+            if (filterPropertiesJson) {
+                await this.loadProperties(filterPropertiesJson);
+            }
 
             // если сингл мод -- ищем точку в жсон
             if (this.mode === 'single' && this.propertyId) {
                 const prop = this.properties.find(p => p.id.toString() === this.propertyId.toString());
                 if (prop) {
                     this.lat = parseFloat(prop.latitude);
-                    this.lng = parseFloat(prop.longtitude);
+                    this.lng = parseFloat(prop.longitude);
                 }
             }
 
@@ -85,7 +87,12 @@ export class PropertyMap {
         }
     }
 
-    async loadProperties() {
+    async loadProperties(props = null) {
+        if (props) {
+            this.properties = Array.isArray(props) ? props : [props];
+            return;
+        }
+
         try {
             const response = await fetch(MAP_CONFIG.DATA_URL);
             const data = await response.json();
@@ -96,23 +103,50 @@ export class PropertyMap {
         }
     }
 
+    clearMarkers() {
+        this.markers.forEach(marker => {
+            marker.map = null;
+        });
+        this.markers = [];
+    }
+
+    async updateProperties(propertiesJson) {
+        try {
+            if (typeof propertiesJson === 'string') {
+                propertiesJson = JSON.parse(propertiesJson);
+            }
+            await this.loadProperties(propertiesJson);
+
+            if (!this.map) return;
+
+            const {AdvancedMarkerElement} = await importLibrary('marker');
+
+            this.clearMarkers();
+
+            if (this.mode === 'single') {
+                this.renderSingleMarker(AdvancedMarkerElement);
+            } else {
+                this.renderMarkers(AdvancedMarkerElement);
+            }
+        } catch (error) {
+            console.error('Error updating properties:', error);
+        }
+    }
+
     renderSingleMarker(AdvancedMarkerElement) {
         const markerElement = document.createElement('div');
         markerElement.className = 'map-marker';
-        markerElement.innerHTML = `<img src="/img/geo.svg" width="22" height="28" alt="Location">`;
+        markerElement.innerHTML = '<img src="' + this.root.dataset.singleGeoMarker + '" width="22" height="28" alt="Location">';
 
         new AdvancedMarkerElement({
-            map: this.map,
-            position: {lat: this.lat, lng: this.lng},
-            content: markerElement,
-            title: 'Location'
+            map: this.map, position: {lat: this.lat, lng: this.lng}, content: markerElement, title: 'Location'
         });
     }
 
     renderMarkers(AdvancedMarkerElement) {
         this.properties.forEach(prop => {
             const lat = parseFloat(prop.latitude);
-            const lng = parseFloat(prop.longtitude);
+            const lng = parseFloat(prop.longitude);
 
             if (isNaN(lat) || isNaN(lng)) return;
 
@@ -121,13 +155,10 @@ export class PropertyMap {
             markerElement.innerHTML = `<span>${prop.units_available}</span>`;
 
             const marker = new AdvancedMarkerElement({
-                map: this.map,
-                position: {lat, lng},
-                content: markerElement,
-                title: prop.name
+                map: this.map, position: {lat, lng}, content: markerElement, title: prop.name
             });
 
-            marker.addListener('click', () => {
+            marker.addListener('gmp-click', () => {
                 this.openSidebar(prop);
             });
 
@@ -141,12 +172,33 @@ export class PropertyMap {
         this.sidebar.classList.remove('is-hidden');
         this.sidebar.classList.add('is-loading');
 
-        // Пока симуляция загрузки. Когда будешь аяксом грузить - можно лоадер этот дергать
-        setTimeout(() => {
-            this.sidebarTarget.innerHTML = renderBuildingCard(prop);
-            this.sidebar.classList.remove('is-loading');
-            this.initCardSlider();
-        }, 1500);
+        let formData = new FormData(),
+            projectLink = this.sidebar.querySelector('.a-link .button');
+
+        formData.append('action', 'get_map_property');
+        formData.append('_ajax_nonce', ajax_object._ajax_nonce);
+        formData.append('property_id', prop.id);
+
+        fetch(ajax_object.ajax_url, {
+            method: 'POST', body: formData, headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (response.success) {
+                    this.sidebarTarget.innerHTML = response.data.map_property_html;
+                    projectLink.href = prop.url;
+                }
+                setTimeout(() => {
+                    this.sidebar.classList.remove('is-loading');
+                    this.initCardSlider();
+                }, 600);
+            })
+            .catch(error => {
+                console.log(error);
+                this.sidebar.classList.remove('is-loading');
+            });
     }
 
     initCardSlider() {
@@ -154,12 +206,8 @@ export class PropertyMap {
         if (!slider) return;
 
         new Swiper(slider, {
-            modules: [Navigation],
-            slidesPerView: 1,
-            loop: true,
-            navigation: {
-                nextEl: slider.querySelector('.swiper-next'),
-                prevEl: slider.querySelector('.swiper-prev'),
+            modules: [Navigation], slidesPerView: 1, loop: true, navigation: {
+                nextEl: slider.querySelector('.swiper-next'), prevEl: slider.querySelector('.swiper-prev'),
             },
         });
     }

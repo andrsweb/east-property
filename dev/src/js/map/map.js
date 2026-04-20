@@ -11,6 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-tab-button]');
+    if (!button) return;
+
+    let sectionAbout = document.querySelector('section.about'),
+        footer = document.querySelector('footer');
+    if ('map' === button.dataset.tab) {
+        sectionAbout?.classList.add('is-hidden');
+        footer?.classList.add('is-hidden');
+    } else {
+        sectionAbout?.classList.remove('is-hidden');
+        footer?.classList.remove('is-hidden');
+    }
+});
+
 export class PropertyMap {
     constructor(root) {
         this.root = root;

@@ -103,6 +103,10 @@
 	}
 }
 
+section.is-hidden {
+  display: none;
+}
+
 main ul:not([class]),.content ul:not([class]) {
 	list-style: none;
 	padding-left: 0;

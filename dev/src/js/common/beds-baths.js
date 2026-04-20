@@ -1,15 +1,20 @@
 export const getBedsBathsText = (selectedBeds, selectedBaths) => {
     const bedsArray = Array.from(selectedBeds).sort()
-    const bathsArray = Array.from(selectedBaths).sort()
+    //const bathsArray = Array.from(selectedBaths).sort()
 
     let text = ''
     if (bedsArray.length > 0) {
-        text += bedsArray.join(',') + ' bed' + (bedsArray.length > 1 || bedsArray.includes('5+') ? 's' : '')
+        if (!bedsArray.includes('studio')) {
+            text += bedsArray.join(',') + ' bed' + (bedsArray.length > 1 || bedsArray.includes('5+') ? 's' : '')
+        } else {
+            text += bedsArray.join(',');
+        }
+
     }
-    if (bathsArray.length > 0) {
-        if (text) text += ', '
-        text += bathsArray.join(',') + ' bath' + (bathsArray.length > 1 || bathsArray.includes('5+') ? 's' : '')
-    }
+    // if (bathsArray.length > 0) {
+    //     if (text) text += ', '
+    //     text += bathsArray.join(',') + ' bath' + (bathsArray.length > 1 || bathsArray.includes('5+') ? 's' : '')
+    // }
 
     return text || 'Select'
 }

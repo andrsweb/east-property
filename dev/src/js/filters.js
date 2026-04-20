@@ -1,55 +1,44 @@
-import {loadSearchData} from './common/common.js'
-import {getBedsBathsText, updateBedsBathsButtons, syncTempBedsBaths} from './common/beds-baths.js'
+import {initSingleSwiper} from "./swiper.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     'use strict'
-
     void initSearchResultsFilters()
     initPropertiesFilters()
 })
 
+const getBedsBathsText = (selectedBeds, selectedBaths) => {
+    const bedsArray = Array.from(selectedBeds).sort()
+    const bathsArray = Array.from(selectedBaths).sort()
+
+    let text = ''
+    if (bedsArray.length > 0) {
+        text += bedsArray.join(',') + ' bed' + (bedsArray.length > 1 || bedsArray.includes('5+') ? 's' : '')
+    }
+    if (bathsArray.length > 0) {
+        if (text) text += ', '
+        text += bathsArray.join(',') + ' bath' + (bathsArray.length > 1 || bathsArray.includes('5+') ? 's' : '')
+    }
+
+    return text || 'Select'
+}
+
+const updateBedsBathsButtons = (container, tempBeds, tempBaths) => {
+    container.querySelectorAll('[data-beds]').forEach(btn => btn.classList.toggle('active', tempBeds.has(btn.dataset.beds)))
+    container.querySelectorAll('[data-baths]').forEach(btn => btn.classList.toggle('active', tempBaths.has(btn.dataset.baths)))
+}
+
 const initSearchResultsFilters = async () => {
     const buttons = Array.from(document.querySelectorAll('.result-filter[data-filter]'))
-
     if (!buttons.length) return
 
     let searchData = searchTabsData;
 
     const filters = searchData?.filters
-
     if (!filters) return
-
-    const ensureValueTextSpan = (valueEl) => {
-        const existing = valueEl.querySelector('[data-value-text]')
-
-        if (existing) return existing
-
-        const img = valueEl.querySelector('img')
-        const span = document.createElement('span')
-
-        span.setAttribute('data-value-text', 'true')
-        span.textContent = (valueEl.textContent ?? '').trim()
-        valueEl.replaceChildren()
-        valueEl.append(span)
-
-        if (img) valueEl.append(img)
-
-        return span
-    }
-
-    const getInitialValue = (filterKey, options, currentLabel) => {
-        const normalized = currentLabel.trim().toLowerCase()
-        const byLabel = options.find((opt) => (opt?.label ?? '').trim().toLowerCase() === normalized)
-
-        if (byLabel?.value) return byLabel.value
-        return options[0]?.value ?? ''
-    }
 
     const getLabelByValue = (filterKey, value) => {
         const options = filters?.[filterKey]?.options
-
         if (!Array.isArray(options)) return value
-
         return options.find((opt) => opt?.value === value)?.label ?? value
     }
 
@@ -58,33 +47,33 @@ const initSearchResultsFilters = async () => {
         button.dispatchEvent(new Event('change', {bubbles: true}));
 
         const valueEl = button.querySelector('.result-value')
-
         if (!valueEl) return
 
-        const textSpan = ensureValueTextSpan(valueEl)
+        let textSpan = valueEl.querySelector('[data-value-text]')
+        if (!textSpan) {
+            const img = valueEl.querySelector('img')
+            textSpan = document.createElement('span')
+            textSpan.setAttribute('data-value-text', 'true')
+            valueEl.replaceChildren(textSpan)
+            if (img) valueEl.append(img)
+        }
         textSpan.textContent = getLabelByValue(filterKey, selectedValue)
     }
 
     const renderDropdown = (button) => {
         const filterKey = button.dataset.filter
-        if (!filterKey) return
-
         const options = filters?.[filterKey]?.options
-
-        if (!Array.isArray(options) || !options.length) return
-
         const dropdown = button.querySelector('.result-dropdown')
 
-        if (!dropdown) return
+        if (!dropdown || !Array.isArray(options)) return
 
         dropdown.replaceChildren()
-
         const selectedValue = button.dataset.selectedValue ?? ''
 
         options.forEach((opt) => {
             const optBtn = document.createElement('button')
             optBtn.type = 'button'
-            optBtn.className = 'result-option'
+            optBtn.className = `result-option${opt.value === selectedValue ? ' is-selected' : ''}`
             optBtn.setAttribute('data-value', opt.value)
 
             const text = document.createElement('span')
@@ -97,30 +86,25 @@ const initSearchResultsFilters = async () => {
             check.height = 16
             check.alt = 'Selected'
 
-            if (opt.value === selectedValue) optBtn.classList.add('is-selected')
-
             optBtn.append(text, check)
             dropdown.append(optBtn)
         })
-
         dropdown.hidden = true
     }
 
     buttons.forEach((button) => {
         const filterKey = button.dataset.filter
-
-        if (!filterKey) return
+        if (filterKey === 'beds_baths') return
 
         const options = filters?.[filterKey]?.options
-
         if (!Array.isArray(options) || !options.length) return
 
         const valueEl = button.querySelector('.result-value')
-
         if (!valueEl) return
 
-        const textSpan = ensureValueTextSpan(valueEl)
-        const initialValue = getInitialValue(filterKey, options, textSpan.textContent ?? '')
+        const currentLabel = (valueEl.querySelector('[data-value-text]')?.textContent ?? valueEl.textContent ?? '').trim().toLowerCase()
+        const initial = options.find((opt) => (opt?.label ?? '').trim().toLowerCase() === currentLabel)
+        const initialValue = (!button.dataset.selectedValue && initial?.value) ? options[0]?.value : button.dataset.selectedValue
 
         applySelection(button, filterKey, initialValue)
         renderDropdown(button)
@@ -128,189 +112,121 @@ const initSearchResultsFilters = async () => {
 
     let openButton = null
 
-    const closeDropdown = (button) => {
-        if (!button) return
-        const filterKey = button.dataset.filter
-
-        const dropdown = button.querySelector('.result-dropdown') ||
-            button.parentElement.querySelector(`[data-result-dropdown="${filterKey}"]`)
-
-        if (!dropdown) return
-
-        dropdown.hidden = true
-        button.classList.remove('is-open')
+    const closeDropdown = (btn) => {
+        if (!btn) return
+        const dropdown = btn.querySelector('.result-dropdown') || document.querySelector(`[data-result-dropdown="${btn.dataset.filter}"]`)
+        if (dropdown) dropdown.hidden = true
+        btn.classList.remove('is-open')
     }
 
-    const openDropdown = (button) => {
-        if (!button) return
-        const filterKey = button.dataset.filter
-        if (openButton && openButton !== button) closeDropdown(openButton)
-
-        openButton = button
-
-        const dropdown = button.querySelector('.result-dropdown') ||
-            button.parentElement.querySelector(`[data-result-dropdown="${filterKey}"]`)
-
-        if (!dropdown) return
-
-        dropdown.hidden = false
-        button.classList.add('is-open')
+    const openDropdown = (btn) => {
+        if (!btn) return
+        if (openButton && openButton !== btn) closeDropdown(openButton)
+        openButton = btn
+        const dropdown = btn.querySelector('.result-dropdown') || document.querySelector(`[data-result-dropdown="${btn.dataset.filter}"]`)
+        if (dropdown) dropdown.hidden = false
+        btn.classList.add('is-open')
     }
 
     buttons.forEach((button) => {
         button.addEventListener('click', (e) => {
-            const target = e.target
-            if (!target || typeof target.closest !== 'function') return
-
-            const option = target.closest('.result-option')
+            const option = e.target.closest('.result-option')
             const filterKey = button.dataset.filter
 
             if (!option) {
-                if (button.classList.contains('is-open')) {
-                    closeDropdown(button)
-                    openButton = null
-                    return
-                }
-
-                openDropdown(button)
-
-                if (filterKey === 'beds_baths') {
-                    window.dispatchEvent(new CustomEvent('filter:open', {detail: {filter: filterKey}}))
-                }
+                button.classList.contains('is-open') ? (closeDropdown(button), openButton = null) : openDropdown(button)
                 return
             }
 
             const selectedValue = option.getAttribute('data-value')
-
             if (filterKey && selectedValue) {
                 applySelection(button, filterKey, selectedValue)
                 renderDropdown(button)
             }
-
             closeDropdown(button)
             openButton = null
         })
     })
 
     document.addEventListener('click', (e) => {
-        if (!openButton) return
-        const target = e.target
-        if (!target) return
-
-        if (openButton.contains(target) || target.closest('[data-result-dropdown]')) return
-
+        if (!openButton || openButton.contains(e.target) || e.target.closest('[data-result-dropdown]')) return
         closeDropdown(openButton)
         openButton = null
     })
 
     document.addEventListener('keydown', (e) => {
-        if (e.key !== 'Escape') return
-        if (!openButton) return
-
-        closeDropdown(openButton)
-        openButton = null
+        if (e.key === 'Escape' && openButton) {
+            closeDropdown(openButton)
+            openButton = null
+        }
     })
 
-    const bedsBathsSelector = document.querySelector('.result-filter[data-filter="beds_baths"]')
-    const bedsBathsDropdown = document.querySelector('[data-result-dropdown="beds_baths"]')
-    const bedsBathsText = document.querySelector('[data-result-beds-baths-text]')
-    const bedsValueInput = document.querySelector('[data-result-beds-value]')
-    const bathsValueInput = document.querySelector('[data-result-baths-value]')
+    const bbSelector = document.querySelector('.result-filter[data-filter="beds_baths"]')
+    const bbDropdown = document.querySelector('[data-result-dropdown="beds_baths"]')
+    const bbText = document.querySelector('[data-result-beds-baths-text]')
+    const bbBedsInp = document.querySelector('[data-result-beds-value]')
+    const bbBathsInp = document.querySelector('[data-result-baths-value]')
 
-    if (bedsBathsSelector && bedsBathsDropdown && bedsBathsText && bedsValueInput && bathsValueInput) {
-        let selectedBeds = new Set()
-        if (0 < searchData.filters.beds?.options.length) {
-            searchData.filters.beds.options.forEach(bed => {
-                if (bed.active) {
-                    selectedBeds.add(bed.value)
+    if (bbSelector && bbDropdown && bbText && bbBedsInp && bbBathsInp) {
+        let selectedBeds = new Set(), selectedBaths = new Set()
+        let tempBeds = new Set(), tempBaths = new Set()
+
+        if (filters.beds) {
+            filters.beds.options.forEach(opt => {
+                if (opt.active) {
+                    selectedBeds.add(opt.value)
+                    tempBeds.add(opt.value)
                 }
             });
         }
-        let selectedBaths = new Set()
-        if (0 < searchData.filters.baths?.options.length) {
-            searchData.filters.baths.options.forEach(bath => {
-                if (bath.active) {
-                    selectedBaths.add(bath.value)
+
+        if (filters.baths) {
+            filters.baths.options.forEach(opt => {
+                if (opt.active) {
+                    selectedBaths.add(opt.value)
+                    tempBaths.add(opt.value)
                 }
             });
         }
-        let tempBeds = new Set(selectedBeds)
-        let tempBaths = new Set(selectedBaths)
 
-        const updateDisplayText = () => {
-            bedsBathsText.textContent = getBedsBathsText(selectedBeds, selectedBaths)
-            bedsValueInput.value = Array.from(selectedBeds).join(',')
-            bathsValueInput.value = Array.from(selectedBaths).join(',')
+        const updateDisplay = () => {
+            bbText.textContent = getBedsBathsText(selectedBeds, selectedBaths)
+            bbBedsInp.value = Array.from(selectedBeds).join(',')
+            bbBathsInp.value = Array.from(selectedBaths).sort().join(',')
         }
 
-        const updateButtonStates = () => {
-            updateBedsBathsButtons(bedsBathsDropdown, tempBeds, tempBaths)
-        }
-
-        updateDisplayText()
-
-        window.addEventListener('filter:open', (e) => {
-            if (e.detail.filter === 'beds_baths') {
-                const synced = syncTempBedsBaths(selectedBeds, selectedBaths)
-                tempBeds = synced.tempBeds
-                tempBaths = synced.tempBaths
-                updateButtonStates()
-            }
-        })
-
-        bedsBathsDropdown.addEventListener('click', (e) => {
+        bbDropdown.addEventListener('click', (e) => {
             e.stopPropagation()
             const bedBtn = e.target.closest('[data-beds]')
             const bathBtn = e.target.closest('[data-baths]')
-
             if (bedBtn) {
-                const value = bedBtn.dataset.beds
-                if (tempBeds.has(value)) {
-                    tempBeds.delete(value)
-                } else {
-                    tempBeds.add(value)
-                }
-                updateButtonStates()
+                const val = bedBtn.dataset.beds
+                tempBeds.has(val) ? tempBeds.delete(val) : tempBeds.add(val)
+                updateBedsBathsButtons(bbDropdown, tempBeds, tempBaths)
             }
-
             if (bathBtn) {
-                const value = bathBtn.dataset.baths
-                if (tempBaths.has(value)) {
-                    tempBaths.delete(value)
-                } else {
-                    tempBaths.add(value)
-                }
-                updateButtonStates()
+                const val = bathBtn.dataset.baths
+                tempBaths.has(val) ? tempBaths.delete(val) : tempBaths.add(val)
+                updateBedsBathsButtons(bbDropdown, tempBeds, tempBaths)
             }
-        })
 
-        const cancelBtn = bedsBathsDropdown.querySelector('.beds-baths-cancel')
-        if (cancelBtn) {
-            cancelBtn.addEventListener('click', (e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                const synced = syncTempBedsBaths(selectedBeds, selectedBaths)
-                tempBeds = synced.tempBeds
-                tempBaths = synced.tempBaths
-                updateButtonStates()
-                closeDropdown(bedsBathsSelector)
+            if (e.target.closest('.beds-baths-cancel')) {
+                tempBeds = new Set(selectedBeds)
+                tempBaths = new Set(selectedBaths)
+                updateBedsBathsButtons(bbDropdown, tempBeds, tempBaths)
+                closeDropdown(bbSelector)
                 openButton = null
-            })
-        }
-
-        const applyBtn = bedsBathsDropdown.querySelector('.beds-baths-apply')
-        if (applyBtn) {
-            applyBtn.addEventListener('click', (e) => {
-                e.preventDefault()
-                e.stopPropagation()
+            }
+            if (e.target.closest('.beds-baths-apply')) {
                 selectedBeds = new Set(tempBeds)
                 selectedBaths = new Set(tempBaths)
-                updateDisplayText()
-                closeDropdown(bedsBathsSelector)
+                updateDisplay()
+                closeDropdown(bbSelector)
                 openButton = null
-                updatePropertiesList();
-            })
-        }
+                bbSelector.dispatchEvent(new Event('change', {bubbles: true}));
+            }
+        })
+        updateDisplay()
     }
 }
 
@@ -328,7 +244,7 @@ const initPropertiesFilters = () => {
     });
 }
 
-export const updatePropertiesList = () => {
+const updatePropertiesList = () => {
     const filterItem = document.querySelector('.results-filters-items');
     let filterButtons = filterItem.querySelectorAll('button.result-filter'),
         formData = new FormData(),
@@ -339,7 +255,8 @@ export const updatePropertiesList = () => {
         bedsValueInput = filterItem.querySelector('input[name="beds"]'),
         bathsValueInput = filterItem.querySelector('input[name="baths"]'),
         action = filterItem.querySelector('input[name="action"]'),
-        mapInstances = document.querySelectorAll('.js-map-instance');
+        mapInstances = document.querySelectorAll('.js-map-instance'),
+        allInputs = filterItem?.querySelectorAll('input');
 
     resultTabs.classList.add('preloader');
 
@@ -349,13 +266,18 @@ export const updatePropertiesList = () => {
         formData.append(button.dataset.filter, button.dataset.selectedValue);
     });
 
-    if (bedsValueInput) {
-        formData.append('beds', bedsValueInput.value);
-    }
+    allInputs.forEach(input => {
+        if (!formData.has(input.name)) {
+            let value = input.value;
+            if ('min_price' === input.name || 'max_price' === input.name) {
+                value = value.replace(/[^0-9.]/g, '');
+            }
+            formData.append(input.name, value);
+        }
+    });
 
-    if (bathsValueInput) {
-        formData.append('baths', bathsValueInput.value);
-    }
+    let urlWithFilters = getUrlWithFilters(formData);
+    formData.append('current_href', urlWithFilters);
 
     fetch(ajax_object.ajax_url, {
         method: 'POST',
@@ -374,6 +296,7 @@ export const updatePropertiesList = () => {
                     });
                 }
                 h2Block.innerHTML = response.data.properties_found;
+                history.replaceState({}, '', urlWithFilters);
             }
             setTimeout(() => {
                 resultTabs.classList.remove('preloader');
@@ -384,4 +307,42 @@ export const updatePropertiesList = () => {
             console.log(error);
             resultTabs.classList.remove('preloader');
         });
+}
+
+/**
+ * Remove from URl pagination like /page-2/ and add to URL all filter parameters as GET params
+ */
+const getUrlWithFilters = (formData) => {
+    let currentHref = removePaginationFromUrl();
+
+    currentHref += '?filtered=true';
+
+    formData.forEach((value, key) => {
+        if (0 === value.length) {
+            return;
+        }
+
+        if (key !== 'action' && key !== '_ajax_nonce' && key !== '_wp_http_referer' && key !== 'current_href') {
+            currentHref += `&${key}=${value}`;
+        }
+    });
+
+    return currentHref;
+}
+
+function removePaginationFromUrl(urlString = window.location.href) {
+    const url = new URL(urlString);
+
+    // Убираем /page-2 или /page/2 в pathname
+    url.pathname = url.pathname
+        .replace(/\/page-\d+\/?$/i, '/')
+        .replace(/\/page\/\d+\/?$/i, '/')
+        .replace(/\/{2,}/g, '/');
+
+    // Убираем query-параметры пагинации, если есть
+    url.searchParams.delete('page');
+    url.searchParams.delete('paged');
+    url.searchParams.delete('pagination');
+
+    return url.toString();
 }

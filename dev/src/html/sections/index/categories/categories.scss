@@ -60,14 +60,14 @@
 			gap: 4px;
 
 			h3 {
-				color: v.$c-black;
+				color: v.$c-white;
 				text-align: center;
 
 				@include l.t-label;
 			}
 
 			p {
-				color: v.$c-black;
+				color: v.$c-white;
 				text-align: center;
 
 				@include p.t-text;

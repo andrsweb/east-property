@@ -1,4 +1,6 @@
 //libs
+@forward '../../../node_modules/filepond/dist/filepond.min.css';
+@forward '../../../node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
 
 // Defaults styles.
 @forward 'common/fonts';
@@ -14,11 +16,13 @@
 @forward 'ui/tabs';
 @forward 'ui/coockie';
 @forward 'ui/breadcrumbs';
+@forward 'ui/dropdowns';
 @forward 'ui/beds-baths';
-@forward 'ui/render-map'; //Новые стили
+@forward 'ui/render-map';
+@forward 'ui/checkbox';
+@forward 'ui/uploader';
 
 //generated
 @forward 'generated/html-modules';
-
 @forward 'common/pagination';
 @forward 'common/404';

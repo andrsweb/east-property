@@ -59,6 +59,7 @@
 		align-items: stretch;
 		flex-wrap: wrap;
 		gap: 16px;
+        min-height: 80px;
 
 		@media(min-width: v.$md) {
 			flex-wrap: nowrap;
@@ -76,6 +77,7 @@
 		@media(min-width: v.$md) {
 			width: auto;
 			max-width: 160px;
+			min-width: 100px;
 		}
 	}
 
@@ -111,6 +113,7 @@
 			color: v.$c-black;
 
 			@include t.t-text;
+			text-align: left;
 
 			img {
 				width: 16px;
@@ -147,7 +150,7 @@
 	.tab-divider {
 		display: none;
 		width: 1px;
-		height: 59px;
+		height: 80px;
 		background-color: v.$c-grey-95;
 
 		@media(min-width: v.$md) {
@@ -167,17 +170,18 @@
 
 	.tab-dropdown {
 		width: 100%;
+		min-width: max-content;
+        max-height: 400px;
 		position: absolute;
-		top: 100%;
-		left: 50%;
-		transform: translateX(-50%);
+        top: 100%;
+		left: 0;
 		z-index: 5;
 		display: flex;
 		flex-direction: column;
 		border-bottom-left-radius: v.$br8;
 		border-bottom-right-radius: v.$br8;
 		background-color: v.$c-grey-97;
-		overflow: hidden;
+        overflow-y: scroll;
 
 		&[hidden] {
 			display: none;

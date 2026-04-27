@@ -6,6 +6,10 @@
 .large-card {
 	width: 100%;
 
+    &:hover {
+      opacity: 0.9;
+    }
+
 	&-inner {
 		display: flex;
 		flex-direction: column-reverse;
@@ -90,7 +94,7 @@
 
 		@media(min-width: v.$md) {
 			border-left: 0;
-			border-radius: v.$br8;
+			border-radius: 0 8px 8px 0;
 			padding: 16px 16px 16px 32px;
 		}
 	}

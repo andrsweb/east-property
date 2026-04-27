@@ -252,11 +252,14 @@ const updatePropertiesList = () => {
         contentList = resultsBlock.querySelector('.content-list'),
         resultTabs = document.querySelector('.result-tabs'),
         h2Block = resultsBlock.querySelector('.title-top h2'),
-        bedsValueInput = filterItem.querySelector('input[name="beds"]'),
-        bathsValueInput = filterItem.querySelector('input[name="baths"]'),
+        h2BlockSpan = h2Block.querySelector('span'),
         action = filterItem.querySelector('input[name="action"]'),
         mapInstances = document.querySelectorAll('.js-map-instance'),
         allInputs = filterItem?.querySelectorAll('input');
+
+    if (h2BlockSpan) {
+        h2Block = h2BlockSpan;
+    }
 
     resultTabs.classList.add('preloader');
 

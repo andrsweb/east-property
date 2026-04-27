@@ -57,6 +57,12 @@
 			gap: 10px;
 		}
 
+        &-items {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 24px;
+        }
+
 		&-labels {
 			display: flex;
 			flex-wrap: wrap;
@@ -172,6 +178,90 @@
 
 		@include h.t-header;
 	}
+
+  .unit-gallery {
+    width: 100%;
+    margin-bottom: 32px;
+
+    &-mobile {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+
+      @media (min-width: v.$lg) {
+        display: none;
+      }
+    }
+
+    &-desktop {
+      display: none;
+
+      @media (min-width: v.$lg) {
+        display: flex;
+        gap: 8px;
+        height: 556px;
+        width: 100%;
+      }
+    }
+
+    &-main {
+      flex: 1 1 50%;
+      height: 100%;
+    }
+
+    &-item {
+      position: relative;
+      border-radius: v.$br2;
+      overflow: hidden;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform v.$tr ease;
+
+        @include g.hover {
+          transform: scale(1.05);
+        }
+      }
+
+      &.big {
+        height: 100%;
+      }
+    }
+
+    &-side {
+      flex: 1 1 50%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      height: 100%;
+
+      .unit-gallery-item {
+        flex: 1 0 calc(50% - 4px);
+        height: calc(50% - 4px);
+      }
+    }
+
+    &-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgb(0 0 0 / 50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      color: v.$c-white;
+      font-weight: v.$fw-800;
+      font-size: 24px;
+      line-height: 30px;
+
+      @media(min-width: v.$md) {
+        font-size: 30px;
+        line-height: 36px;
+      }
+    }
+  }
 
 	.single-info {
 		width: 100%;
@@ -301,8 +391,7 @@
 	}
 
 	.single-steps {
-		width: 100%;
-        max-width: 700px;
+		width: auto;
 		display: flex;
 		flex-flow: column nowrap;
 		align-items: stretch;
@@ -320,7 +409,8 @@
         justify-content: flex-start;
 
         &-title {
-          min-width: 160px;
+          width: 200px;
+          min-width: 200px;
           font-size: 14px;
           font-weight: 400;
         }
@@ -439,6 +529,13 @@
 				@include t.t-text;
 			}
 		}
+
+        &-estate {
+          img {
+            max-height: 66px;
+            border-radius: 50px;
+          }
+        }
 
 		&-img {
 			width: 64px;

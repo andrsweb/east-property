@@ -126,6 +126,13 @@
 		&:empty {
 			display: none;
 		}
+
+        &.preloader {
+          &::before {
+            top: 0;
+            z-index: 12;
+          }
+        }
 	}
 
 	&-item {

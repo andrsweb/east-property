@@ -1,0 +1,188 @@
+<section class="submit-unit">
+    <div class="container">
+        <div class="submit-unit-wrapper">
+            <h1>Add new property</h1>
+            <form class="submit-unit-form" autocomplete="off" method="POST" enctype="multipart/form-data">
+                <div class="submit-unit-inner">
+                    <div class="submit-unit-left">
+                        <fieldset>
+                            <div class="input-group">
+                                <label for="s-text">
+                                    Title
+                                    <input type="text" id="s-text" name="title" required>
+                                </label>
+                            </div>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="is_new">
+                                <span>This is a new property</span>
+                            </label>
+                            <div class="inputs-wrapper">
+                                <img src="/img/logo-sm.png" width="31" height="43" alt="">
+                                <div class="inputs-box">
+                                    <div class="inputs-group">
+                                        <div class="input-group">
+                                            <label for="s-price">
+                                                Price, AED
+                                                <input type="number" id="s-price" name="price" min="0" required>
+                                            </label>
+                                        </div>
+                                        <div class="input-group half-width">
+                                            <label for="s-sqrt">
+                                                Area, square feets
+                                                <input type="number" id="s-sqrt" name="area" min="0" required>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <span class="sqrt-value" data-sqrt-value>Price per square foot: <span></span></span>
+                                </div>
+                            </div>
+                            <div class="inputs-group">
+                                <div class="input-group">
+                                    <div class="input-wrapper">
+                                        <span class="label-text">Unit type</span>
+                                        <div class="dropdown">
+                                            <button class="dropdown-button" type="button">
+                                                <span class="dropdown-title">Select property type</span>
+                                                <span class="dropdown-arrow">
+                                                    <img src="/img/arrow-down.svg" width="16" height="16"
+                                                         alt="vector arrow">
+                                                </span>
+                                            </button>
+                                            <div class="dropdown-content">
+                                                <div class="dropdown-inner">
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="apartments">Apartments
+                                                    </button>
+                                                    <button type="button" class="dropdown-option" data-value="houses">
+                                                        Houses
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="villas">Villas
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="offices">Offices
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="unit_type" value="" data-required>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-wrapper">
+                                        <span class="label-text">Property</span>
+                                        <div class="dropdown">
+                                            <button class="dropdown-button" type="button">
+                                                <span class="dropdown-title">Select</span>
+                                                <span class="dropdown-arrow">
+                                                    <img src="/img/arrow-down.svg" width="16" height="16"
+                                                         alt="vector arrow">
+                                                </span>
+                                            </button>
+                                            <div class="dropdown-content">
+                                                <div class="dropdown-inner">
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="burj-khalifa">
+                                                        Burj Khalifa
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="princess-tower">Princess Tower
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="address-downtown">Address Downtown
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="damac-heights">DAMAC Heights
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="marina-101">Marina 101
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="property" value="" data-required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inputs-group">
+                                <div class="submit-buttons-wrapper">
+                                    <span class="dropdown-label">Bedrooms</span>
+                                    <div class="submit-buttons" data-beds-group>
+                                        <button type="button" class="beds-baths-btn" data-beds="1">1</button>
+                                        <button type="button" class="beds-baths-btn" data-beds="2">2</button>
+                                        <button type="button" class="beds-baths-btn" data-beds="3">3</button>
+                                        <button type="button" class="beds-baths-btn" data-beds="4">4</button>
+                                        <button type="button" class="beds-baths-btn" data-beds="5">5+</button>
+                                    </div>
+                                    <input type="hidden" name="bedrooms" value="" data-required>
+                                </div>
+                                <div class="submit-buttons-wrapper">
+                                    <span class="dropdown-label">Bathrooms</span>
+                                    <div class="submit-buttons" data-baths-group>
+                                        <button type="button" class="beds-baths-btn" data-baths="1">1</button>
+                                        <button type="button" class="beds-baths-btn" data-baths="2">2</button>
+                                        <button type="button" class="beds-baths-btn" data-baths="3">3</button>
+                                        <button type="button" class="beds-baths-btn" data-baths="4">4</button>
+                                    </div>
+                                    <input type="hidden" name="bathrooms" value="" data-required>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="s-desc">
+                                    Description
+                                    <textarea name="description" id="s-desc" required></textarea>
+                                </label>
+                            </div>
+                        </fieldset>
+                        <div class="submit-unit-bottom">
+                            <span>New units are save as draft for moderation</span>
+                            <button class="button green xl" type="submit" disabled>
+                                <img src="/img/rect.svg" width="12" height="19" alt="">
+                                Submit Unit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="submit-unit-right">
+                        <div class="uploader">
+                            <div class="uploader-user" id="uploader-user">
+                                <div class="uploader-header" id="user-header">
+                                    <h2>Pictures</h2>
+                                    <button type="button" class="browse-link" id="trigger-browse">Browse files</button>
+                                </div>
+                                <div class="uploader-dropzone" id="uploader-dropzone">
+                                    <input type="file" class="filepond" name="filepond" multiple
+                                           data-max-file-size="10MB" data-max-files="50">
+                                </div>
+                                <div class="uploader-grid" id="user-grid">
+                                    <!-- Сюда будут рендерится загруженные фото юзера. Не удалять -->
+                                </div>
+                            </div>
+
+                            <div class="uploader-presets">
+                                <div class="uploader-header">
+                                    <h2>Select property pictures to include in unit page</h2>
+                                    <button type="button" class="select-all" id="select-all-images">Select all</button>
+                                </div>
+                                <div class="uploader-grid" id="presets-grid">
+                                    <!-- По идее циклом должен вывести все -->
+
+                                    <div class="uploader-item is-selected" data-id="p1" data-url="/img/h1.jpg">
+                                        <img src="/img/h1.jpg" alt="Property image">
+                                    </div>
+
+                                    <div class="uploader-item" data-id="p2" data-url="/img/h2.jpg">
+                                        <img src="/img/h2.jpg" alt="Property image">
+                                    </div>
+
+                                    <div class="uploader-item" data-id="p3" data-url="/img/h3.jpg">
+                                        <img src="/img/h3.jpg" alt="Property image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

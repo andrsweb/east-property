@@ -24,6 +24,7 @@ form .custom-checkbox {
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: 12px;
+        padding: 0 8px;
 
 		&:checked {
 			background-color: v.$c-orange;

@@ -8,3 +8,5 @@ import './map/map';
 import './filters.js';
 import './swiper.js';
 import './dropdowns.js';
+import './submit-unit';
+import './uploader';

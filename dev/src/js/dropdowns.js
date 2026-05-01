@@ -7,33 +7,62 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const toggleDropdown = () => {
-	const dropdownButtons = document.querySelectorAll('.dropdown-button')
+    const dropdownButtons = document.querySelectorAll('.dropdown-button')
+    const openedDropdowns = document.querySelectorAll('.dropdown.opened')
 
-	if (!dropdownButtons.length) return
+    if (openedDropdowns.length) {
+        openedDropdowns.forEach(dropdown => reCalculateDropdownHeight(dropdown))
+    }
 
-	dropdownButtons.forEach(button => {
-		button.addEventListener('click', () => {
-			const dropdown = button.closest('.dropdown')
-			const dropdownOpen = dropdown.querySelector('.dropdown-content')
+    if (!dropdownButtons.length) return
 
-			if (!dropdownOpen) return
+    dropdownButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const dropdown = button.closest('.dropdown')
+            const dropdownOpen = dropdown.querySelector('.dropdown-content')
 
-			if (!dropdown.classList.contains('opened')) {
-				dropdown.classList.add('opened')
+            if (!dropdownOpen) return
 
-				reCalculateDropdownHeight(dropdown)
-			} else {
-				dropdown.classList.remove('opened')
-				dropdownOpen.style.height = '0'
-			}
-		})
-	})
+            if (!dropdown.classList.contains('opened')) {
+                dropdown.classList.add('opened')
+
+                reCalculateDropdownHeight(dropdown)
+            } else {
+                dropdown.classList.remove('opened')
+                dropdownOpen.style.height = '0'
+            }
+        })
+    })
+
+    document.addEventListener('click', (e) => {
+        const option = e.target.closest('.dropdown-option')
+        if (!option) return
+
+        const dropdown = option.closest('.dropdown')
+        const button = dropdown.querySelector('.dropdown-button')
+        const title = button.querySelector('.dropdown-title')
+        const dropdownOpen = dropdown.querySelector('.dropdown-content')
+        const hiddenInput = dropdown.closest('.input-wrapper')?.querySelector('input[type="hidden"]')
+
+        if (title) title.textContent = option.textContent
+        if (hiddenInput) {
+            hiddenInput.value = option.getAttribute('data-value') || option.textContent
+
+            hiddenInput.dispatchEvent(new Event('input', {bubbles: true}))
+            hiddenInput.dispatchEvent(new Event('change', {bubbles: true}))
+        }
+
+        dropdown.classList.remove('opened')
+        if (dropdownOpen) dropdownOpen.style.height = '0'
+
+        dropdown.dispatchEvent(new CustomEvent('change', {detail: {value: option.textContent}}))
+    })
 }
 
 window.addEventListener('resize', () => {
-	const dropdowns = document.querySelectorAll('.dropdown.opened')
+    const dropdowns = document.querySelectorAll('.dropdown.opened')
 
-	if (!dropdowns.length) return
+    if (!dropdowns.length) return
 
-	dropdowns.forEach(dropdown => reCalculateDropdownHeight(dropdown))
+    dropdowns.forEach(dropdown => reCalculateDropdownHeight(dropdown))
 })

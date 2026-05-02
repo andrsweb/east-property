@@ -146,6 +146,11 @@
 .link {
 	color: v.$c-black;
 	text-decoration: underline;
+
+    &.logout {
+      padding: 0 30px;
+      font-size: 14px;
+    }
 }
 
 .edit-property-link {

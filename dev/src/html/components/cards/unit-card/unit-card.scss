@@ -5,7 +5,7 @@
 
 .unit-card {
 	width: 100%;
-    cursor: pointer;
+	cursor: pointer;
 
 	&-inner {
 		display: flex;
@@ -67,7 +67,7 @@
 
 		@media(min-width: v.$md) {
 			border-left: 0;
-            border-radius: 0 8px 8px 0;
+			border-radius: 0 8px 8px 0;
 			padding: 16px 16px 16px 32px;
 		}
 	}
@@ -194,7 +194,7 @@
 		}
 	}
 
-    &:hover {
-      opacity: 0.9;
-    }
+	&:hover {
+		opacity: 0.9;
+	}
 }

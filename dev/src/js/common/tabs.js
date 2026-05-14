@@ -66,6 +66,17 @@ const initDefaultTabs = () => {
 				if (!key) return;
 
 				activate(key);
+
+				let currentUrl = window.location.href,
+					newUrl = currentUrl;
+				if (currentUrl.includes('tab=')) {
+					newUrl = currentUrl.replace(/tab=[^&]*/, 'tab=' + key);
+				} else {
+					const separator = currentUrl.includes('?') ? '&' : '?';
+					newUrl = currentUrl + separator + 'tab=' + key;
+				}
+
+				window.history.replaceState(null, '', newUrl);
 			});
 		});
 

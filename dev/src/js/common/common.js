@@ -33,7 +33,7 @@ document.addEventListener('click', (e) => {
 	const trigger = e.target.closest('[data-modal-open="plan-modal"]');
 	if (!trigger) return;
 
-	const modal  = document.querySelector('.modal-wrapper[data-modal-id="plan-modal"]');
+	const modal = document.querySelector('.modal-wrapper[data-modal-id="plan-modal"]');
 	const imgTag = modal?.querySelector('[data-modal-img]');
 	if (!imgTag) return;
 

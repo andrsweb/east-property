@@ -12,6 +12,11 @@
 	border-radius: v.$br8;
 	outline: 3px solid transparent;
 
+	&:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
 	&.black {
 		background-color: v.$c-black;
 		color: v.$c-white;
@@ -58,6 +63,17 @@
 		background-color: v.$c-yellow;
 		color: v.$c-black;
 
+		&.xs {
+			padding: 6px 8px;
+			border: none;
+			font-size: 13px;
+
+			img {
+				width: 16px;
+				height: 16px;
+			}
+		}
+
 		&.sm {
 			padding: 9.5px 12px;
 			border: none;
@@ -80,6 +96,10 @@
 				width: 24px;
 				height: 24px;
 			}
+		}
+
+		&.text_white {
+			color: #FFF;
 		}
 
 		@include g.hover {
@@ -147,12 +167,12 @@
 	color: v.$c-black;
 	text-decoration: underline;
 
-    &.logout {
-      padding: 0 30px;
-      font-size: 14px;
-    }
+	&.logout {
+		padding: 0 30px;
+		font-size: 14px;
+	}
 }
 
 .edit-property-link {
-  margin-bottom: 10px;
+	margin-bottom: 0;
 }

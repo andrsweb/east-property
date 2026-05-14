@@ -98,7 +98,7 @@ const initUploader = () => {
                     let item = document.querySelector('.uploader-item[data-id="' + file.id + '"]'),
                         userThumbnailIds = document.getElementById('user-thumbnail-ids');
                     item?.remove();
-                    userThumbnailIds.value = userThumbnailIds.value.replace(file.id + ',', '');
+					userThumbnailIds.value = userThumbnailIds.value.replace(file.id, '');
                     userFiles = userFiles.filter(f => f.id !== file.id);
                     render();
                 }

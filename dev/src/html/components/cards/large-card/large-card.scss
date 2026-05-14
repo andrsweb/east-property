@@ -14,6 +14,8 @@
 		display: flex;
 		flex-direction: column-reverse;
 		align-items: stretch;
+        border: 1px solid v.$c-grey-95;
+        border-radius: v.$br8;
 
 		@media(min-width: v.$md) {
 			flex-direction: row;
@@ -88,9 +90,6 @@
 		flex-grow: 1;
 		padding: 16px;
 		gap: 16px;
-		border: 1px solid v.$c-grey-95;
-		border-top-left-radius: v.$br8;
-		border-top-right-radius: v.$br8;
 
 		@media(min-width: v.$md) {
 			border-left: 0;

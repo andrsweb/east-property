@@ -7,62 +7,89 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const toggleDropdown = () => {
-    const dropdownButtons = document.querySelectorAll('.dropdown-button')
-    const openedDropdowns = document.querySelectorAll('.dropdown.opened')
+	const dropdownButtons = document.querySelectorAll('.dropdown-button')
+	const openedDropdowns = document.querySelectorAll('.dropdown.opened')
 
-    if (openedDropdowns.length) {
-        openedDropdowns.forEach(dropdown => reCalculateDropdownHeight(dropdown))
-    }
+	if (openedDropdowns.length) {
+		openedDropdowns.forEach(dropdown => reCalculateDropdownHeight(dropdown))
+	}
 
-    if (!dropdownButtons.length) return
+	if (!dropdownButtons.length) return
 
-    dropdownButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const dropdown = button.closest('.dropdown')
-            const dropdownOpen = dropdown.querySelector('.dropdown-content')
+	dropdownButtons.forEach(button => {
+		button.addEventListener('click', () => {
+			const dropdown = button.closest('.dropdown')
+			const dropdownOpen = dropdown.querySelector('.dropdown-content')
 
-            if (!dropdownOpen) return
+			if (!dropdownOpen) return
 
-            if (!dropdown.classList.contains('opened')) {
-                dropdown.classList.add('opened')
+			if (!dropdown.classList.contains('opened')) {
+				dropdown.classList.add('opened')
 
-                reCalculateDropdownHeight(dropdown)
-            } else {
-                dropdown.classList.remove('opened')
-                dropdownOpen.style.height = '0'
-            }
-        })
-    })
+				reCalculateDropdownHeight(dropdown)
+			} else {
+				dropdown.classList.remove('opened')
+				dropdownOpen.style.height = '0'
+			}
+		})
 
-    document.addEventListener('click', (e) => {
-        const option = e.target.closest('.dropdown-option')
-        if (!option) return
+		initSearch(button);
+	})
 
-        const dropdown = option.closest('.dropdown')
-        const button = dropdown.querySelector('.dropdown-button')
-        const title = button.querySelector('.dropdown-title')
-        const dropdownOpen = dropdown.querySelector('.dropdown-content')
-        const hiddenInput = dropdown.closest('.input-wrapper')?.querySelector('input[type="hidden"]')
+	document.addEventListener('click', (e) => {
+		const option = e.target.closest('.dropdown-option')
+		if (!option) return
 
-        if (title) title.textContent = option.textContent
-        if (hiddenInput) {
-            hiddenInput.value = option.getAttribute('data-value') || option.textContent
+		const dropdown = option.closest('.dropdown')
+		const button = dropdown.querySelector('.dropdown-button')
+		const title = button.querySelector('.dropdown-title')
+		const dropdownOpen = dropdown.querySelector('.dropdown-content')
+		const hiddenInput = dropdown.closest('.input-wrapper')?.querySelector('input[type="hidden"]')
 
-            hiddenInput.dispatchEvent(new Event('input', {bubbles: true}))
-            hiddenInput.dispatchEvent(new Event('change', {bubbles: true}))
-        }
+		if (title) title.textContent = option.textContent
+		if (hiddenInput) {
+			hiddenInput.value = option.getAttribute('data-value') || option.textContent
 
-        dropdown.classList.remove('opened')
-        if (dropdownOpen) dropdownOpen.style.height = '0'
+			hiddenInput.dispatchEvent(new Event('input', {bubbles: true}))
+			hiddenInput.dispatchEvent(new Event('change', {bubbles: true}))
+		}
 
-        dropdown.dispatchEvent(new CustomEvent('change', {detail: {value: option.textContent}}))
-    })
+		dropdown.classList.remove('opened')
+		if (dropdownOpen) dropdownOpen.style.height = '0'
+
+		dropdown.dispatchEvent(new CustomEvent('change', {detail: {value: option.textContent}}))
+	})
+}
+
+const initSearch = (button) => {
+	const dropdown = button.closest('.dropdown')
+	const searchInput = dropdown.querySelector('.dropdown-search input')
+	if (!searchInput) return
+
+	const options = dropdown.querySelectorAll('.dropdown-option')
+	if (!options.length) return
+
+	searchInput.addEventListener('input', () => {
+		const searchValue = searchInput.value.toLowerCase()
+
+		options.forEach(option => {
+			const optionText = option.textContent.toLowerCase()
+
+			if (optionText.includes(searchValue)) {
+				option.classList.remove('hidden')
+			} else {
+				option.classList.add('hidden')
+			}
+		})
+
+		reCalculateDropdownHeight(dropdown)
+	})
 }
 
 window.addEventListener('resize', () => {
-    const dropdowns = document.querySelectorAll('.dropdown.opened')
+	const dropdowns = document.querySelectorAll('.dropdown.opened')
 
-    if (!dropdowns.length) return
+	if (!dropdowns.length) return
 
-    dropdowns.forEach(dropdown => reCalculateDropdownHeight(dropdown))
+	dropdowns.forEach(dropdown => reCalculateDropdownHeight(dropdown))
 })

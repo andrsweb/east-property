@@ -110,12 +110,17 @@
 
 		form {
 			fieldset {
-				max-width: 300px;
+				//max-width: 300px;
 			}
 		}
 
-        &.submit-unit {
-          padding: 0 0 32px 0;
-        }
+		&.submit-unit {
+			padding: 0 0 32px 0;
+		}
+
+		.unit-card,
+		.large-card {
+			margin-bottom: 20px;
+		}
 	}
 }

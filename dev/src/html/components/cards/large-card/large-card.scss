@@ -5,17 +5,14 @@
 
 .large-card {
 	width: 100%;
-
-    &:hover {
-      opacity: 0.9;
-    }
+	cursor: pointer;
 
 	&-inner {
 		display: flex;
 		flex-direction: column-reverse;
 		align-items: stretch;
-        border: 1px solid v.$c-grey-95;
-        border-radius: v.$br8;
+		border: 1px solid v.$c-grey-95;
+		border-radius: v.$br8;
 
 		@media(min-width: v.$md) {
 			flex-direction: row;

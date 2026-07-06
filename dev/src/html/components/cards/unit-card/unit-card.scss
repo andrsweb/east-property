@@ -50,6 +50,10 @@
 				object-fit: cover;
 				border-top-left-radius: v.$br12;
 				border-bottom-left-radius: v.$br12;
+
+				@media(max-width: v.$sm) {
+					border-radius: 0 0 8px 8px;
+				}
 			}
 		}
 	}
@@ -159,10 +163,19 @@
 			justify-content: space-between;
 			gap: 16px;
 
+			@media (max-width: v.$lg) {
+				justify-content: flex-end;
+			}
+
 			p {
 				color: v.$c-black;
+				width: 100%;
 
 				@include t.t-text;
+
+				@media(min-width: v.$lg) {
+					max-width: 60%;
+				}
 			}
 		}
 
@@ -171,6 +184,11 @@
 			flex-wrap: wrap;
 			align-items: center;
 			gap: 8px;
+
+			@media (max-width: v.$sm) {
+				justify-content: space-between;
+				width: 100%;
+			}
 		}
 
 		&-items {

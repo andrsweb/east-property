@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
 
 	void initSearchTabs()
+	void initSearchInDropdowns()
 })
 
 const containerClosers = new Map()
@@ -184,7 +185,7 @@ const initSearchTabs = async () => {
 				e.preventDefault()
 				const isOpen = selector.classList.contains('is-open')
 
-				if (isOpen) {
+				if (isOpen && !e.target.classList.contains('dropdown-search-input')) {
 					closeAllDropdowns()
 					return
 				}
@@ -326,5 +327,48 @@ const initSearchTabs = async () => {
 
 			updateDisplayText()
 		}
+	})
+}
+
+const initSearchInDropdowns = () => {
+	const searchInputs = document.querySelectorAll('.tab-selector .dropdown-search-input')
+	if (!searchInputs.length) return
+
+	searchInputs.forEach(searchInput => {
+		const tab = searchInput.closest('.tab-field')
+		if (!tab) return
+
+		const dropdown = tab.querySelector('.tab-dropdown');
+		if (!dropdown) return
+
+		let options = null;
+
+		searchInput.addEventListener('input', () => {
+			if (options === options || !options.length) {
+				options = dropdown.querySelectorAll('.tab-option')
+			}
+
+			const searchValue = searchInput.value.toLowerCase()
+
+			options.forEach(option => {
+				const span = option.querySelector('span')
+				const optionText = span.textContent.toLowerCase()
+
+				if (0 === searchValue.length) {
+					option.classList.remove('hidden')
+				}
+
+				if (optionText.includes(searchValue)) {
+					option.classList.remove('hidden')
+
+					const regex = new RegExp(`(${searchValue})`, 'gi')
+					span.innerHTML = span.textContent.replace(regex, '<b>$1</b>')
+				} else {
+					span.innerHTML = span.textContent.replace(/<b>|<\/b>/g, '')
+					option.classList.add('hidden')
+				}
+			})
+
+		})
 	})
 }

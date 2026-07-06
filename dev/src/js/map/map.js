@@ -51,7 +51,6 @@ export class PropertyMap {
         this.startY = 0;
         this.currentTranslation = 0;
 
-        // если сайдбар не нужен - сносим его к чертям собачьим
         if (!this.showSidebar && this.sidebar) {
             this.sidebar.remove();
             this.sidebar = null;

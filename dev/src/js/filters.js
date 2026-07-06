@@ -130,7 +130,9 @@ const initSearchResultsFilters = async () => {
 
     buttons.forEach((button) => {
         button.addEventListener('click', (e) => {
-            const option = e.target.closest('.result-option')
+			if (e.target.classList.contains('dropdown-search-input')) return
+
+			const option = e.target.closest('.result-option')
             const filterKey = button.dataset.filter
 
             if (!option) {
@@ -228,6 +230,7 @@ const initSearchResultsFilters = async () => {
         })
         updateDisplay()
     }
+	initSearchInFilters()
 }
 
 const initPropertiesFilters = () => {
@@ -270,7 +273,7 @@ const updatePropertiesList = () => {
     });
 
     allInputs.forEach(input => {
-        if (!formData.has(input.name)) {
+		if (0 < input.name.length && !formData.has(input.name)) {
             let value = input.value;
             if ('min_price' === input.name || 'max_price' === input.name) {
                 value = value.replace(/[^0-9.]/g, '');
@@ -336,16 +339,59 @@ const getUrlWithFilters = (formData) => {
 function removePaginationFromUrl(urlString = window.location.href) {
     const url = new URL(urlString);
 
-    // Убираем /page-2 или /page/2 в pathname
     url.pathname = url.pathname
         .replace(/\/page-\d+\/?$/i, '/')
         .replace(/\/page\/\d+\/?$/i, '/')
         .replace(/\/{2,}/g, '/');
 
-    // Убираем query-параметры пагинации, если есть
     url.searchParams.delete('page');
     url.searchParams.delete('paged');
     url.searchParams.delete('pagination');
 
     return url.toString();
+}
+
+const initSearchInFilters = () => {
+	const searchInputs = document.querySelectorAll('.dropdown-search-input')
+	if (!searchInputs.length) return
+
+	searchInputs.forEach(searchInput => {
+		const button = searchInput.closest('.result-filter')
+		if (!button) return
+
+		const dropdown = button.querySelector('.result-dropdown');
+		if (!dropdown) return
+
+		let options = null;
+
+		searchInput.addEventListener('input', () => {
+			if (options === options || !options.length) {
+				options = dropdown.querySelectorAll('.result-option, .tab-option')
+			}
+			const searchValue = searchInput.value.toLowerCase()
+
+			options.forEach(option => {
+				option.addEventListener('click', () => {
+					searchInput.value = '';
+				});
+
+				const optionText = option.textContent.toLowerCase()
+				if (0 === searchValue.length) {
+					option.classList.remove('hidden')
+					return;
+				}
+
+				if (optionText.includes(searchValue)) {
+					option.classList.remove('hidden')
+
+					const regex = new RegExp(`(${searchValue})`, 'gi')
+					option.innerHTML = option.textContent.replace(regex, '<b>$1</b>')
+				} else {
+					option.innerHTML = option.textContent.replace(/<b>|<\/b>/g, '')
+					option.classList.add('hidden')
+				}
+			})
+
+		})
+	})
 }

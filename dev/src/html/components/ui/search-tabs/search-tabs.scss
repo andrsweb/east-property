@@ -69,6 +69,7 @@
 
 	.tab-field {
 		width: 100%;
+		height: max-content;
 		position: relative;
 		display: flex;
 		flex-direction: column;
@@ -173,7 +174,7 @@
 		min-width: max-content;
         max-height: 400px;
 		position: absolute;
-        top: 100%;
+		top: 97%;
 		left: 0;
 		z-index: 5;
 		display: flex;

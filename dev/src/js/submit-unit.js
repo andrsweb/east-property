@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	'use strict';
 
 	initFormInteractions();
+	initFormValidation();
 });
 
 const initFormInteractions = () => {
@@ -41,7 +42,8 @@ const initFormInteractions = () => {
 	const initButtonGroupToggles = () => {
 		form.querySelectorAll('.submit-buttons-wrapper').forEach(wrapper => {
 			const buttons = wrapper.querySelectorAll('.beds-baths-btn');
-			const hiddenInput = wrapper.querySelector('input[type="hidden"]'); 
+			const hiddenInput = wrapper.querySelector('input[type="hidden"]');
+			console.log(hiddenInput.value);
 
 			buttons.forEach(btn => {
 				btn.addEventListener('click', () => {
@@ -63,12 +65,60 @@ const initFormInteractions = () => {
 			});
 		});
 
-		form.addEventListener('input', checkValidity);
-		form.addEventListener('change', checkValidity);
-
 		initButtonGroupToggles();
 	};
 
 	initEvents();
-	checkValidity();
 };
+
+const initFormValidation = () => {
+	const form = document.querySelector('.submit-unit-form');
+	if (!form) return;
+	
+	form.addEventListener('submit', (e) => {
+		const requiredElements = form.querySelectorAll('[required], [data-required]');
+		let errors = 0;
+
+		requiredElements.forEach(el => {
+			let wrapper = el.closest('.submit-buttons-wrapper');
+
+			if (!wrapper) {
+				wrapper = el.closest('.checkbox-buttons-wrapper');
+			}
+
+			if (!wrapper) {
+				wrapper = el.closest('.input-wrapper');
+			}
+
+			if (!wrapper) return;
+
+			if (!el.value) {
+				wrapper.classList.add('error-field');
+				errors++;
+			} else {
+				wrapper.classList.remove('error-field');
+			}
+		});
+
+		const finalImageSelectionInp = form.querySelector('input[name="final_image_selection"]'),
+			imagesUploaderBlock = form.querySelector('.submit-unit-right .uploader');
+
+		if (finalImageSelectionInp) {
+			const finalImageSelection = JSON.parse(finalImageSelectionInp.value);
+
+			if (finalImageSelection.fullOrder.length <= 0) {
+				errors++;
+				imagesUploaderBlock.classList.add('error-field');
+			} else {
+				imagesUploaderBlock.classList.remove('error-field');
+			}
+		}
+
+		if (errors > 0) {
+			e.preventDefault();
+			return false;
+		}
+
+		return true;
+	});
+}

@@ -172,6 +172,7 @@ const initSearchResultsFilters = async () => {
 		let tempBeds = new Set(), tempBaths = new Set()
 
 		if (filters.beds) {
+			console.log(filters.beds);
 			filters.beds.options.forEach(opt => {
 				if (opt.active) {
 					selectedBeds.add(opt.value)
@@ -320,7 +321,7 @@ const getUrlWithFilters = (formData) => {
 	let currentHref = removePaginationFromUrl();
 
 	currentHref += '?filtered=true';
-	
+
 	formData.forEach((value, key) => {
 		if (0 === value.length) {
 			return;

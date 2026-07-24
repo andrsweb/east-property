@@ -100,6 +100,15 @@ const initFormValidation = () => {
 			}
 		});
 
+		const wpEditor = tinymce.get('s-desc');
+		if (wpEditor && wpEditor.getContent().length < 40) {
+			const wrapper = document.querySelector('.wp-editor-container');
+			if (wrapper) {
+				wrapper.classList.add('error-field');
+				errors++;
+			}
+		}
+
 		const finalImageSelectionInp = form.querySelector('input[name="final_image_selection"]'),
 			imagesUploaderBlock = form.querySelector('.submit-unit-right .uploader');
 

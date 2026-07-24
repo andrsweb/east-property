@@ -184,6 +184,8 @@
 			flex-wrap: wrap;
 			align-items: center;
 			gap: 8px;
+			width: 100%;
+			justify-content: flex-end;
 
 			@media (max-width: v.$sm) {
 				justify-content: space-between;
